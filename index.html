@@ -1,103 +1,299 @@
 <!doctype html>
-<html lang="es">
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta
       name="description"
-      content="Web profesional de Carlos Bernal, periodista y comunicador."
+      content="Scrollytelling portfolio for Carlos Bernal, journalist and corporate communication specialist."
     >
-    <title>Portfolio Web | Carlos Bernal</title>
+    <title>Carlos Bernal | Scrollytelling Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=IBM+Plex+Mono:wght@500;600&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    >
     <link rel="stylesheet" href="css/styles.css">
   </head>
   <body>
     <header class="site-header">
-      <a class="brand" href="#inicio" aria-label="Ir al inicio">Carlos Bernal</a>
-      <nav class="site-nav" aria-label="Navegacion principal">
-        <a href="#perfil">Perfil</a>
-        <a href="#servicios">Servicios</a>
-        <a href="#proyectos">Proyectos</a>
-        <a href="#contacto">Contacto</a>
+      <a class="brand" href="#top" aria-label="Back to the beginning">CB</a>
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="#profile">Profile</a>
+        <a href="#chapters">Chapters</a>
+        <a href="#timeline">Timeline</a>
+        <a href="#archive">Archive</a>
       </nav>
     </header>
 
-    <main id="inicio">
-      <section class="hero section">
-        <div class="hero__content">
-          <p class="eyebrow">Periodismo, comunicacion y estrategia editorial</p>
-          <h1>Una web profesional para presentar trabajo, criterio y trayectoria.</h1>
-          <p class="hero__lead">
-            Proyecto web estatico creado desde cero para construir una presencia
-            digital clara, rapida y preparada para crecer.
+    <main id="top">
+      <section class="story-hero" aria-labelledby="hero-title">
+        <div class="hero-video" aria-hidden="true">
+          <video autoplay muted loop playsinline preload="metadata">
+            <source src="assets/video/hero-background.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="hero-media hero-portrait" aria-hidden="true">
+          <img src="assets/images/carlos-bernal-profile.png" alt="">
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-copy reveal">
+          <p class="kicker">International profile | Strategy | Corporate PR</p>
+          <h1
+            id="hero-title"
+            class="hero-title"
+          >
+            <span class="hero-title__line hero-title__line--hand">Journalist</span>
+            <span class="hero-title__line hero-title__line--mono">with a focus on</span>
+            <span class="hero-title__line hero-title__line--corporate">strategic communication and public affairs</span>
+          </h1>
+          <p class="hero-subtitle">
+            Journalist and corporate communication specialist shaped by newsrooms,
+            agencies and social projects.
           </p>
-          <div class="hero__actions" aria-label="Acciones principales">
-            <a class="button button--primary" href="#proyectos">Ver estructura</a>
-            <a class="button button--secondary" href="#contacto">Contactar</a>
-          </div>
+          <a class="scroll-cue" href="#timeline">Start the story</a>
         </div>
       </section>
 
-      <section id="perfil" class="section section--split">
-        <div>
-          <p class="eyebrow">Perfil</p>
-          <h2>Base editorial para una nueva identidad digital.</h2>
+      <section id="timeline" class="timeline-section journey-section">
+        <div class="section-intro">
+          <p class="kicker">Timeline</p>
+          <h2 class="journey-heading">
+            Donde convergen periodismo de campo, comunicación estratégica e incidencia pública.
+          </h2>
+          <p>
+            Una lectura interactiva de mi recorrido: educacion y proyectos sociales,
+            periodismo multimedia y comunicacion corporativa.
+          </p>
         </div>
-        <p>
-          Esta primera version define la arquitectura del repositorio, el punto
-          de entrada HTML, estilos propios, JavaScript ligero, estructura de
-          assets y configuracion de despliegue. El contenido definitivo se
-          incorporara en las siguientes iteraciones.
-        </p>
-      </section>
 
-      <section id="servicios" class="section">
-        <p class="eyebrow">Servicios</p>
-        <h2>Areas preparadas para desarrollar contenido.</h2>
-        <div class="cards-grid">
-          <article class="card">
-            <h3>Comunicacion</h3>
-            <p>Mensajes, narrativa profesional y posicionamiento publico.</p>
+        <div class="journey-map" aria-label="Tres caminos profesionales">
+          <article class="journey-path journey-path--social">
+            <div class="path-header">
+              <span>01</span>
+              <h3>Educacion y proyectos sociales</h3>
+            </div>
+            <div class="path-line" aria-hidden="true"></div>
+            <button class="path-node" data-panel="hilo">
+              <strong>ONG Hilo Rojo</strong>
+              <span>Trujillo, Peru | 2026</span>
+            </button>
+            <button class="path-node" data-panel="ministry">
+              <strong>Ministerio de Educacion Nacional</strong>
+              <span>Francia | BPJEPS / CEMEA</span>
+            </button>
+            <button class="path-node" data-panel="busette">
+              <strong>Centre Social La Busette</strong>
+              <span>Lille, France | project management</span>
+            </button>
+            <button class="path-node" data-panel="openworld">
+              <strong>Open World Education</strong>
+              <span>Dublin - Madrid | language exchanges</span>
+            </button>
+            <button class="path-node" data-panel="ufcv">
+              <strong>UFCV</strong>
+              <span>France | summer camps coordination</span>
+            </button>
           </article>
-          <article class="card">
-            <h3>Periodismo</h3>
-            <p>Trayectoria, publicaciones, formatos y trabajos destacados.</p>
+
+          <article class="journey-path journey-path--journalism">
+            <div class="path-header">
+              <span>02</span>
+              <h3>Periodismo multimedia</h3>
+            </div>
+            <div class="path-line" aria-hidden="true"></div>
+            <button class="path-node" data-panel="comercio">
+              <strong>El Comercio</strong>
+              <span>Asturias | reporter & editor</span>
+            </button>
+            <button class="path-node" data-panel="lavoz">
+              <strong>La Voz del Trubia</strong>
+              <span>local journalism and interviews</span>
+            </button>
+            <button class="path-node" data-panel="culturall">
+              <strong>Cultur'All Studio</strong>
+              <span>Lille | publishing and content</span>
+            </button>
+            <button class="path-node" data-panel="brumaria">
+              <strong>Brumaria</strong>
+              <span>Madrid | editorial project</span>
+            </button>
           </article>
-          <article class="card">
-            <h3>Estrategia digital</h3>
-            <p>Estructura web clara, mobile first y preparada para Netlify.</p>
+
+          <article class="journey-path journey-path--corporate">
+            <div class="path-header">
+              <span>03</span>
+              <h3>Comunicacion corporativa</h3>
+            </div>
+            <div class="path-line" aria-hidden="true"></div>
+            <button class="path-node" data-panel="weber">
+              <strong>Weber Shandwick</strong>
+              <span>Madrid | corporate communications</span>
+            </button>
+            <button class="path-node" data-panel="navarra">
+              <strong>Universidad de Navarra</strong>
+              <span>Corporate Comm & Public Affairs</span>
+            </button>
+            <button class="path-node" data-panel="george">
+              <strong>George Washington University</strong>
+              <span>School of Political Management</span>
+            </button>
           </article>
         </div>
       </section>
 
-      <section id="proyectos" class="section section--muted">
-        <p class="eyebrow">Proyecto</p>
-        <h2>Repositorio inicializado con una base limpia.</h2>
-        <ul class="status-list">
-          <li>HTML semantico y accesible.</li>
-          <li>CSS propio sin frameworks innecesarios.</li>
-          <li>JavaScript ligero para mejoras progresivas.</li>
-          <li>Assets organizados por tipo.</li>
-          <li>Preview local con Node en el puerto 5179.</li>
-        </ul>
+      <section id="profile" class="portfolio-folders" aria-labelledby="folders-title">
+        <div class="folder-label" aria-hidden="true">
+          <span></span>
+          <strong>FOR</strong>
+        </div>
+
+        <h2 id="folders-title" class="sr-only">Portfolio folders</h2>
+        <div class="folder-grid">
+          <button class="folder-card folder-card--commerce" data-panel="comercio">
+            <small>Journalism</small>
+            <span>El Comercio</span>
+          </button>
+          <button class="folder-card folder-card--weber" data-panel="weber">
+            <small>Corporate PR</small>
+            <span>Weber Shandwick</span>
+          </button>
+          <button class="folder-card folder-card--ministry" data-panel="ministry">
+            <small>Education</small>
+            <span>Ministerio de Educacion Nacional</span>
+          </button>
+          <button class="folder-card folder-card--navarra" data-panel="navarra">
+            <small>Academic</small>
+            <span>Universidad de Navarra</span>
+          </button>
+          <button class="folder-card folder-card--trubia" data-panel="lavoz">
+            <small>Journalism</small>
+            <span>La Voz del Trubia</span>
+          </button>
+          <button class="folder-card folder-card--culturall" data-panel="culturall">
+            <small>Culture</small>
+            <span>Cultur'All Studio</span>
+          </button>
+          <button class="folder-card folder-card--hilo" data-panel="hilo">
+            <small>NGO</small>
+            <span>ONG Hilo Rojo</span>
+          </button>
+          <button class="folder-card folder-card--george" data-panel="george">
+            <small>Academic</small>
+            <span>George Washington University</span>
+          </button>
+        </div>
       </section>
 
-      <section id="contacto" class="section section--split">
-        <div>
-          <p class="eyebrow">Contacto</p>
-          <h2>Siguiente paso: contenidos reales y despliegue.</h2>
+      <section class="metrics-strip" aria-label="Career highlights">
+        <button class="metric-card reveal" data-panel="journalism">
+          <span>+80</span>
+          <strong>print, digital and video stories</strong>
+          <small>Journalism archive</small>
+        </button>
+        <button class="metric-card reveal" data-panel="interviews">
+          <span>+50</span>
+          <strong>regional public-opinion interviews</strong>
+          <small>Sources and fieldwork</small>
+        </button>
+        <button class="metric-card reveal" data-panel="social">
+          <span>+14</span>
+          <strong>education and cultural workshops</strong>
+          <small>Social projects</small>
+        </button>
+        <button class="metric-card reveal" data-panel="corporate">
+          <span>100+</span>
+          <strong>press releases, op-eds and reports</strong>
+          <small>Corporate PR</small>
+        </button>
+      </section>
+
+      <section id="chapters" class="scrolly-layout">
+        <aside class="sticky-panel">
+          <p class="kicker">The story arc</p>
+          <h2>Four ways to read the same trajectory.</h2>
+          <p>
+            Each chapter is designed to become a deeper interactive case with
+            photos, videos, logos, documents and academic work.
+          </p>
+        </aside>
+
+        <div class="chapter-stack">
+          <article class="story-card reveal">
+            <span>Newsrooms</span>
+            <h3>Journalism as the foundation.</h3>
+            <p>
+              El Comercio, La Voz del Trubia and cultural media work: interviews,
+              reporting, editing and stories across print, digital and video.
+            </p>
+            <button class="text-link" data-panel="journalism">Open journalism chapter</button>
+          </article>
+
+          <article class="story-card reveal">
+            <span>Agency</span>
+            <h3>Corporate communications and public affairs.</h3>
+            <p>
+              Weber Shandwick: communication plans, media angles, reports, social
+              copy, press materials and event support for client teams.
+            </p>
+            <button class="text-link" data-panel="corporate">Open corporate PR chapter</button>
+          </article>
+
+          <article class="story-card reveal">
+            <span>Fieldwork</span>
+            <h3>Social, cultural and education projects.</h3>
+            <p>
+              Hilo Rojo, Cultur'All Studio, La Busette and Centro Agora as a
+              practical laboratory for workshops, camps, youth work and culture.
+            </p>
+            <button class="text-link" data-panel="social">Open social chapter</button>
+          </article>
+
+          <article class="story-card reveal">
+            <span>Formation</span>
+            <h3>Academic and creative training.</h3>
+            <p>
+              Political management, public affairs, journalism, screenwriting,
+              digital design and web development as the academic backbone.
+            </p>
+            <button class="text-link" data-panel="academic">Open academic chapter</button>
+          </article>
         </div>
-        <p>
-          La URL de produccion en Netlify queda pendiente hasta conectar el
-          repositorio y publicar la primera version.
-        </p>
+      </section>
+
+      <section id="archive" class="archive-section">
+        <div class="section-intro reveal">
+          <p class="kicker">Deep dive</p>
+          <h2>What the visitor will be able to open next.</h2>
+          <p>
+            This archive is the future navigation layer: each item can become an
+            internal page with titles, documents, articles, videos, logos and
+            academic work.
+          </p>
+        </div>
+
+        <div class="archive-grid">
+          <button class="archive-tile reveal" data-panel="academic">Academic titles</button>
+          <button class="archive-tile reveal" data-panel="works">Academic works</button>
+          <button class="archive-tile reveal" data-panel="skills">Skills and tools</button>
+          <button class="archive-tile reveal" data-panel="references">References</button>
+          <button class="archive-tile reveal" data-panel="contact">Contact and availability</button>
+        </div>
       </section>
     </main>
 
     <footer class="site-footer">
-      <p>&copy; <span id="current-year"></span> Carlos Bernal. Portfolio web.</p>
+      <p>&copy; <span id="current-year"></span> Carlos Bernal. Scrollytelling portfolio.</p>
     </footer>
+
+    <dialog class="detail-panel" id="detail-panel" aria-labelledby="panel-title">
+      <button class="panel-close" type="button" aria-label="Close detail panel">Close</button>
+      <p class="kicker" id="panel-kicker">Portfolio chapter</p>
+      <h2 id="panel-title"></h2>
+      <div id="panel-body"></div>
+    </dialog>
 
     <script src="js/main.js" defer></script>
   </body>
 </html>
-
