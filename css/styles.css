@@ -102,11 +102,20 @@ button {
 .story-hero {
   position: relative;
   display: grid;
+  width: 100vw;
   min-height: 100svh;
   align-content: end;
+  flex: 0 0 auto;
   gap: clamp(1.4rem, 3vw, 2.3rem);
   overflow: hidden;
   padding: 7rem clamp(1rem, 5vw, 5rem) clamp(5.4rem, 10vw, 7.4rem);
+  cursor: default;
+  border: 0;
+  border-radius: 0;
+  background: #050608;
+  opacity: 1;
+  transform: none;
+  box-shadow: none;
 }
 
 .hero-media,
@@ -351,6 +360,32 @@ p {
   display: none;
 }
 
+.timeline-video-background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.82;
+  filter: saturate(0.96) contrast(1.12) brightness(0.74);
+  transform: scale(1.04);
+  pointer-events: none;
+}
+
+.universe-sticky::after {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(90deg, rgba(3, 4, 5, 0.82), rgba(3, 4, 5, 0.42) 48%, rgba(3, 4, 5, 0.78)),
+    radial-gradient(circle at 50% 48%, rgba(199, 239, 207, 0.12), transparent 34%);
+  opacity: 0.44;
+  content: "";
+  pointer-events: none;
+}
+
 .career-track {
   position: relative;
   z-index: 1;
@@ -359,7 +394,7 @@ p {
   gap: clamp(8rem, 16vw, 18rem);
   width: max-content;
   height: 100%;
-  padding: 0 clamp(1rem, 4vw, 4rem);
+  padding: 0;
   will-change: transform;
 }
 
@@ -475,9 +510,10 @@ p {
   border: 1px solid rgba(247, 242, 232, 0.13);
   border-radius: 8px;
   background:
-    linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02)),
-    rgba(10, 12, 15, 0.72);
+    linear-gradient(145deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.018)),
+    rgba(10, 12, 15, 0.54);
   color: var(--ink);
+  backdrop-filter: blur(5px);
   box-shadow: 0 26px 90px rgba(0, 0, 0, 0.32);
 }
 
@@ -489,13 +525,45 @@ p {
   transform: translateY(9vh);
 }
 
+.timeline-station--hero,
+.timeline-station--intro,
+.timeline-station--map,
+.timeline-station--archive {
+  transform: none !important;
+}
+
+.timeline-station--hero {
+  width: 100vw;
+  min-height: 100svh;
+  align-content: end;
+  gap: clamp(1.4rem, 3vw, 2.3rem);
+  flex: 0 0 auto;
+  overflow: hidden;
+  padding: 7rem clamp(1rem, 5vw, 5rem) clamp(5.4rem, 10vw, 7.4rem);
+  cursor: default;
+  border: 0;
+  border-radius: 0;
+  background: #050608;
+  opacity: 1;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
 .timeline-station:hover,
 .timeline-station:focus-visible,
 .timeline-station.is-active {
   border-color: rgba(166, 225, 250, 0.72);
   background:
     linear-gradient(145deg, rgba(166, 225, 250, 0.14), rgba(255, 255, 255, 0.025)),
-    rgba(10, 12, 15, 0.9);
+    rgba(10, 12, 15, 0.72);
+  outline: none;
+}
+
+.timeline-station--hero:hover,
+.timeline-station--hero:focus-visible,
+.timeline-station--hero.is-active {
+  border-color: transparent;
+  background: #050608;
   outline: none;
 }
 
@@ -1134,21 +1202,26 @@ p {
 .map-callout-text {
   fill: rgba(255, 247, 174, 0.86);
   font-family: "Newsreader", Georgia, "Times New Roman", serif;
-  font-size: 8.2px;
+  font-size: 6.85px;
   font-weight: 700;
   letter-spacing: -0.01em;
 }
 
+.callout-field-label {
+  fill: #fffaf0;
+  font-weight: 900;
+}
+
 .map-callout-text--ecuador {
-  font-size: 8px;
+  font-size: 6.85px;
 }
 
 .map-callout-text--peru {
-  font-size: 7.7px;
+  font-size: 6.85px;
 }
 
 .map-callout-text--portugal {
-  font-size: 7.25px;
+  font-size: 6.85px;
 }
 
 .map-callout-text--spain {
@@ -1160,12 +1233,12 @@ p {
 }
 
 .map-callout-text--ireland {
-  font-size: 7.25px;
+  font-size: 6.85px;
 }
 
 .map-callout-text--belgium,
 .map-callout-text--denmark {
-  font-size: 7.15px;
+  font-size: 6.85px;
 }
 
 .map-typewriter-copy {

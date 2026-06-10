@@ -105,15 +105,21 @@ const universe = document.querySelector(".career-universe");
 const track = document.querySelector("#career-track");
 const calendarRuler = document.querySelector(".calendar-ruler");
 const currentYearElement = document.querySelector(".timeline-current-year");
+const timelineVideoBackground = document.querySelector(".timeline-video-background");
 const stations = Array.from(document.querySelectorAll(".timeline-station"));
 const timelineStations = stations.filter(
   (station) =>
+    !station.classList.contains("timeline-station--hero") &&
     !station.classList.contains("timeline-station--intro") &&
     !station.classList.contains("timeline-station--map") &&
     !station.classList.contains("timeline-station--archive"),
 );
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const horizontalMedia = window.matchMedia("(min-width: 761px)");
+
+if (timelineVideoBackground) {
+  timelineVideoBackground.play().catch(() => {});
+}
 
 let targetX = 0;
 let currentX = 0;
