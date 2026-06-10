@@ -281,18 +281,31 @@ p {
   margin: 0;
   overflow: hidden;
   background: #050608;
+  cursor: grab;
+  touch-action: pan-y;
   transform: none;
+  user-select: none;
+}
+
+.hero-ticker.is-dragging {
+  cursor: grabbing;
 }
 
 .ticker-track {
   display: flex;
   width: max-content;
-  animation: ticker-slide 54s linear infinite;
+  animation: ticker-slide 40s linear infinite;
+  will-change: transform;
 }
 
 .hero-ticker:hover .ticker-track,
-.hero-ticker:focus-within .ticker-track {
+.hero-ticker:focus-within .ticker-track,
+.hero-ticker.is-dragging .ticker-track {
   animation-play-state: paused;
+}
+
+.hero-ticker.is-manual .ticker-track {
+  animation: none;
 }
 
 .ticker-group {
@@ -506,81 +519,39 @@ p {
 
 .timeline-station--map {
   display: block;
-  width: min(100vw, 1320px);
-  min-height: min(86svh, 760px);
-  overflow: hidden;
+  width: 130vw;
+  min-height: 100svh;
+  overflow: visible;
   padding: 0;
   cursor: default;
-  border-color: rgba(199, 239, 207, 0.16);
+  border: 0;
+  border-radius: 0;
   background: #313741;
-}
-
-.map-copy {
-  position: absolute;
-  top: clamp(1rem, 2.6vw, 2rem);
-  left: clamp(1rem, 2.6vw, 2.2rem);
-  z-index: 3;
-  width: min(86vw, 420px);
-  pointer-events: none;
-}
-
-.map-kicker {
-  margin: 0 0 0.65rem;
-  color: rgba(255, 252, 242, 0.68);
-  font-family:
-    "Raleway", "Aktiv Grotesk", Inter, ui-sans-serif, system-ui, -apple-system,
-    BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-size: 0.72rem;
-  font-weight: 200;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-}
-
-.map-copy h2 {
-  max-width: 390px;
-  margin: 0 0 0.75rem;
-  color: #fffcf2;
-  font-family:
-    "Raleway", "Aktiv Grotesk", Inter, ui-sans-serif, system-ui, -apple-system,
-    BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-size: clamp(1.85rem, 3vw, 3.4rem);
-  font-weight: 200;
-  letter-spacing: -0.06em;
-  line-height: 0.98;
-  text-shadow: 0 16px 42px rgba(0, 0, 0, 0.62);
-}
-
-.map-copy p:last-child {
-  max-width: 260px;
-  margin: 0;
-  color: rgba(255, 252, 242, 0.62);
-  font-size: clamp(0.82rem, 1.2vw, 0.95rem);
-  font-weight: 200;
-  line-height: 1.35;
+  opacity: 1;
+  transform: none;
+  box-shadow: none;
 }
 
 .world-map-card {
-  --map-accent: #c7efcf;
-  --map-accent-hover: #e8fcc2;
-  --map-sea: #313741;
-  --map-land: #4d5359;
-  --map-border: #2b313a;
-  --map-detail: rgba(255, 252, 242, 0.58);
+  --map-sea: #303640;
+  --map-land: #4b5056;
+  --map-border: #2b3139;
 
   position: relative;
-  min-height: min(86svh, 760px);
-  overflow: hidden;
+  width: 100%;
+  min-height: 100svh;
+  overflow: visible;
   border: 0;
-  border-radius: 8px;
+  border-radius: 0;
   background: var(--map-sea);
-  box-shadow: inset 0 0 0 1px rgba(255, 252, 242, 0.045), 0 26px 90px rgba(0, 0, 0, 0.34);
+  box-shadow: none;
 }
 
 .portfolio-world-map {
   display: block;
   width: 100%;
   height: 100%;
-  min-height: min(86svh, 760px);
+  min-height: 100svh;
   background: var(--map-sea);
 }
 
@@ -588,163 +559,794 @@ p {
   fill: var(--map-sea);
 }
 
-.map-graticule path {
-  fill: none;
-  stroke: rgba(255, 252, 242, 0.035);
-  stroke-width: 1;
-}
-
-.map-land--muted path,
-.map-country-shape {
+.static-world-country {
   fill: var(--map-land);
   stroke: var(--map-border);
-  stroke-width: 1.15;
+  stroke-width: 0.72;
+  transition: fill 180ms ease, filter 180ms ease;
 }
 
-.map-border-line {
+.static-world-border {
   fill: none;
   stroke: var(--map-border);
-  stroke-width: 1;
+  stroke-width: 0.68;
   pointer-events: none;
 }
 
-.map-detail path {
-  fill: none;
-  stroke: var(--map-detail);
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 1.1;
-  opacity: 0.72;
+.static-world-country.is-us-country {
+  cursor: crosshair;
+  filter: drop-shadow(0 0 0 rgba(255, 247, 174, 0));
+  animation: us-country-hint 2.4s ease-in-out infinite;
 }
 
-.map-country {
-  cursor: pointer;
+.static-world-country.is-ecuador-country {
+  cursor: crosshair;
+  animation: ecuador-country-hint 2.6s ease-in-out infinite;
+}
+
+.static-world-country.is-peru-country {
+  cursor: crosshair;
+  animation: peru-country-hint 2.7s ease-in-out infinite;
+}
+
+.static-world-country.is-portugal-country {
+  cursor: crosshair;
+  animation: portugal-country-hint 2.6s ease-in-out infinite;
+}
+
+.static-world-country.is-spain-country {
+  cursor: crosshair;
+  animation: spain-country-hint 2.6s ease-in-out infinite;
+}
+
+.static-world-country.is-france-country {
+  cursor: crosshair;
+  animation: france-country-hint 2.6s ease-in-out infinite;
+}
+
+.static-world-country.is-ireland-country {
+  cursor: crosshair;
+  animation: ireland-country-hint 2.6s ease-in-out infinite;
+}
+
+.static-world-country.is-belgium-country {
+  cursor: crosshair;
+  animation: belgium-country-hint 2.6s ease-in-out infinite;
+}
+
+.static-world-country.is-denmark-country {
+  cursor: crosshair;
+  animation: denmark-country-hint 2.6s ease-in-out infinite;
+}
+
+.timeline-station--map.is-us-callout-open .static-world-country.is-us-country,
+.static-world-country.is-us-country:hover,
+.static-world-country.is-us-country:focus-visible {
+  filter: brightness(1.16) drop-shadow(0 0 9px rgba(81, 187, 254, 0.34));
   outline: none;
 }
 
-.map-country path,
-path.map-country {
-  fill: var(--map-accent);
-  stroke: rgba(255, 252, 242, 0.72);
-  stroke-width: 1.05;
-  transition: fill 220ms ease, filter 220ms ease, stroke-width 220ms ease;
+.timeline-station--map.is-ecuador-callout-open .static-world-country.is-ecuador-country,
+.static-world-country.is-ecuador-country:hover,
+.static-world-country.is-ecuador-country:focus-visible {
+  filter: brightness(1.16) drop-shadow(0 0 9px rgba(81, 187, 254, 0.34));
+  outline: none;
 }
 
-.map-country:hover path,
-.map-country:focus path,
-.map-country.is-active path,
-path.map-country:hover,
-path.map-country:focus,
-path.map-country.is-active {
-  fill: var(--map-accent-hover);
-  filter: drop-shadow(0 0 13px rgba(199, 239, 207, 0.62));
-  stroke-width: 2.4;
+.timeline-station--map.is-peru-callout-open .static-world-country.is-peru-country,
+.static-world-country.is-peru-country:hover,
+.static-world-country.is-peru-country:focus-visible {
+  filter: brightness(1.16) drop-shadow(0 0 9px rgba(81, 187, 254, 0.34));
+  outline: none;
 }
 
-.map-country:focus-visible path,
-path.map-country:focus-visible {
-  stroke: #fffcf2;
+.timeline-station--map.is-portugal-callout-open .static-world-country.is-portugal-country,
+.static-world-country.is-portugal-country:hover,
+.static-world-country.is-portugal-country:focus-visible {
+  filter: brightness(1.16) drop-shadow(0 0 9px rgba(81, 187, 254, 0.34));
+  outline: none;
 }
 
-.map-country-hit {
-  cursor: pointer;
-  fill: transparent;
-  pointer-events: all;
-  stroke: transparent;
+.timeline-station--map.is-spain-callout-open .static-world-country.is-spain-country,
+.static-world-country.is-spain-country:hover,
+.static-world-country.is-spain-country:focus-visible {
+  filter: brightness(1.16) drop-shadow(0 0 9px rgba(81, 187, 254, 0.34));
+  outline: none;
 }
 
-.map-tooltip {
+.timeline-station--map.is-france-callout-open .static-world-country.is-france-country,
+.static-world-country.is-france-country:hover,
+.static-world-country.is-france-country:focus-visible {
+  filter: brightness(1.16) drop-shadow(0 0 9px rgba(255, 247, 174, 0.28));
+  outline: none;
+}
+
+.timeline-station--map.is-ireland-callout-open .static-world-country.is-ireland-country,
+.static-world-country.is-ireland-country:hover,
+.static-world-country.is-ireland-country:focus-visible {
+  filter: brightness(1.16) drop-shadow(0 0 9px rgba(255, 247, 174, 0.28));
+  outline: none;
+}
+
+.timeline-station--map.is-belgium-callout-open .static-world-country.is-belgium-country,
+.static-world-country.is-belgium-country:hover,
+.static-world-country.is-belgium-country:focus-visible,
+.timeline-station--map.is-denmark-callout-open .static-world-country.is-denmark-country,
+.static-world-country.is-denmark-country:hover,
+.static-world-country.is-denmark-country:focus-visible {
+  filter: brightness(1.16) drop-shadow(0 0 9px rgba(255, 247, 174, 0.28));
+  outline: none;
+}
+
+.us-map-callout {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 220ms ease;
+}
+
+.ecuador-map-callout {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 220ms ease;
+}
+
+.peru-map-callout {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 220ms ease;
+}
+
+.portugal-map-callout {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 220ms ease;
+}
+
+.spain-map-callout {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 220ms ease;
+}
+
+.france-map-callout {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 220ms ease;
+}
+
+.ireland-map-callout {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 220ms ease;
+}
+
+.belgium-map-callout,
+.denmark-map-callout {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 220ms ease;
+}
+
+.us-hover-hint,
+.ecuador-hover-hint,
+.peru-hover-hint,
+.portugal-hover-hint,
+.spain-hover-hint,
+.france-hover-hint,
+.ireland-hover-hint,
+.belgium-hover-hint,
+.denmark-hover-hint {
+  opacity: 1;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+
+.timeline-station--map.is-us-callout-open .us-hover-hint,
+.portfolio-world-map:has(.static-world-country.is-us-country:hover) .us-hover-hint,
+.portfolio-world-map:has(.static-world-country.is-us-country:focus-visible) .us-hover-hint {
+  opacity: 0;
+}
+
+.timeline-station--map.is-ecuador-callout-open .ecuador-hover-hint,
+.portfolio-world-map:has(.static-world-country.is-ecuador-country:hover) .ecuador-hover-hint,
+.portfolio-world-map:has(.static-world-country.is-ecuador-country:focus-visible) .ecuador-hover-hint {
+  opacity: 0;
+}
+
+.timeline-station--map.is-peru-callout-open .peru-hover-hint,
+.portfolio-world-map:has(.static-world-country.is-peru-country:hover) .peru-hover-hint,
+.portfolio-world-map:has(.static-world-country.is-peru-country:focus-visible) .peru-hover-hint {
+  opacity: 0;
+}
+
+.timeline-station--map.is-portugal-callout-open .portugal-hover-hint,
+.portfolio-world-map:has(.static-world-country.is-portugal-country:hover) .portugal-hover-hint,
+.portfolio-world-map:has(.static-world-country.is-portugal-country:focus-visible) .portugal-hover-hint {
+  opacity: 0;
+}
+
+.timeline-station--map.is-spain-callout-open .spain-hover-hint,
+.portfolio-world-map:has(.static-world-country.is-spain-country:hover) .spain-hover-hint,
+.portfolio-world-map:has(.static-world-country.is-spain-country:focus-visible) .spain-hover-hint {
+  opacity: 0;
+}
+
+.timeline-station--map.is-france-callout-open .france-hover-hint,
+.portfolio-world-map:has(.static-world-country.is-france-country:hover) .france-hover-hint,
+.portfolio-world-map:has(.static-world-country.is-france-country:focus-visible) .france-hover-hint {
+  opacity: 0;
+}
+
+.timeline-station--map.is-ireland-callout-open .ireland-hover-hint,
+.portfolio-world-map:has(.static-world-country.is-ireland-country:hover) .ireland-hover-hint,
+.portfolio-world-map:has(.static-world-country.is-ireland-country:focus-visible) .ireland-hover-hint {
+  opacity: 0;
+}
+
+.timeline-station--map.is-belgium-callout-open .belgium-hover-hint,
+.portfolio-world-map:has(.static-world-country.is-belgium-country:hover) .belgium-hover-hint,
+.portfolio-world-map:has(.static-world-country.is-belgium-country:focus-visible) .belgium-hover-hint,
+.timeline-station--map.is-denmark-callout-open .denmark-hover-hint,
+.portfolio-world-map:has(.static-world-country.is-denmark-country:hover) .denmark-hover-hint,
+.portfolio-world-map:has(.static-world-country.is-denmark-country:focus-visible) .denmark-hover-hint {
+  opacity: 0;
+}
+
+.us-hover-ring,
+.map-hover-ring {
+  fill: none;
+  stroke: #51bbfe;
+  stroke-width: 1.4;
+  opacity: 0.78;
+  transform-box: fill-box;
+  transform-origin: center;
+  vector-effect: non-scaling-stroke;
+  animation: us-hover-ring-pulse 1.7s ease-out infinite;
+}
+
+.map-hover-ring--ecuador {
+  stroke-width: 0.9;
+  opacity: 0.72;
+  animation-duration: 1.55s;
+}
+
+.map-hover-ring--peru {
+  stroke-width: 0.95;
+  opacity: 0.72;
+  animation-duration: 1.6s;
+}
+
+.map-hover-ring--portugal {
+  stroke-width: 0.85;
+  opacity: 0.72;
+  animation-duration: 1.55s;
+}
+
+.map-hover-ring--spain {
+  stroke: #51bbfe;
+  stroke-width: 0.9;
+  opacity: 0.72;
+  animation-duration: 1.55s;
+}
+
+.map-hover-ring--france {
+  stroke-width: 0.9;
+  opacity: 0.72;
+  animation-duration: 1.55s;
+}
+
+.map-hover-ring--ireland {
+  stroke-width: 0.9;
+  opacity: 0.72;
+  animation-duration: 1.55s;
+}
+
+.map-hover-ring--belgium,
+.map-hover-ring--denmark {
+  stroke-width: 0.85;
+  opacity: 0.72;
+  animation-duration: 1.55s;
+}
+
+.us-hover-core,
+.map-hover-core {
+  fill: #fff7ae;
+  stroke: #51bbfe;
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.map-hover-core--ecuador {
+  stroke-width: 0.75;
+}
+
+.map-hover-core--peru {
+  stroke-width: 0.8;
+}
+
+.map-hover-core--portugal {
+  stroke-width: 0.75;
+}
+
+.map-hover-core--spain {
+  fill: #51bbfe;
+  stroke: #51bbfe;
+  stroke-width: 0.8;
+}
+
+.map-hover-core--france {
+  stroke-width: 0.8;
+}
+
+.map-hover-core--ireland {
+  stroke-width: 0.8;
+}
+
+.map-hover-core--belgium,
+.map-hover-core--denmark {
+  stroke-width: 0.75;
+}
+
+.us-hover-label,
+.map-hover-label {
+  fill: rgba(255, 247, 174, 0.78);
+  font-family: "PT Mono", "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 7.4px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.map-hover-label--ecuador {
+  font-size: 5.8px;
+  letter-spacing: 0.02em;
+}
+
+.map-hover-label--peru {
+  font-size: 5.8px;
+  letter-spacing: 0.02em;
+}
+
+.map-hover-label--portugal {
+  font-size: 5.7px;
+  letter-spacing: 0.02em;
+  text-anchor: start;
+}
+
+.map-hover-label--spain {
+  fill: #51bbfe;
+  font-size: 5.8px;
+  letter-spacing: 0.02em;
+  text-anchor: start;
+}
+
+.map-hover-label--france {
+  font-size: 5.8px;
+  letter-spacing: 0.02em;
+  text-anchor: start;
+}
+
+.map-hover-label--ireland {
+  font-size: 5.8px;
+  letter-spacing: 0.02em;
+  text-anchor: start;
+}
+
+.map-hover-label--belgium,
+.map-hover-label--denmark {
+  font-size: 5.7px;
+  letter-spacing: 0.02em;
+  text-anchor: start;
+}
+
+.timeline-station--map.is-us-callout-open .us-map-callout,
+.portfolio-world-map:has(.static-world-country.is-us-country:hover) .us-map-callout,
+.portfolio-world-map:has(.static-world-country.is-us-country:focus-visible) .us-map-callout {
+  opacity: 1;
+}
+
+.timeline-station--map.is-ecuador-callout-open .ecuador-map-callout,
+.portfolio-world-map:has(.static-world-country.is-ecuador-country:hover) .ecuador-map-callout,
+.portfolio-world-map:has(.static-world-country.is-ecuador-country:focus-visible) .ecuador-map-callout {
+  opacity: 1;
+}
+
+.timeline-station--map.is-peru-callout-open .peru-map-callout,
+.portfolio-world-map:has(.static-world-country.is-peru-country:hover) .peru-map-callout,
+.portfolio-world-map:has(.static-world-country.is-peru-country:focus-visible) .peru-map-callout {
+  opacity: 1;
+}
+
+.timeline-station--map.is-portugal-callout-open .portugal-map-callout,
+.portfolio-world-map:has(.static-world-country.is-portugal-country:hover) .portugal-map-callout,
+.portfolio-world-map:has(.static-world-country.is-portugal-country:focus-visible) .portugal-map-callout {
+  opacity: 1;
+}
+
+.timeline-station--map.is-spain-callout-open .spain-map-callout,
+.portfolio-world-map:has(.static-world-country.is-spain-country:hover) .spain-map-callout,
+.portfolio-world-map:has(.static-world-country.is-spain-country:focus-visible) .spain-map-callout {
+  opacity: 1;
+}
+
+.timeline-station--map.is-france-callout-open .france-map-callout,
+.portfolio-world-map:has(.static-world-country.is-france-country:hover) .france-map-callout,
+.portfolio-world-map:has(.static-world-country.is-france-country:focus-visible) .france-map-callout {
+  opacity: 1;
+}
+
+.timeline-station--map.is-ireland-callout-open .ireland-map-callout,
+.portfolio-world-map:has(.static-world-country.is-ireland-country:hover) .ireland-map-callout,
+.portfolio-world-map:has(.static-world-country.is-ireland-country:focus-visible) .ireland-map-callout {
+  opacity: 1;
+}
+
+.timeline-station--map.is-belgium-callout-open .belgium-map-callout,
+.portfolio-world-map:has(.static-world-country.is-belgium-country:hover) .belgium-map-callout,
+.portfolio-world-map:has(.static-world-country.is-belgium-country:focus-visible) .belgium-map-callout,
+.timeline-station--map.is-denmark-callout-open .denmark-map-callout,
+.portfolio-world-map:has(.static-world-country.is-denmark-country:hover) .denmark-map-callout,
+.portfolio-world-map:has(.static-world-country.is-denmark-country:focus-visible) .denmark-map-callout {
+  opacity: 1;
+}
+
+.us-callout-panel,
+.map-callout-panel {
+  fill: rgba(12, 16, 20, 0.88);
+  stroke: rgba(255, 247, 174, 0.42);
+  stroke-width: 0.8;
+}
+
+.us-callout-line,
+.map-callout-line {
+  fill: none;
+  stroke-width: 1.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.us-callout-line--washington {
+  stroke: #1f363d;
+}
+
+.us-callout-line--wisconsin {
+  stroke: #51bbfe;
+}
+
+.map-callout-line--ecuador {
+  stroke: #51bbfe;
+  stroke-width: 0.9;
+}
+
+.map-callout-line--peru {
+  stroke: #51bbfe;
+  stroke-width: 0.95;
+}
+
+.map-callout-line--portugal {
+  stroke: #51bbfe;
+  stroke-width: 0.9;
+}
+
+.map-callout-line--spain {
+  stroke: #51bbfe;
+  stroke-width: 0.9;
+}
+
+.map-callout-line--france {
+  stroke: #51bbfe;
+  stroke-width: 0.9;
+}
+
+.map-callout-line--ireland {
+  stroke: #51bbfe;
+  stroke-width: 0.9;
+}
+
+.map-callout-line--belgium,
+.map-callout-line--denmark {
+  stroke: #51bbfe;
+  stroke-width: 0.9;
+}
+
+.us-callout-dot,
+.map-callout-dot {
+  fill: #fff7ae;
+  stroke-width: 1.4;
+  vector-effect: non-scaling-stroke;
+}
+
+.us-callout-dot--washington {
+  stroke: #1f363d;
+}
+
+.us-callout-dot--wisconsin {
+  stroke: #51bbfe;
+}
+
+.map-callout-dot--ecuador {
+  stroke: #51bbfe;
+  stroke-width: 0.9;
+}
+
+.map-callout-dot--peru {
+  stroke: #51bbfe;
+  stroke-width: 0.95;
+}
+
+.map-callout-dot--portugal {
+  stroke: #51bbfe;
+  stroke-width: 0.85;
+}
+
+.map-callout-dot--spain {
+  stroke: #51bbfe;
+  stroke-width: 0.9;
+}
+
+.map-callout-dot--france {
+  stroke: #51bbfe;
+  stroke-width: 0.9;
+}
+
+.map-callout-dot--ireland {
+  stroke: #51bbfe;
+  stroke-width: 0.9;
+}
+
+.map-callout-dot--belgium,
+.map-callout-dot--denmark {
+  stroke: #51bbfe;
+  stroke-width: 0.85;
+}
+
+.map-callout-panel--ecuador {
+  stroke-width: 0.65;
+}
+
+.map-callout-panel--peru {
+  stroke-width: 0.7;
+}
+
+.map-callout-panel--portugal {
+  stroke-width: 0.7;
+}
+
+.map-callout-panel--spain {
+  stroke-width: 0.72;
+}
+
+.map-callout-panel--france {
+  stroke-width: 0.72;
+}
+
+.map-callout-panel--ireland {
+  stroke-width: 0.7;
+}
+
+.map-callout-panel--belgium,
+.map-callout-panel--denmark {
+  stroke-width: 0.7;
+}
+
+.us-callout-text,
+.map-callout-text {
+  fill: rgba(255, 247, 174, 0.86);
+  font-family: "Newsreader", Georgia, "Times New Roman", serif;
+  font-size: 8.2px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.map-callout-text--ecuador {
+  font-size: 8px;
+}
+
+.map-callout-text--peru {
+  font-size: 7.7px;
+}
+
+.map-callout-text--portugal {
+  font-size: 7.25px;
+}
+
+.map-callout-text--spain {
+  font-size: 6.45px;
+}
+
+.map-callout-text--france {
+  font-size: 6.85px;
+}
+
+.map-callout-text--ireland {
+  font-size: 7.25px;
+}
+
+.map-callout-text--belgium,
+.map-callout-text--denmark {
+  font-size: 7.15px;
+}
+
+.map-typewriter-copy {
   position: absolute;
-  right: clamp(1rem, 2vw, 1.4rem);
-  bottom: clamp(1rem, 2vw, 1.4rem);
+  top: clamp(25.7rem, 79svh, 45.5rem);
+  left: clamp(37rem, 61vw, 60rem);
   z-index: 3;
-  width: min(90%, 360px);
-  padding: 0.95rem 1.05rem 1.05rem;
-  border: 1px solid rgba(199, 239, 207, 0.58);
-  border-radius: 0;
-  background: rgba(4, 7, 9, 0.86);
-  clip-path: polygon(0 0, calc(100% - 32px) 0, 100% 32px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
-  color: #fffcf2;
-  box-shadow: 0 18px 70px rgba(0, 0, 0, 0.42);
-  backdrop-filter: blur(12px);
-}
-
-.map-tooltip__eyebrow {
-  margin: 0 0 0.35rem;
-  color: var(--map-accent);
-  font-family:
-    "Raleway", "Aktiv Grotesk", Inter, ui-sans-serif, system-ui, -apple-system,
-    BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-size: 0.72rem;
-  font-weight: 200;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.map-tooltip h3 {
-  margin: 0 0 0.7rem;
-  color: #fffcf2;
-  font-family:
-    "Raleway", "Aktiv Grotesk", Inter, ui-sans-serif, system-ui, -apple-system,
-    BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-size: clamp(1.3rem, 2vw, 1.7rem);
-  font-weight: 200;
+  display: grid;
+  width: max-content;
+  max-width: min(42rem, 46vw);
+  margin: 0;
+  overflow: hidden;
+  color: #fff7ae;
+  font-family: Raleway, "Helvetica Neue", Arial, sans-serif;
+  font-size: clamp(1.25rem, 2.03vw, 2rem);
+  font-weight: 300;
   letter-spacing: -0.035em;
-  line-height: 1;
+  line-height: 1.12;
+  text-shadow: 0 14px 32px rgba(3, 4, 5, 0.52);
+  white-space: nowrap;
 }
 
-.map-tooltip dl {
-  display: grid;
-  gap: 0.35rem;
-  margin: 0 0 0.72rem;
+.map-typewriter-copy::after {
+  position: absolute;
+  top: 1.18em;
+  right: 0;
+  width: 0.08em;
+  height: 1.06em;
+  background: currentColor;
+  content: "";
+  animation: map-cursor-blink 760ms steps(1, end) infinite;
 }
 
-.map-tooltip dt,
-.map-tooltip dd {
-  margin: 0;
-  color: rgba(255, 252, 242, 0.76);
-  font-family:
-    "Raleway", "Aktiv Grotesk", Inter, ui-sans-serif, system-ui, -apple-system,
-    BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-size: 0.8rem;
-  font-weight: 200;
-  line-height: 1.28;
+.map-typewriter-copy span {
+  display: block;
+  overflow: hidden;
+  animation: map-typewriter 11s steps(86, end) infinite;
 }
 
-.map-tooltip dt {
-  color: rgba(199, 239, 207, 0.86);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+.map-typewriter-copy span + span {
+  animation-delay: 120ms;
 }
 
-.map-tooltip__label {
-  margin: 0 0 0.4rem;
-  color: rgba(199, 239, 207, 0.86);
-  font-family:
-    "Raleway", "Aktiv Grotesk", Inter, ui-sans-serif, system-ui, -apple-system,
-    BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-size: 0.78rem;
-  font-weight: 200;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+@keyframes map-typewriter {
+  0%,
+  6% {
+    max-width: 0;
+  }
+
+  43%,
+  88% {
+    max-width: 44ch;
+  }
+
+  100% {
+    max-width: 0;
+  }
 }
 
-.map-tooltip ul {
-  display: grid;
-  gap: 0.35rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
+@keyframes map-cursor-blink {
+  0%,
+  48% {
+    opacity: 1;
+  }
+
+  49%,
+  100% {
+    opacity: 0;
+  }
 }
 
-.map-tooltip li {
-  color: rgba(255, 252, 242, 0.82);
-  font-family:
-    "Raleway", "Aktiv Grotesk", Inter, ui-sans-serif, system-ui, -apple-system,
-    BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-size: 0.82rem;
-  font-weight: 200;
-  line-height: 1.38;
+@keyframes us-country-hint {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 0 rgba(81, 187, 254, 0));
+  }
+
+  50% {
+    filter: brightness(1.08) drop-shadow(0 0 10px rgba(81, 187, 254, 0.34));
+  }
+}
+
+@keyframes ecuador-country-hint {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 0 rgba(81, 187, 254, 0));
+  }
+
+  50% {
+    filter: brightness(1.08) drop-shadow(0 0 8px rgba(81, 187, 254, 0.32));
+  }
+}
+
+@keyframes peru-country-hint {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 0 rgba(81, 187, 254, 0));
+  }
+
+  50% {
+    filter: brightness(1.08) drop-shadow(0 0 8px rgba(81, 187, 254, 0.32));
+  }
+}
+
+@keyframes portugal-country-hint {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 0 rgba(81, 187, 254, 0));
+  }
+
+  50% {
+    filter: brightness(1.08) drop-shadow(0 0 8px rgba(81, 187, 254, 0.32));
+  }
+}
+
+@keyframes spain-country-hint {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 0 rgba(81, 187, 254, 0));
+  }
+
+  50% {
+    filter: brightness(1.08) drop-shadow(0 0 8px rgba(81, 187, 254, 0.32));
+  }
+}
+
+@keyframes france-country-hint {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 0 rgba(255, 247, 174, 0));
+  }
+
+  50% {
+    filter: brightness(1.08) drop-shadow(0 0 8px rgba(255, 247, 174, 0.22));
+  }
+}
+
+@keyframes ireland-country-hint {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 0 rgba(255, 247, 174, 0));
+  }
+
+  50% {
+    filter: brightness(1.08) drop-shadow(0 0 8px rgba(255, 247, 174, 0.22));
+  }
+}
+
+@keyframes belgium-country-hint {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 0 rgba(255, 247, 174, 0));
+  }
+
+  50% {
+    filter: brightness(1.08) drop-shadow(0 0 8px rgba(255, 247, 174, 0.22));
+  }
+}
+
+@keyframes denmark-country-hint {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 0 rgba(255, 247, 174, 0));
+  }
+
+  50% {
+    filter: brightness(1.08) drop-shadow(0 0 8px rgba(255, 247, 174, 0.22));
+  }
+}
+
+@keyframes us-hover-ring-pulse {
+  0% {
+    opacity: 0.9;
+    transform: scale(0.72);
+  }
+
+  74%,
+  100% {
+    opacity: 0;
+    transform: scale(1.85);
+  }
 }
 
 .intro-station-bg {
@@ -764,13 +1366,18 @@ path.map-country:focus-visible {
   left: clamp(1rem, 4vw, 3rem);
   z-index: 1;
   display: grid;
-  color: #30011e;
+  color: #e3c0d3;
   font-family: "Archivo Black", "Arial Black", Impact, sans-serif;
   font-size: clamp(4.8rem, 13vw, 12.5rem);
+  font-weight: 950;
   letter-spacing: -0.08em;
   line-height: 0.73;
   text-transform: uppercase;
-  opacity: 0.9;
+  opacity: 1;
+  text-shadow: 0 16px 48px rgba(0, 0, 0, 0.54);
+  clip-path: inset(0 100% 0 0);
+  filter: blur(14px);
+  transform: translateY(14px);
 }
 
 .intro-station-copy {
@@ -780,20 +1387,32 @@ path.map-country:focus-visible {
   z-index: 2;
   max-width: min(84vw, 660px);
   margin: 0;
-  color: #fcab64;
+  color: #fb4d3d;
   font-family:
     "Raleway", "Aktiv Grotesk", Inter, ui-sans-serif, system-ui, -apple-system,
     BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-size: clamp(1.35rem, 2.75vw, 2.95rem);
-  font-weight: 300;
+  font-weight: 700;
   letter-spacing: -0.035em;
   line-height: 1.12;
   text-align: right;
   text-shadow: 0 14px 44px rgba(0, 0, 0, 0.68);
+  clip-path: inset(0 0 100% 0);
+  opacity: 0;
+  filter: blur(8px);
+  transform: translateY(18px);
 }
 
 .timeline-station .intro-station-copy {
-  color: #fcab64;
+  color: #fb4d3d;
+}
+
+.timeline-station--intro.is-visible .intro-station-name {
+  animation: editorial-name-reveal 980ms cubic-bezier(0.16, 1, 0.3, 1) 120ms both;
+}
+
+.timeline-station--intro.is-visible .intro-station-copy {
+  animation: editorial-copy-reveal 860ms cubic-bezier(0.16, 1, 0.3, 1) 520ms both;
 }
 
 .timeline-station--large {
@@ -961,6 +1580,43 @@ path.map-country:focus-visible {
   }
 }
 
+@keyframes editorial-name-reveal {
+  0% {
+    clip-path: inset(0 100% 0 0);
+    filter: blur(14px);
+    opacity: 0.68;
+    transform: translateY(14px);
+  }
+
+  64% {
+    filter: blur(2px);
+    opacity: 1;
+  }
+
+  100% {
+    clip-path: inset(0 0 0 0);
+    filter: blur(0);
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes editorial-copy-reveal {
+  0% {
+    clip-path: inset(0 0 100% 0);
+    filter: blur(8px);
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  100% {
+    clip-path: inset(0 0 0 0);
+    filter: blur(0);
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @keyframes broken-tv {
   0%,
   100% {
@@ -1085,30 +1741,26 @@ path.map-country:focus-visible {
   }
 
   .timeline-station--map {
-    grid-template-columns: 1fr;
-    min-height: auto;
-    gap: 1.2rem;
-    padding: 1rem;
-  }
-
-  .map-copy h2 {
-    font-size: clamp(2.1rem, 13vw, 3.5rem);
+    width: 100%;
+    min-height: 76svh;
+    padding: 0;
   }
 
   .world-map-card {
-    min-height: auto;
+    min-height: 76svh;
   }
 
   .portfolio-world-map {
-    min-height: 330px;
+    min-height: 76svh;
   }
 
-  .map-tooltip {
-    position: relative;
-    right: auto;
-    bottom: auto;
-    width: auto;
-    margin: 0 0.75rem 0.75rem;
+  .map-typewriter-copy {
+    top: auto;
+    right: 1rem;
+    bottom: clamp(2.2rem, 8svh, 4.5rem);
+    left: auto;
+    max-width: min(21rem, 74vw);
+    font-size: clamp(0.97rem, 4.4vw, 1.28rem);
   }
 
   .intro-station-name {
@@ -1137,8 +1789,21 @@ path.map-country:focus-visible {
   .ticker-track,
   .hero-title__chaos,
   .hero-title__chaos::before,
-  .hero-title__chaos::after {
+  .hero-title__chaos::after,
+  .map-typewriter-copy span,
+  .map-typewriter-copy::after,
+  .timeline-station--intro.is-visible .intro-station-name,
+  .timeline-station--intro.is-visible .intro-station-copy {
     animation: none;
+    transition: none;
+  }
+
+  .intro-station-name,
+  .intro-station-copy {
+    clip-path: none;
+    filter: none;
+    opacity: 1;
+    transform: none;
   }
 
   .career-track,
@@ -1166,6 +1831,7 @@ path.map-country:focus-visible {
   }
 
   .timeline-station--map {
-    grid-template-columns: 1fr;
+    width: 100%;
+    min-height: auto;
   }
 }

@@ -7,6 +7,11 @@ if (yearElement) {
 const revealObserver = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
+      if (entry.target.classList.contains("timeline-station--intro")) {
+        entry.target.classList.toggle("is-visible", entry.isIntersecting);
+        return;
+      }
+
       if (entry.isIntersecting) {
         entry.target.classList.add("is-visible");
         revealObserver.unobserve(entry.target);
@@ -19,6 +24,82 @@ const revealObserver = new IntersectionObserver(
 document.querySelectorAll(".reveal").forEach((element) => {
   revealObserver.observe(element);
 });
+
+const heroTicker = document.querySelector(".hero-ticker");
+const tickerTrack = document.querySelector(".ticker-track");
+const tickerGroup = document.querySelector(".ticker-group");
+
+let tickerStartX = 0;
+let tickerOffset = 0;
+let tickerStartOffset = 0;
+let tickerIsDragging = false;
+
+function getTickerLoopWidth() {
+  return tickerGroup?.getBoundingClientRect().width || 0;
+}
+
+function normalizeTickerOffset(offset) {
+  const loopWidth = getTickerLoopWidth();
+
+  if (!loopWidth) {
+    return offset;
+  }
+
+  return ((offset % loopWidth) + loopWidth) % loopWidth - loopWidth;
+}
+
+function applyTickerOffset(offset) {
+  tickerOffset = normalizeTickerOffset(offset);
+  tickerTrack.style.transform = `translate3d(${tickerOffset}px, 0, 0)`;
+}
+
+function syncTickerOffsetFromAnimation() {
+  if (!tickerTrack) {
+    return;
+  }
+
+  const computedTransform = window.getComputedStyle(tickerTrack).transform;
+  const matrix = computedTransform === "none" ? new DOMMatrixReadOnly() : new DOMMatrixReadOnly(computedTransform);
+  tickerOffset = matrix.m41 || 0;
+  applyTickerOffset(tickerOffset);
+}
+
+if (heroTicker && tickerTrack) {
+  heroTicker.addEventListener("pointerdown", (event) => {
+    tickerIsDragging = true;
+    tickerStartX = event.clientX;
+    syncTickerOffsetFromAnimation();
+    tickerStartOffset = tickerOffset;
+    heroTicker.classList.add("is-dragging", "is-manual");
+    heroTicker.setPointerCapture(event.pointerId);
+  });
+
+  heroTicker.addEventListener("pointermove", (event) => {
+    if (!tickerIsDragging) {
+      return;
+    }
+
+    applyTickerOffset(tickerStartOffset + event.clientX - tickerStartX);
+  });
+
+  heroTicker.addEventListener("pointerup", (event) => {
+    tickerIsDragging = false;
+    heroTicker.classList.remove("is-dragging");
+    heroTicker.releasePointerCapture(event.pointerId);
+  });
+
+  heroTicker.addEventListener("pointercancel", () => {
+    tickerIsDragging = false;
+    heroTicker.classList.remove("is-dragging");
+  });
+
+  heroTicker.addEventListener("mouseleave", () => {
+    if (!tickerIsDragging) {
+      heroTicker.classList.remove("is-manual");
+      tickerTrack.style.removeProperty("transform");
+    }
+  });
+}
 
 const universe = document.querySelector(".career-universe");
 const track = document.querySelector("#career-track");
@@ -175,351 +256,255 @@ reducedMotion.addEventListener("change", () => {
   requestScrollUpdate();
 });
 
-// Editable map content: update these fields to change the hover panels.
-const countryExperiences = {
-  PER: {
-    country: "Peru",
-    date: "March-May 2026",
-    role: "Digital Content Specialist / Volunteer",
-    organization: "ONG Hilo Rojo, Trujillo",
-    experience: [
-      "Volunteering and community-based projects",
-      "Digital content creation",
-      "Educational and social-impact storytelling",
-    ],
-  },
-  ECU: {
-    country: "Ecuador",
-    date: "January-March 2026",
-    role: "Digital Content Specialist / Volunteer",
-    organization: "Achuar community-based project",
-    experience: [
-      "Community-based volunteering",
-      "Work with Achuar communities",
-      "Ecotourism and territorial storytelling",
-      "Digital content and visual documentation",
-    ],
-  },
-  ESP: {
-    country: "Spain",
-    date: "2021-2026",
-    role: "Journalist / Corporate Communication Consultant",
-    organizationLabel: "Organizations",
-    organization: "El Comercio, La Voz del Trubia, Weber Shandwick",
-    experience: [
-      "Newsroom and local reporting experience",
-      "Corporate communication and public affairs",
-      "Strategic content, media relations, and stakeholder work",
-      "Editorial, audiovisual, and visual storytelling",
-    ],
-  },
-  PRT: {
-    country: "Portugal",
-    date: "June-September 2015",
-    role: "Sociocultural Project Volunteer",
-    organization: "Retirement home project supported by the French Ministry of National Education",
-    experience: [
-      "Sociocultural projects in a retirement home",
-      "Community engagement",
-      "European volunteering and social-impact work",
-    ],
-  },
-  FRA: {
-    country: "France",
-    date: "2015-2018",
-    role: "Digital Content Manager / Sociocultural Project Coordinator",
-    organizationLabel: "Organizations",
-    organization: "Cultur'All Studio and Centre Social La Busette, Lille",
-    experience: [
-      "Audiovisual production",
-      "Sociocultural projects",
-      "Institutional communication",
-      "French-language communication",
-      "Project supported by the French Ministry of National Education",
-    ],
-  },
-  IRL: {
-    country: "Ireland",
-    date: "2015-2016",
-    role: "Linguistic Exchange Coordinator",
-    organization: "Open World Education",
-    experience: [
-      "Coordination of language exchanges between Madrid and Dublin",
-      "International education experience",
-      "Youth mobility and intercultural communication",
-    ],
-  },
-  BEL: {
-    country: "Belgium",
-    date: "November 2024",
-    role: "Master's Programme Participant",
-    organization: "University of Navarra - MCPC",
-    experience: [
-      "Engaging Europe Program",
-      "European political and corporate communication",
-      "EU institutions and Brussels public affairs context",
-    ],
-  },
-  USA: {
-    country: "United States · Washington State",
-    date: "March 2025",
-    role: "Postgraduate Student",
-    organization: "George Washington University - Graduate School of Political Management",
-    experience: [
-      "GSPM Four-Week Program",
-      "Political communication and public affairs",
-      "Washington D.C. institutional and strategic communication environment",
-    ],
-  },
-};
-
-function escapeHTML(value) {
-  return value
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
-}
-
-function setActiveMapCountry(countryCode) {
-  document.querySelectorAll(".map-country").forEach((country) => {
-    country.classList.remove("is-active");
-    country.setAttribute("aria-pressed", "false");
-  });
-  document.querySelectorAll(`.map-country[data-country="${countryCode}"]`).forEach((country) => {
-    country.classList.add("is-active");
-    country.setAttribute("aria-pressed", "true");
-  });
-}
-
-function updateMapTooltip(countryCode, pointerEvent) {
-  const mapCard = document.querySelector(".world-map-card");
-  const tooltip = document.querySelector(".map-tooltip");
-  const data = countryExperiences[countryCode];
-
-  if (!mapCard || !tooltip || !data) {
-    return;
-  }
-
-  const organizationLabel = data.organizationLabel || "Organization";
-  tooltip.innerHTML = `
-    <p class="map-tooltip__eyebrow">${escapeHTML(countryCode)}</p>
-    <h3>${escapeHTML(data.country)}</h3>
-    <dl>
-      <dt>Date</dt>
-      <dd>${escapeHTML(data.date)}</dd>
-      <dt>Role</dt>
-      <dd>${escapeHTML(data.role)}</dd>
-      <dt>${escapeHTML(organizationLabel)}</dt>
-      <dd>${escapeHTML(data.organization)}</dd>
-    </dl>
-    <p class="map-tooltip__label">Experience</p>
-    <ul>${data.experience.map((line) => `<li>${escapeHTML(line)}</li>`).join("")}</ul>
-  `;
-
-  if (pointerEvent && window.matchMedia("(min-width: 761px)").matches) {
-    const rect = mapCard.getBoundingClientRect();
-    const left = Math.min(rect.width - tooltip.offsetWidth - 16, Math.max(16, pointerEvent.clientX - rect.left + 18));
-    const top = Math.min(rect.height - tooltip.offsetHeight - 16, Math.max(16, pointerEvent.clientY - rect.top + 18));
-    tooltip.style.left = `${left}px`;
-    tooltip.style.top = `${top}px`;
-    tooltip.style.right = "auto";
-    tooltip.style.bottom = "auto";
-  } else {
-    tooltip.style.removeProperty("left");
-    tooltip.style.removeProperty("top");
-    tooltip.style.removeProperty("right");
-    tooltip.style.removeProperty("bottom");
-  }
-}
-
-function getMapCountryTarget(event) {
-  const target = event.target.closest?.(".map-country, .map-country-hit");
-  const map = document.querySelector(".portfolio-world-map");
-  return target && map?.contains(target) ? target : null;
-}
-
-function activateMapCountry(countryElement, event) {
-  const countryCode = countryElement.dataset.country;
-
-  if (!countryExperiences[countryCode]) {
-    return;
-  }
-
-  setActiveMapCountry(countryCode);
-  updateMapTooltip(countryCode, event);
-}
-
-function initializeMapInteractions() {
-  const map = document.querySelector(".portfolio-world-map");
-
-  if (!map) {
-    return;
-  }
-
-  map.addEventListener("mouseover", (event) => {
-    const country = getMapCountryTarget(event);
-    if (country) {
-      activateMapCountry(country, event);
-    }
-  });
-
-  map.addEventListener("mousemove", (event) => {
-    const country = getMapCountryTarget(event);
-    if (country?.classList.contains("is-active")) {
-      updateMapTooltip(country.dataset.country, event);
-    }
-  });
-
-  map.addEventListener("focusin", (event) => {
-    const country = getMapCountryTarget(event);
-    if (country) {
-      activateMapCountry(country);
-    }
-  });
-
-  map.addEventListener("click", (event) => {
-    const country = getMapCountryTarget(event);
-    if (country) {
-      activateMapCountry(country, event);
-    }
-  });
-
-  map.addEventListener("keydown", (event) => {
-    if (event.key !== "Enter" && event.key !== " ") {
-      return;
-    }
-
-    const country = getMapCountryTarget(event);
-    if (country) {
-      event.preventDefault();
-      activateMapCountry(country);
-    }
-  });
-}
-
-// Uses open-source TopoJSON when available; the inline SVG remains as a fallback.
-async function renderPortfolioGeoMap() {
+function renderStaticWorldMap() {
   const svgElement = document.querySelector(".portfolio-world-map");
+  const mapSection = document.querySelector(".timeline-station--map");
 
   if (!svgElement || !window.d3 || !window.topojson) {
     return;
   }
 
-  try {
-    const world = await window.d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json");
-    const svg = window.d3.select(svgElement);
-    const width = 960;
-    const height = 520;
-    const projection = window.d3.geoNaturalEarth1().fitExtent(
-      [
-        [18, 28],
-        [942, 500],
-      ],
-      { type: "Sphere" },
-    );
-    const path = window.d3.geoPath(projection);
-    const countries = window.topojson.feature(world, world.objects.countries).features;
-    const countryIds = new Map([
-      ["604", "PER"],
-      ["218", "ECU"],
-      ["724", "ESP"],
-      ["620", "PRT"],
-      ["250", "FRA"],
-      ["372", "IRL"],
-      ["056", "BEL"],
-    ]);
-    const washingtonState = {
-      type: "Feature",
-      id: "USA",
-      properties: { name: "Washington State" },
-      geometry: {
-        type: "Polygon",
-        coordinates: [
-          [
-            [-124.8, 45.55],
-            [-116.9, 45.55],
-            [-116.9, 49.02],
-            [-124.8, 49.02],
-            [-124.8, 45.55],
-          ],
+  window.d3
+    .json("assets/data/countries-110m.json")
+    .then((world) => {
+      const svg = window.d3.select(svgElement);
+      const highlightedCountryColors = new Map([
+        ["840", "#227C9D"], // United States
+        ["218", "#E3C0D3"], // Ecuador
+        ["604", "#731963"], // Peru
+        ["724", "#C7EFCF"], // Spain
+        ["620", "#FFF7AE"], // Portugal
+        ["372", "#FF9B42"], // Ireland
+        ["208", "#FFC600"], // Denmark
+        ["056", "#904C77"], // Belgium
+      ]);
+      const projection = window.d3.geoNaturalEarth1().fitExtent(
+        [
+          [4, 30],
+          [956, 534],
         ],
-      },
-    };
+        { type: "Sphere" },
+      );
+      const path = window.d3.geoPath(projection);
+      const countries = window.topojson.feature(world, world.objects.countries).features;
+      const borders = window.topojson.mesh(world, world.objects.countries, (a, b) => a !== b);
+      const france = countries.find((country) => String(country.id).padStart(3, "0") === "250");
+      const mainlandFrance = france
+        ? {
+            ...france,
+            geometry: {
+              type: "MultiPolygon",
+              coordinates: france.geometry.coordinates.filter((polygon) => {
+                const [longitude, latitude] = window.d3.geoCentroid({ type: "Polygon", coordinates: polygon });
+                return longitude > -6 && longitude < 10 && latitude > 41 && latitude < 52;
+              }),
+            },
+          }
+        : null;
 
-    svg.select(".map-fallback").style("display", "none");
-    svg.select(".map-countries").style("display", "none");
-    svg.selectAll(".map-dynamic").remove();
+      svg.select(".static-world-layer").selectAll("*").remove();
+      const layer = svg.select(".static-world-layer");
 
-    const landLayer = svg.insert("g", ".map-detail").attr("class", "map-dynamic map-dynamic--land");
-    landLayer
-      .selectAll("path")
-      .data(countries)
-      .join("path")
-      .attr("class", "map-country-shape")
-      .attr("d", path);
+      layer
+        .selectAll("path.static-world-country")
+        .data(countries)
+        .join("path")
+        .attr("class", (country) => {
+          const id = String(country.id).padStart(3, "0");
+          if (id === "840") {
+            return "static-world-country is-us-country";
+          }
 
-    landLayer
-      .append("path")
-      .datum(window.topojson.mesh(world, world.objects.countries, (a, b) => a !== b))
-      .attr("class", "map-border-line")
-      .attr("d", path);
+          if (id === "218") {
+            return "static-world-country is-ecuador-country";
+          }
 
-    const highlightedCountries = countries.filter((country) => countryIds.has(String(country.id).padStart(3, "0")));
-    const highlightLayer = svg.append("g").attr("class", "map-dynamic map-dynamic--highlight");
-    highlightLayer
-      .selectAll("path")
-      .data(highlightedCountries)
-      .join("path")
-      .attr("class", "map-country")
-      .attr("data-country", (country) => countryIds.get(String(country.id).padStart(3, "0")))
-      .attr("role", "button")
-      .attr("tabindex", "0")
-      .attr("aria-pressed", "false")
-      .attr("aria-label", (country) => countryExperiences[countryIds.get(String(country.id).padStart(3, "0"))].country)
-      .attr("d", path);
+          if (id === "604") {
+            return "static-world-country is-peru-country";
+          }
 
-    highlightLayer
-      .append("path")
-      .datum(washingtonState)
-      .attr("class", "map-country")
-      .attr("data-country", "USA")
-      .attr("role", "button")
-      .attr("tabindex", "0")
-      .attr("aria-pressed", "false")
-      .attr("aria-label", countryExperiences.USA.country)
-      .attr("d", path);
+          if (id === "620") {
+            return "static-world-country is-portugal-country";
+          }
 
-    const hitFeatures = [
-      ...highlightedCountries.map((feature) => ({
-        feature,
-        code: countryIds.get(String(feature.id).padStart(3, "0")),
-      })),
-      { feature: washingtonState, code: "USA" },
-    ];
+          if (id === "724") {
+            return "static-world-country is-spain-country";
+          }
 
-    highlightLayer
-      .selectAll("circle")
-      .data(hitFeatures)
-      .join("circle")
-      .attr("class", "map-country-hit")
-      .attr("data-country", (item) => item.code)
-      .attr("aria-hidden", "true")
-      .attr("cx", (item) => path.centroid(item.feature)[0])
-      .attr("cy", (item) => path.centroid(item.feature)[1])
-      .attr("r", (item) => (["BEL", "IRL", "PRT", "USA"].includes(item.code) ? 15 : 12));
+          if (id === "372") {
+            return "static-world-country is-ireland-country";
+          }
 
-    svg.attr("viewBox", `0 0 ${width} ${height}`);
-  } catch {
-    document.querySelector(".map-fallback")?.removeAttribute("style");
-    document.querySelector(".map-countries")?.removeAttribute("style");
-  }
+          if (id === "056") {
+            return "static-world-country is-belgium-country";
+          }
+
+          if (id === "208") {
+            return "static-world-country is-denmark-country";
+          }
+
+          return "static-world-country";
+        })
+        .attr("tabindex", (country) => {
+          const id = String(country.id).padStart(3, "0");
+          return id === "840" || id === "218" || id === "604" || id === "620" || id === "724" || id === "372" || id === "056" || id === "208" ? "0" : null;
+        })
+        .attr("aria-label", (country) => {
+          const id = String(country.id).padStart(3, "0");
+
+          if (id === "840") {
+            return "United States education callout";
+          }
+
+          if (id === "218") {
+            return "Ecuador community volunteering callout";
+          }
+
+          if (id === "604") {
+            return "Peru Hilo Rojo volunteer callout";
+          }
+
+          if (id === "620") {
+            return "Portugal sociocultural project callout";
+          }
+
+          if (id === "724") {
+            return "Spain professional and academic callout";
+          }
+
+          if (id === "372") {
+            return "Ireland linguistic exchange callout";
+          }
+
+          if (id === "056") {
+            return "Belgium Engaging Europe callout";
+          }
+
+          if (id === "208") {
+            return "Denmark Erasmus exchange callout";
+          }
+
+          return null;
+        })
+        .attr("d", path)
+        .style("fill", (country) => highlightedCountryColors.get(String(country.id).padStart(3, "0")) || null);
+
+      const usCountry = svg.select(".is-us-country");
+      const ecuadorCountry = svg.select(".is-ecuador-country");
+      const peruCountry = svg.select(".is-peru-country");
+      const portugalCountry = svg.select(".is-portugal-country");
+      const spainCountry = svg.select(".is-spain-country");
+      const irelandCountry = svg.select(".is-ireland-country");
+      const belgiumCountry = svg.select(".is-belgium-country");
+      const denmarkCountry = svg.select(".is-denmark-country");
+
+      if (mapSection && !usCountry.empty()) {
+        usCountry
+          .on("mouseenter focus", () => mapSection.classList.add("is-us-callout-open"))
+          .on("mouseleave blur", () => mapSection.classList.remove("is-us-callout-open"))
+          .on("click touchstart", (event) => {
+            event.preventDefault();
+            mapSection.classList.toggle("is-us-callout-open");
+          });
+      }
+
+      if (mapSection && !ecuadorCountry.empty()) {
+        ecuadorCountry
+          .on("mouseenter focus", () => mapSection.classList.add("is-ecuador-callout-open"))
+          .on("mouseleave blur", () => mapSection.classList.remove("is-ecuador-callout-open"))
+          .on("click touchstart", (event) => {
+            event.preventDefault();
+            mapSection.classList.toggle("is-ecuador-callout-open");
+          });
+      }
+
+      if (mapSection && !peruCountry.empty()) {
+        peruCountry
+          .on("mouseenter focus", () => mapSection.classList.add("is-peru-callout-open"))
+          .on("mouseleave blur", () => mapSection.classList.remove("is-peru-callout-open"))
+          .on("click touchstart", (event) => {
+            event.preventDefault();
+            mapSection.classList.toggle("is-peru-callout-open");
+          });
+      }
+
+      if (mapSection && !portugalCountry.empty()) {
+        portugalCountry
+          .on("mouseenter focus", () => mapSection.classList.add("is-portugal-callout-open"))
+          .on("mouseleave blur", () => mapSection.classList.remove("is-portugal-callout-open"))
+          .on("click touchstart", (event) => {
+            event.preventDefault();
+            mapSection.classList.toggle("is-portugal-callout-open");
+          });
+      }
+
+      if (mapSection && !spainCountry.empty()) {
+        spainCountry
+          .on("mouseenter focus", () => mapSection.classList.add("is-spain-callout-open"))
+          .on("mouseleave blur", () => mapSection.classList.remove("is-spain-callout-open"))
+          .on("click touchstart", (event) => {
+            event.preventDefault();
+            mapSection.classList.toggle("is-spain-callout-open");
+          });
+      }
+
+      if (mapSection && !irelandCountry.empty()) {
+        irelandCountry
+          .on("mouseenter focus", () => mapSection.classList.add("is-ireland-callout-open"))
+          .on("mouseleave blur", () => mapSection.classList.remove("is-ireland-callout-open"))
+          .on("click touchstart", (event) => {
+            event.preventDefault();
+            mapSection.classList.toggle("is-ireland-callout-open");
+          });
+      }
+
+      if (mapSection && !belgiumCountry.empty()) {
+        belgiumCountry
+          .on("mouseenter focus", () => mapSection.classList.add("is-belgium-callout-open"))
+          .on("mouseleave blur", () => mapSection.classList.remove("is-belgium-callout-open"))
+          .on("click touchstart", (event) => {
+            event.preventDefault();
+            mapSection.classList.toggle("is-belgium-callout-open");
+          });
+      }
+
+      if (mapSection && !denmarkCountry.empty()) {
+        denmarkCountry
+          .on("mouseenter focus", () => mapSection.classList.add("is-denmark-callout-open"))
+          .on("mouseleave blur", () => mapSection.classList.remove("is-denmark-callout-open"))
+          .on("click touchstart", (event) => {
+            event.preventDefault();
+            mapSection.classList.toggle("is-denmark-callout-open");
+          });
+      }
+
+      if (mainlandFrance?.geometry.coordinates.length) {
+        const franceCountry = layer
+          .append("path")
+          .datum(mainlandFrance)
+          .attr("class", "static-world-country is-france-country")
+          .attr("tabindex", "0")
+          .attr("aria-label", "France professional experience callout")
+          .attr("d", path)
+          .style("fill", "#BA1200");
+
+        if (mapSection) {
+          franceCountry
+            .on("mouseenter focus", () => mapSection.classList.add("is-france-callout-open"))
+            .on("mouseleave blur", () => mapSection.classList.remove("is-france-callout-open"))
+            .on("click touchstart", (event) => {
+              event.preventDefault();
+              mapSection.classList.toggle("is-france-callout-open");
+            });
+        }
+      }
+
+      layer.append("path").datum(borders).attr("class", "static-world-border").attr("d", path);
+    })
+    .catch(() => {});
 }
 
-initializeMapInteractions();
-renderPortfolioGeoMap();
-
+renderStaticWorldMap();
 const panelContent = {
   urjc: {
     kicker: "2010 - 2015",

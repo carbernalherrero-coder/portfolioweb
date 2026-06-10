@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-      href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Caveat:wght@700&family=IBM+Plex+Mono:wght@500;600&family=PT+Mono&family=Prata&family=Raleway:wght@100;300&family=Rubik+Glitch&family=Space+Grotesk:wght@500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Caveat:wght@700&family=IBM+Plex+Mono:wght@500;600&family=Newsreader:opsz,wght@6..72,500;6..72,700&family=PT+Mono&family=Prata&family=Raleway:wght@100;300;700;800&family=Rubik+Glitch&family=Space+Grotesk:wght@500;600;700&display=swap"
       rel="stylesheet"
     >
     <link rel="stylesheet" href="css/styles.css">
@@ -105,83 +105,191 @@
                 <span>Bernal</span>
               </div>
               <p id="universe-title" class="intro-station-copy">
-                Journalist with 7 years of experience and two master&rsquo;s degrees,<br>
+                Journalist<br>
                 working at the crossroads where<br>
                 field reporting, strategic communication, and public-impact work meet.
               </p>
             </article>
 
-            <article class="timeline-station timeline-station--map reveal" aria-labelledby="map-title">
-              <div class="map-copy">
-                <p class="map-kicker">Geographic trajectory</p>
-                <h2 id="map-title">Fieldwork, strategy and public-impact projects across borders.</h2>
-                <p>
-                  Hover or tap a highlighted place.
-                </p>
-              </div>
-
+            <article class="timeline-station timeline-station--map" aria-labelledby="world-map-title">
               <div class="world-map-card">
                 <svg class="portfolio-world-map" viewBox="0 0 960 520" role="img" aria-labelledby="world-map-title world-map-desc">
-                  <title id="world-map-title">Interactive map of Carlos Bernal's professional trajectory</title>
-                  <desc id="world-map-desc">Highlighted places: Peru, Ecuador, Spain, Portugal, France, Ireland, Belgium and Washington State.</desc>
-
+                  <title id="world-map-title">Static world map</title>
+                  <desc id="world-map-desc">A clean grey world map with selected countries highlighted as an editorial transition section.</desc>
                   <rect class="map-ocean" width="960" height="520" rx="0" />
-
-                  <g class="map-graticule" aria-hidden="true">
-                    <path d="M72 116H884M64 246H904M96 372H872M230 72V468M480 52V480M718 80V460" />
+                  <g class="static-world-layer" aria-hidden="true"></g>
+                  <g class="us-hover-hint" aria-hidden="true">
+                    <circle class="us-hover-ring" cx="219" cy="187" r="10" />
+                    <circle class="us-hover-core" cx="219" cy="187" r="3.2" />
+                    <text class="us-hover-label" x="231" y="190">TAP USA</text>
                   </g>
-
-                  <g class="map-fallback" aria-hidden="true">
-                    <g class="map-land map-land--muted">
-                    <path d="M120 128 183 88 259 93 304 132 290 184 232 214 197 185 155 198 112 170Z" />
-                    <path d="M248 203 309 232 318 304 288 392 247 451 219 365 178 311 193 247Z" />
-                    <path d="M420 118 529 87 644 111 706 152 682 220 578 210 499 238 405 199Z" />
-                    <path d="M610 232 710 220 779 275 814 348 743 373 660 330Z" />
-                    <path d="M748 360 846 388 815 452 724 438 694 391Z" />
-                    </g>
+                  <g class="us-map-callout" aria-hidden="true">
+                    <path class="us-callout-line us-callout-line--washington" d="M219 187 C202 166 181 152 166 141 H122" />
+                    <path class="us-callout-line us-callout-line--wisconsin" d="M253 156 C222 129 191 118 166 141 H122" />
+                    <circle class="us-callout-dot us-callout-dot--washington" cx="219" cy="187" r="3.7" />
+                    <circle class="us-callout-dot us-callout-dot--wisconsin" cx="253" cy="156" r="3.7" />
+                    <rect class="us-callout-panel" x="70" y="80" width="332" height="142" rx="0" />
+                    <text class="us-callout-text us-callout-text--washington" x="90" y="104">
+                      <tspan x="90" dy="0">Date: 2025</tspan>
+                      <tspan x="90" dy="14">Role: Master's Programme Student</tspan>
+                      <tspan x="90" dy="14">Organization: The George Washington University</tspan>
+                      <tspan x="90" dy="14">Graduate School of Political Management</tspan>
+                    </text>
+                    <text class="us-callout-text us-callout-text--wisconsin" x="90" y="170">
+                      <tspan x="90" dy="0">Date: 2009</tspan>
+                      <tspan x="90" dy="14">Role: International Academic Year</tspan>
+                      <tspan x="90" dy="14">Organization: St. Mary's Springs High School,</tspan>
+                      <tspan x="90" dy="14">Fond du Lac, Wisconsin, USA</tspan>
+                    </text>
                   </g>
-
-                  <g class="map-detail" aria-hidden="true">
-                    <path d="M162 164 170 156 178 164M255 332 264 316 273 332M408 154 416 146 424 154M521 148 529 134 537 148M690 204 704 196 718 204M787 302 796 282 805 302" />
-                    <path d="M192 224H204M232 262H247M512 218H532M585 314H606M735 372H758M834 188H850" />
-                    <path d="M318 228 326 206 335 228M487 176 494 154 502 176M458 181 464 167 470 181M443 185 448 174 453 185" />
+                  <g class="portugal-hover-hint" aria-hidden="true">
+                    <text class="map-hover-label map-hover-label--portugal" x="420" y="174">TAP PORTUGAL</text>
+                    <circle class="map-hover-ring map-hover-ring--portugal" cx="462" cy="166" r="4.6" />
+                    <circle class="map-hover-core map-hover-core--portugal" cx="462" cy="166" r="1.7" />
                   </g>
-
-                  <g class="map-countries" aria-label="Highlighted countries">
-                    <g class="map-country" data-country="USA" role="button" tabindex="0" aria-label="Washington State">
-                      <path d="M129 154 160 150 163 169 133 174Z" />
-                    </g>
-                    <g class="map-country" data-country="PER" role="button" tabindex="0" aria-label="Peru">
-                      <path d="M282 309 306 319 296 367 273 405 260 361Z" />
-                    </g>
-                    <g class="map-country" data-country="ECU" role="button" tabindex="0" aria-label="Ecuador">
-                      <path d="M262 284 287 288 283 311 256 309Z" />
-                    </g>
-                    <g class="map-country" data-country="ESP" role="button" tabindex="0" aria-label="Spain">
-                      <path d="M438 177 474 172 489 192 465 210 432 201Z" />
-                    </g>
-                    <g class="map-country" data-country="PRT" role="button" tabindex="0" aria-label="Portugal">
-                      <path d="M423 179 437 178 433 203 418 200Z" />
-                    </g>
-                    <g class="map-country" data-country="FRA" role="button" tabindex="0" aria-label="France">
-                      <path d="M459 142 503 145 514 178 489 197 468 172Z" />
-                    </g>
-                    <g class="map-country" data-country="IRL" role="button" tabindex="0" aria-label="Ireland">
-                      <path d="M429 125 448 116 458 134 440 145Z" />
-                    </g>
-                    <g class="map-country" data-country="BEL" role="button" tabindex="0" aria-label="Belgium">
-                      <path d="M499 136 516 137 516 151 500 153Z" />
-                    </g>
+                  <g class="portugal-map-callout" aria-hidden="true">
+                    <path class="map-callout-line map-callout-line--portugal" d="M462 166 C488 156 512 150 532 146 H546" />
+                    <circle class="map-callout-dot map-callout-dot--portugal" cx="462" cy="166" r="2.1" />
+                    <rect class="map-callout-panel map-callout-panel--portugal" x="546" y="112" width="258" height="78" rx="0" />
+                    <text class="map-callout-text map-callout-text--portugal" x="560" y="135">
+                      <tspan x="560" dy="0">Date: June-September 2015</tspan>
+                      <tspan x="560" dy="15">Role: Sociocultural Project Coordinator</tspan>
+                      <tspan x="560" dy="15">Organization: CEMEA, supported by the French</tspan>
+                      <tspan x="560" dy="15">Ministry of National Education</tspan>
+                    </text>
+                  </g>
+                  <g class="spain-hover-hint" aria-hidden="true">
+                    <text class="map-hover-label map-hover-label--spain" x="420" y="158">TAP SPAIN</text>
+                    <circle class="map-hover-ring map-hover-ring--spain" cx="479" cy="155" r="4.8" />
+                    <circle class="map-hover-core map-hover-core--spain" cx="479" cy="155" r="1.8" />
+                  </g>
+                  <g class="spain-map-callout" aria-hidden="true">
+                    <path class="map-callout-line map-callout-line--spain" d="M479 155 C504 151 529 150 548 150 H560" />
+                    <circle class="map-callout-dot map-callout-dot--spain" cx="479" cy="155" r="2.2" />
+                    <rect class="map-callout-panel map-callout-panel--spain" x="560" y="62" width="232" height="228" rx="0" />
+                    <text class="map-callout-text map-callout-text--spain" x="574" y="82">
+                      <tspan x="574" dy="0">Date: 2026 (in progress)</tspan>
+                      <tspan x="574" dy="13">Role: Journalist</tspan>
+                      <tspan x="574" dy="13">Organization: La Voz del Trubia</tspan>
+                      <tspan x="574" dy="17">Date: 2025</tspan>
+                      <tspan x="574" dy="13">Role: Corporate Communication Consultant</tspan>
+                      <tspan x="574" dy="13">Organization: Weber Shandwick</tspan>
+                      <tspan x="574" dy="17">Date: 2024/25</tspan>
+                      <tspan x="574" dy="13">Role: Corporate Comm &amp; Public Affairs - Master</tspan>
+                      <tspan x="574" dy="13">Organization: Universidad de Navarra</tspan>
+                      <tspan x="574" dy="17">Date: 2021-2024</tspan>
+                      <tspan x="574" dy="13">Role: Journalist</tspan>
+                      <tspan x="574" dy="13">Organization: El Comercio</tspan>
+                      <tspan x="574" dy="17">Date: 2020</tspan>
+                      <tspan x="574" dy="13">Role: Graphic Design &amp; Web Development Programme</tspan>
+                      <tspan x="574" dy="13">Organization: Trazos Escuela de Arte Digital</tspan>
+                    </text>
+                  </g>
+                  <g class="france-hover-hint" aria-hidden="true">
+                    <text class="map-hover-label map-hover-label--france" x="420" y="142">TAP FRANCE</text>
+                    <circle class="map-hover-ring map-hover-ring--france" cx="482" cy="139" r="4.8" />
+                    <circle class="map-hover-core map-hover-core--france" cx="482" cy="139" r="1.8" />
+                  </g>
+                  <g class="france-map-callout" aria-hidden="true">
+                    <path class="map-callout-line map-callout-line--france" d="M482 139 C468 124 464 112 464 100" />
+                    <circle class="map-callout-dot map-callout-dot--france" cx="482" cy="139" r="2.2" />
+                    <rect class="map-callout-panel map-callout-panel--france" x="164" y="76" width="300" height="162" rx="0" />
+                    <text class="map-callout-text map-callout-text--france" x="180" y="95">
+                      <tspan x="180" dy="0">Date: 2016-2018</tspan>
+                      <tspan x="180" dy="14">Role: Assistant Content Manager</tspan>
+                      <tspan x="180" dy="14">Organization: Cultur'All Studio - Audiovisual</tspan>
+                      <tspan x="180" dy="14">Production, Lille</tspan>
+                      <tspan x="180" dy="18">Date: 2015</tspan>
+                      <tspan x="180" dy="14">Role: Project Manager</tspan>
+                      <tspan x="180" dy="14">Organization: Centre Social La Busette - Lille</tspan>
+                      <tspan x="180" dy="18">Date: 2015</tspan>
+                      <tspan x="180" dy="14">Role: BPJEPS Loisirs Tous Publics - Scholarship</tspan>
+                      <tspan x="180" dy="14">Organization: French Ministry of Education - CEMEA</tspan>
+                    </text>
+                  </g>
+                  <g class="ireland-hover-hint" aria-hidden="true">
+                    <text class="map-hover-label map-hover-label--ireland" x="404" y="122">TAP IRELAND</text>
+                    <circle class="map-hover-ring map-hover-ring--ireland" cx="456" cy="119" r="4.8" />
+                    <circle class="map-hover-core map-hover-core--ireland" cx="456" cy="119" r="1.8" />
+                  </g>
+                  <g class="ireland-map-callout" aria-hidden="true">
+                    <path class="map-callout-line map-callout-line--ireland" d="M456 119 C430 104 412 94 392 91 H376" />
+                    <circle class="map-callout-dot map-callout-dot--ireland" cx="456" cy="119" r="2.2" />
+                    <rect class="map-callout-panel map-callout-panel--ireland" x="164" y="76" width="212" height="76" rx="0" />
+                    <text class="map-callout-text map-callout-text--ireland" x="180" y="98">
+                      <tspan x="180" dy="0">Date: 2011/2012</tspan>
+                      <tspan x="180" dy="15">Role: Linguistic Exchange Coordinator</tspan>
+                      <tspan x="180" dy="15">Organization: Open World Education</tspan>
+                      <tspan x="180" dy="15">Madrid / Dublin</tspan>
+                    </text>
+                  </g>
+                  <g class="belgium-hover-hint" aria-hidden="true">
+                    <circle class="map-hover-ring map-hover-ring--belgium" cx="492" cy="127" r="4.6" />
+                    <circle class="map-hover-core map-hover-core--belgium" cx="492" cy="127" r="1.7" />
+                    <text class="map-hover-label map-hover-label--belgium" x="500" y="130">TAP BELGIUM</text>
+                  </g>
+                  <g class="belgium-map-callout" aria-hidden="true">
+                    <path class="map-callout-line map-callout-line--belgium" d="M492 127 C520 121 542 116 560 112 H574" />
+                    <circle class="map-callout-dot map-callout-dot--belgium" cx="492" cy="127" r="2.1" />
+                    <rect class="map-callout-panel map-callout-panel--belgium" x="574" y="82" width="258" height="78" rx="0" />
+                    <text class="map-callout-text map-callout-text--belgium" x="590" y="104">
+                      <tspan x="590" dy="0">Date: November 2024</tspan>
+                      <tspan x="590" dy="15">Role: Engaging Europe Programme Participant</tspan>
+                      <tspan x="590" dy="15">Organization: University of Navarra - MCPC</tspan>
+                      <tspan x="590" dy="15">Brussels</tspan>
+                    </text>
+                  </g>
+                  <g class="denmark-hover-hint" aria-hidden="true">
+                    <circle class="map-hover-ring map-hover-ring--denmark" cx="500" cy="112" r="4.6" />
+                    <circle class="map-hover-core map-hover-core--denmark" cx="500" cy="112" r="1.7" />
+                    <text class="map-hover-label map-hover-label--denmark" x="508" y="115">TAP DENMARK</text>
+                  </g>
+                  <g class="denmark-map-callout" aria-hidden="true">
+                    <path class="map-callout-line map-callout-line--denmark" d="M500 112 C528 123 558 134 586 138 H600" />
+                    <circle class="map-callout-dot map-callout-dot--denmark" cx="500" cy="112" r="2.1" />
+                    <rect class="map-callout-panel map-callout-panel--denmark" x="600" y="108" width="222" height="76" rx="0" />
+                    <text class="map-callout-text map-callout-text--denmark" x="616" y="130">
+                      <tspan x="616" dy="0">Date: 2012-2013</tspan>
+                      <tspan x="616" dy="15">Role: Erasmus Exchange Student</tspan>
+                      <tspan x="616" dy="15">Organization: Roskilde University</tspan>
+                      <tspan x="616" dy="15">Roskilde</tspan>
+                    </text>
+                  </g>
+                  <g class="ecuador-hover-hint" aria-hidden="true">
+                    <circle class="map-hover-ring map-hover-ring--ecuador" cx="270" cy="280" r="4.8" />
+                    <circle class="map-hover-core map-hover-core--ecuador" cx="270" cy="280" r="1.8" />
+                    <text class="map-hover-label map-hover-label--ecuador" x="278" y="283">TAP ECUADOR</text>
+                  </g>
+                  <g class="ecuador-map-callout" aria-hidden="true">
+                    <path class="map-callout-line map-callout-line--ecuador" d="M270 280 C288 256 309 239 326 226 H340" />
+                    <circle class="map-callout-dot map-callout-dot--ecuador" cx="270" cy="280" r="2.2" />
+                    <rect class="map-callout-panel map-callout-panel--ecuador" x="340" y="190" width="246" height="78" rx="0" />
+                    <text class="map-callout-text map-callout-text--ecuador" x="354" y="212">
+                      <tspan x="354" dy="0">Date: January-March 2026</tspan>
+                      <tspan x="354" dy="15">Role: Digital Content Specialist / Volunteer</tspan>
+                      <tspan x="354" dy="15">Organization: Achuar community-based project</tspan>
+                    </text>
+                  </g>
+                  <g class="peru-hover-hint" aria-hidden="true">
+                    <circle class="map-hover-ring map-hover-ring--peru" cx="275" cy="307" r="5.2" />
+                    <circle class="map-hover-core map-hover-core--peru" cx="275" cy="307" r="1.9" />
+                    <text class="map-hover-label map-hover-label--peru" x="284" y="310">TAP PERU</text>
+                  </g>
+                  <g class="peru-map-callout" aria-hidden="true">
+                    <path class="map-callout-line map-callout-line--peru" d="M275 307 C306 331 338 351 370 360 H390" />
+                    <circle class="map-callout-dot map-callout-dot--peru" cx="275" cy="307" r="2.4" />
+                    <rect class="map-callout-panel map-callout-panel--peru" x="390" y="326" width="246" height="72" rx="0" />
+                    <text class="map-callout-text map-callout-text--peru" x="406" y="349">
+                      <tspan x="406" dy="0">Date: March-May 2026</tspan>
+                      <tspan x="406" dy="15">Role: Digital Content Specialist / Volunteer</tspan>
+                      <tspan x="406" dy="15">Organization: ONG Hilo Rojo, Trujillo</tspan>
+                    </text>
                   </g>
                 </svg>
-
-                <aside class="map-tooltip" aria-live="polite">
-                  <p class="map-tooltip__eyebrow">Hover a country</p>
-                  <h3>Professional geography</h3>
-                  <ul>
-                    <li>Select Peru, Ecuador, Spain, Portugal, France, Ireland, Belgium or Washington State.</li>
-                  </ul>
-                </aside>
+                <p class="map-typewriter-copy" aria-label="An international path shaped across Spanish, French, and English-speaking environments.">
+                  <span>An international path shaped across</span>
+                  <span>Spanish, French, and English-speaking environments.</span>
+                </p>
               </div>
             </article>
 
@@ -317,8 +425,8 @@
       <div id="panel-body"></div>
     </dialog>
 
-    <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js" defer></script>
+    <script src="assets/vendor/d3.min.js" defer></script>
+    <script src="assets/vendor/topojson-client.min.js" defer></script>
     <script src="js/main.js" defer></script>
   </body>
 </html>
