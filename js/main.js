@@ -65,6 +65,33 @@ function syncTickerOffsetFromAnimation() {
 }
 
 if (heroTicker && tickerTrack) {
+  heroTicker.addEventListener("pointerenter", () => {
+    heroTicker.classList.add("is-paused");
+  });
+
+  heroTicker.addEventListener("pointerleave", () => {
+    if (!tickerIsDragging) {
+      heroTicker.classList.remove("is-paused", "is-manual");
+      tickerTrack.style.removeProperty("transform");
+    }
+  });
+
+  heroTicker.addEventListener(
+    "wheel",
+    (event) => {
+      event.preventDefault();
+
+      if (!heroTicker.classList.contains("is-manual")) {
+        syncTickerOffsetFromAnimation();
+      }
+
+      const wheelDelta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
+      heroTicker.classList.add("is-manual");
+      applyTickerOffset(tickerOffset - wheelDelta * 1.25);
+    },
+    { passive: false },
+  );
+
   heroTicker.addEventListener("pointerdown", (event) => {
     tickerIsDragging = true;
     tickerStartX = event.clientX;
@@ -95,7 +122,7 @@ if (heroTicker && tickerTrack) {
 
   heroTicker.addEventListener("mouseleave", () => {
     if (!tickerIsDragging) {
-      heroTicker.classList.remove("is-manual");
+      heroTicker.classList.remove("is-paused", "is-manual");
       tickerTrack.style.removeProperty("transform");
     }
   });
