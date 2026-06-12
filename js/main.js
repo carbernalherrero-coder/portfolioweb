@@ -33,6 +33,7 @@ let tickerStartX = 0;
 let tickerOffset = 0;
 let tickerStartOffset = 0;
 let tickerIsDragging = false;
+let tickerLastPointerX = null;
 
 function getTickerLoopWidth() {
   return tickerGroup?.getBoundingClientRect().width || 0;
@@ -64,16 +65,61 @@ function syncTickerOffsetFromAnimation() {
   applyTickerOffset(tickerOffset);
 }
 
+function isPointerInsideTicker(event) {
+  if (!heroTicker) {
+    return false;
+  }
+
+  const bounds = heroTicker.getBoundingClientRect();
+
+  return (
+    event.clientX >= bounds.left &&
+    event.clientX <= bounds.right &&
+    event.clientY >= bounds.top &&
+    event.clientY <= bounds.bottom
+  );
+}
+
+function releaseTickerControl() {
+  if (tickerIsDragging || !heroTicker || !tickerTrack) {
+    return;
+  }
+
+  heroTicker.classList.remove("is-paused", "is-manual");
+  tickerTrack.style.removeProperty("transform");
+}
+
 if (heroTicker && tickerTrack) {
-  heroTicker.addEventListener("pointerenter", () => {
+  heroTicker.addEventListener("pointerenter", (event) => {
+    syncTickerOffsetFromAnimation();
+    tickerLastPointerX = event.clientX;
     heroTicker.classList.add("is-paused");
   });
 
   heroTicker.addEventListener("pointerleave", () => {
-    if (!tickerIsDragging) {
-      heroTicker.classList.remove("is-paused", "is-manual");
-      tickerTrack.style.removeProperty("transform");
+    tickerLastPointerX = null;
+    releaseTickerControl();
+  });
+
+  document.addEventListener("pointermove", (event) => {
+    if (isPointerInsideTicker(event)) {
+      heroTicker.classList.add("is-paused");
+
+      if (!tickerIsDragging && tickerLastPointerX !== null) {
+        const pointerDelta = event.clientX - tickerLastPointerX;
+
+        if (Math.abs(pointerDelta) > 0.2) {
+          heroTicker.classList.add("is-manual");
+          applyTickerOffset(tickerOffset + pointerDelta * 1.8);
+        }
+      }
+
+      tickerLastPointerX = event.clientX;
+      return;
     }
+
+    tickerLastPointerX = null;
+    releaseTickerControl();
   });
 
   heroTicker.addEventListener(
@@ -93,38 +139,45 @@ if (heroTicker && tickerTrack) {
   );
 
   heroTicker.addEventListener("pointerdown", (event) => {
+    event.preventDefault();
     tickerIsDragging = true;
     tickerStartX = event.clientX;
     syncTickerOffsetFromAnimation();
     tickerStartOffset = tickerOffset;
     heroTicker.classList.add("is-dragging", "is-manual");
-    heroTicker.setPointerCapture(event.pointerId);
+    heroTicker.setPointerCapture?.(event.pointerId);
   });
 
-  heroTicker.addEventListener("pointermove", (event) => {
+  document.addEventListener("pointermove", (event) => {
     if (!tickerIsDragging) {
       return;
     }
 
+    event.preventDefault();
     applyTickerOffset(tickerStartOffset + event.clientX - tickerStartX);
   });
 
-  heroTicker.addEventListener("pointerup", (event) => {
+  document.addEventListener("pointerup", (event) => {
+    if (!tickerIsDragging) {
+      return;
+    }
+
     tickerIsDragging = false;
     heroTicker.classList.remove("is-dragging");
-    heroTicker.releasePointerCapture(event.pointerId);
+    heroTicker.releasePointerCapture?.(event.pointerId);
+
+    if (!isPointerInsideTicker(event)) {
+      releaseTickerControl();
+    }
   });
 
-  heroTicker.addEventListener("pointercancel", () => {
+  document.addEventListener("pointercancel", () => {
     tickerIsDragging = false;
     heroTicker.classList.remove("is-dragging");
   });
 
   heroTicker.addEventListener("mouseleave", () => {
-    if (!tickerIsDragging) {
-      heroTicker.classList.remove("is-paused", "is-manual");
-      tickerTrack.style.removeProperty("transform");
-    }
+    releaseTickerControl();
   });
 }
 
@@ -427,9 +480,27 @@ function renderStaticWorldMap() {
       const peruCountry = svg.select(".is-peru-country");
       const portugalCountry = svg.select(".is-portugal-country");
       const spainCountry = svg.select(".is-spain-country");
-      const irelandCountry = svg.select(".is-ireland-country");
-      const belgiumCountry = svg.select(".is-belgium-country");
-      const denmarkCountry = svg.select(".is-denmark-country");
+      function bindMapCalloutTargets() {
+        if (!mapSection) {
+          return;
+        }
+
+        svg.selectAll("[data-map-callout]")
+          .attr("tabindex", "0")
+          .on("mouseenter focus", (event) => {
+            const name = event.currentTarget.dataset.mapCallout;
+            mapSection.classList.add(`is-${name}-callout-open`);
+          })
+          .on("mouseleave blur", (event) => {
+            const name = event.currentTarget.dataset.mapCallout;
+            mapSection.classList.remove(`is-${name}-callout-open`);
+          })
+          .on("click touchstart", (event) => {
+            event.preventDefault();
+            const name = event.currentTarget.dataset.mapCallout;
+            mapSection.classList.toggle(`is-${name}-callout-open`);
+          });
+      }
 
       if (mapSection && !usCountry.empty()) {
         usCountry
@@ -481,35 +552,7 @@ function renderStaticWorldMap() {
           });
       }
 
-      if (mapSection && !irelandCountry.empty()) {
-        irelandCountry
-          .on("mouseenter focus", () => mapSection.classList.add("is-ireland-callout-open"))
-          .on("mouseleave blur", () => mapSection.classList.remove("is-ireland-callout-open"))
-          .on("click touchstart", (event) => {
-            event.preventDefault();
-            mapSection.classList.toggle("is-ireland-callout-open");
-          });
-      }
-
-      if (mapSection && !belgiumCountry.empty()) {
-        belgiumCountry
-          .on("mouseenter focus", () => mapSection.classList.add("is-belgium-callout-open"))
-          .on("mouseleave blur", () => mapSection.classList.remove("is-belgium-callout-open"))
-          .on("click touchstart", (event) => {
-            event.preventDefault();
-            mapSection.classList.toggle("is-belgium-callout-open");
-          });
-      }
-
-      if (mapSection && !denmarkCountry.empty()) {
-        denmarkCountry
-          .on("mouseenter focus", () => mapSection.classList.add("is-denmark-callout-open"))
-          .on("mouseleave blur", () => mapSection.classList.remove("is-denmark-callout-open"))
-          .on("click touchstart", (event) => {
-            event.preventDefault();
-            mapSection.classList.toggle("is-denmark-callout-open");
-          });
-      }
+      bindMapCalloutTargets();
 
       if (mainlandFrance?.geometry.coordinates.length) {
         const franceCountry = layer
@@ -574,9 +617,34 @@ const panelContent = {
   culturall: {
     kicker: "2016 - 2018",
     title: "Cultur'All Studio",
-    body: [
-      "Content and cultural communication work in Lille, France.",
-      "Future assets: publishing samples, social content, layout work and multilingual editorial materials.",
+    type: "videoCarousel",
+    intro: "Selected audiovisual production and cultural communication work published on YouTube.",
+    videos: [
+      {
+        label: "01 / Cultur'All",
+        title: "Audiovisual production sample",
+        videoId: "hzGSc3bGglA",
+      },
+      {
+        label: "02 / Cultur'All",
+        title: "Cultural communication sample",
+        videoId: "rk-WD544VvU",
+      },
+      {
+        label: "03 / Cultur'All",
+        title: "Editorial video sample",
+        videoId: "iN00tx9GprA",
+      },
+      {
+        label: "04 / Cultur'All",
+        title: "Creative production sample",
+        videoId: "ipLX0uPDGlk",
+      },
+      {
+        label: "05 / Cultur'All",
+        title: "Visual storytelling sample",
+        videoId: "DnRP51uEQQg",
+      },
     ],
   },
   busette: {
@@ -597,10 +665,124 @@ const panelContent = {
   },
   comercio: {
     kicker: "2021 - 2024",
-    title: "El Comercio",
-    body: [
-      "Reporter and editor in Asturias.",
-      "Future detail page: articles, interviews, video pieces, beats, regional stories and editorial highlights.",
+    title: "El Comercio / Portadas",
+    type: "reader",
+    chapters: [
+      {
+        title: "El Comercio / Portadas",
+        items: [
+          {
+            label: "01 / Incendios",
+            src: "assets/images/el-comercio/portadas/01-portada-incendios.jpg",
+            alt: "El Comercio front page about wildfires in Asturias",
+          },
+          {
+            label: "01 / Incendios",
+            src: "assets/images/el-comercio/portadas/02-articulo-incendios.jpg",
+            alt: "El Comercio article about beekeepers affected by wildfires",
+          },
+          {
+            label: "02 / Politica",
+            src: "assets/images/el-comercio/portadas/03-portada-autovia.png",
+            alt: "El Comercio front page about the southwestern highway extension",
+          },
+          {
+            label: "02 / Politica",
+            src: "assets/images/el-comercio/portadas/04-articulo-autovia.png",
+            alt: "El Comercio article about the southwestern highway toward Ponferrada",
+          },
+          {
+            label: "03 / Cultura",
+            src: "assets/images/el-comercio/portadas/05-portada-cangas.png",
+            alt: "El Comercio front page about Cangas celebration",
+          },
+          {
+            label: "03 / Cultura",
+            src: "assets/images/el-comercio/portadas/06-articulo-descarga.png",
+            alt: "El Comercio feature about La Descarga celebration",
+          },
+        ],
+      },
+      {
+        title: "El Comercio / Entrevistas",
+        items: [
+          {
+            label: "01 / Elecciones",
+            src: "assets/images/el-comercio/entrevistas/01-elecciones-belarmino.png",
+            alt: "El Comercio interview with Belarmino Fernandez",
+          },
+          {
+            label: "02 / Elecciones",
+            src: "assets/images/el-comercio/entrevistas/02-elecciones-oscar-ancares.png",
+            alt: "El Comercio interview with Oscar Ancares",
+          },
+          {
+            label: "03 / Elecciones",
+            src: "assets/images/el-comercio/entrevistas/03-elecciones-hidalgo.png",
+            alt: "El Comercio interview with Sergio Hidalgo",
+          },
+          {
+            label: "04 / Elecciones",
+            src: "assets/images/el-comercio/entrevistas/04-elecciones-feito.png",
+            alt: "El Comercio interview with Jose Ramon Feito Lorences",
+          },
+          {
+            label: "05 / Cruz Roja",
+            src: "assets/images/el-comercio/entrevistas/05-cruz-roja-andres.png",
+            alt: "El Comercio interview with Andres Rodriguez from Cruz Roja",
+          },
+          {
+            label: "06 / Elecciones",
+            src: "assets/images/el-comercio/entrevistas/06-elecciones-carmen.png",
+            alt: "El Comercio interview with Carmen Lopez",
+          },
+        ],
+      },
+      {
+        title: "El Comercio / Politica",
+        items: [
+          {
+            label: "01 / Programa transicion justa",
+            src: "assets/images/el-comercio/politica/01-programa-transicion-justa-barbon.png",
+            alt: "El Comercio article about Adrian Barbon and just transition works in Ibias",
+          },
+          {
+            label: "02 / Programa transicion justa",
+            src: "assets/images/el-comercio/politica/02-programa-transicion-justa-mina-miura.png",
+            alt: "El Comercio article about Mina Miura and the coal market in southwestern Asturias",
+          },
+          {
+            label: "03 / Programa transicion justa",
+            src: "assets/images/el-comercio/politica/03-programa-transicion-justa-restauracion-minas.png",
+            alt: "El Comercio article about environmental restoration of mines and employment",
+          },
+        ],
+      },
+      {
+        title: "El Comercio / Sociedad",
+        items: [
+          {
+            label: "01 / Cruz Roja",
+            src: "assets/images/el-comercio/sociedad/01-cruz-roja.png",
+            alt: "El Comercio article about Cruz Roja volunteers and immigration support",
+          },
+          {
+            label: "02 / Historia",
+            src: "assets/images/el-comercio/sociedad/02-historia.png",
+            alt: "El Comercio article about El Fuejo and local history",
+          },
+          {
+            label: "03 / Salud",
+            src: "assets/images/el-comercio/sociedad/03-salud.png",
+            alt: "El Comercio article about access to healthcare on the Asturias and Galicia border",
+          },
+          {
+            label: "04 / Emprendimiento",
+            src: "assets/images/el-comercio/sociedad/04-emprendimiento.png",
+            alt: "El Comercio article about rural entrepreneurship in southwestern Asturias",
+          },
+        ],
+      },
     ],
   },
   navarra: {
@@ -641,6 +823,70 @@ const panelContent = {
     body: [
       "Madrid correspondent for local journalism, interviews and field reporting.",
       "Future assets: article links, interviews, screenshots, publication pages and notes.",
+    ],
+  },
+  "archive-value": {
+    kicker: "Archive",
+    title: "Value",
+    body: [
+      "Selected field reporting, social-impact projects and pieces that explain the professional value behind the portfolio.",
+      "Future assets: articles, case studies, visual notes and editorial outcomes.",
+    ],
+  },
+  "archive-growth": {
+    kicker: "Archive",
+    title: "Growth",
+    body: [
+      "Academic progression, master's degrees, international programmes and design/web development training.",
+      "Future assets: certificates, coursework, presentations and learning evidence.",
+    ],
+  },
+  "archive-reputation": {
+    kicker: "Archive",
+    title: "Reputation",
+    body: [
+      "Corporate communication, public affairs, media relations and strategic content work.",
+      "Future assets: non-confidential briefs, monitoring samples, planning notes and reputation frameworks.",
+    ],
+  },
+  "archive-diversity": {
+    kicker: "Archive",
+    title: "Diversity",
+    body: [
+      "International experience across Spanish, French and English-speaking environments.",
+      "Future assets: maps, project diaries, language evidence and cross-cultural work.",
+    ],
+  },
+  "archive-share": {
+    kicker: "Archive",
+    title: "Share",
+    body: [
+      "Published journalism, audiovisual pieces, interviews and public-facing storytelling.",
+      "Future assets: links, clips, screenshots, embeds and publication pages.",
+    ],
+  },
+  "archive-ambition": {
+    kicker: "Archive",
+    title: "Ambition",
+    body: [
+      "Projects that connect journalism, strategic communication, public affairs and visual storytelling.",
+      "Future assets: portfolio experiments, prototypes, design systems and narrative formats.",
+    ],
+  },
+  "archive-dispute": {
+    kicker: "Archive",
+    title: "Dispute",
+    body: [
+      "Work around public debate, political communication, institutional environments and social listening.",
+      "Future assets: analysis, issue maps, stakeholder contexts and communication strategy notes.",
+    ],
+  },
+  "archive-critical": {
+    kicker: "Archive",
+    title: "Critical",
+    body: [
+      "Research, essays, screenwriting, editorial thinking and reflective academic work.",
+      "Future assets: papers, scripts, reading notes, research projects and visual essays.",
     ],
   },
   journalism: {
@@ -698,6 +944,162 @@ const panelKicker = document.querySelector("#panel-kicker");
 const panelTitle = document.querySelector("#panel-title");
 const panelBody = document.querySelector("#panel-body");
 const closeButton = document.querySelector(".panel-close");
+let activeReaderCleanup = null;
+
+function renderReaderPages(items) {
+  return items
+    .map(
+      (item) => `
+        <figure class="archive-reader-page">
+          <figcaption>${item.label}</figcaption>
+          <img src="${item.src}" alt="${item.alt}" loading="lazy">
+        </figure>
+      `,
+    )
+    .join("");
+}
+
+function renderVideoCards(videos) {
+  return videos
+    .map(
+      (video) => `
+        <article class="video-card">
+          <button class="video-card__poster" type="button" data-video-id="${video.videoId}" aria-label="Play ${video.title}">
+            <img src="https://i.ytimg.com/vi/${video.videoId}/hqdefault.jpg" alt="${video.title}" loading="lazy">
+            <span class="video-card__play" aria-hidden="true">Play</span>
+          </button>
+          <div class="video-card__meta">
+            <span>${video.label}</span>
+            <h3>${video.title}</h3>
+          </div>
+        </article>
+      `,
+    )
+    .join("");
+}
+
+function initializeReaderChapters(content) {
+  const readerShell = panelBody?.querySelector("[data-reader-shell]");
+  const track = readerShell?.querySelector("[data-reader-track]");
+  const previousButton = readerShell?.querySelector("[data-reader-previous]");
+  const nextButton = readerShell?.querySelector("[data-reader-next]");
+  const counter = readerShell?.querySelector("[data-reader-counter]");
+  const chapters = content.chapters || [];
+  let activeIndex = 0;
+
+  if (!readerShell || !track || chapters.length < 2) {
+    return () => {};
+  }
+
+  const updateReader = () => {
+    track.style.transform = `translateX(-${activeIndex * 100}%)`;
+    panelTitle.textContent = chapters[activeIndex].title;
+    counter.textContent = `${activeIndex + 1} / ${chapters.length}`;
+    previousButton.disabled = activeIndex === 0;
+    nextButton.disabled = activeIndex === chapters.length - 1;
+    dialog.scrollTop = 0;
+  };
+
+  const showPrevious = () => {
+    activeIndex = Math.max(0, activeIndex - 1);
+    updateReader();
+  };
+
+  const showNext = () => {
+    activeIndex = Math.min(chapters.length - 1, activeIndex + 1);
+    updateReader();
+  };
+
+  previousButton.addEventListener("click", showPrevious);
+  nextButton.addEventListener("click", showNext);
+  updateReader();
+
+  return () => {
+    previousButton.removeEventListener("click", showPrevious);
+    nextButton.removeEventListener("click", showNext);
+  };
+}
+
+function initializeVideoCarousel() {
+  const carousel = panelBody?.querySelector("[data-video-carousel]");
+  const track = carousel?.querySelector("[data-video-track]");
+  const playButtons = carousel?.querySelectorAll("[data-video-id]");
+
+  if (!carousel || !track || !playButtons?.length) {
+    return () => {};
+  }
+
+  let isDragging = false;
+  let startX = 0;
+  let startScrollLeft = 0;
+  let moved = false;
+
+  const handlePointerDown = (event) => {
+    isDragging = true;
+    moved = false;
+    startX = event.clientX;
+    startScrollLeft = track.scrollLeft;
+    track.classList.add("is-dragging");
+    track.setPointerCapture?.(event.pointerId);
+  };
+
+  const handlePointerMove = (event) => {
+    if (!isDragging) {
+      return;
+    }
+
+    const delta = event.clientX - startX;
+    if (Math.abs(delta) > 6) {
+      moved = true;
+    }
+    track.scrollLeft = startScrollLeft - delta;
+  };
+
+  const stopDragging = (event) => {
+    if (!isDragging) {
+      return;
+    }
+
+    isDragging = false;
+    track.classList.remove("is-dragging");
+    track.releasePointerCapture?.(event.pointerId);
+  };
+
+  const handlePlayClick = (event) => {
+    if (moved) {
+      event.preventDefault();
+      return;
+    }
+
+    const button = event.currentTarget;
+    const videoId = button.dataset.videoId;
+    button.outerHTML = `
+      <iframe
+        class="video-card__iframe"
+        src="https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1"
+        title="Cultur'All YouTube video"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen
+      ></iframe>
+    `;
+  };
+
+  track.addEventListener("pointerdown", handlePointerDown);
+  track.addEventListener("pointermove", handlePointerMove);
+  track.addEventListener("pointerup", stopDragging);
+  track.addEventListener("pointercancel", stopDragging);
+  track.addEventListener("pointerleave", stopDragging);
+  playButtons.forEach((button) => button.addEventListener("click", handlePlayClick));
+
+  return () => {
+    track.removeEventListener("pointerdown", handlePointerDown);
+    track.removeEventListener("pointermove", handlePointerMove);
+    track.removeEventListener("pointerup", stopDragging);
+    track.removeEventListener("pointercancel", stopDragging);
+    track.removeEventListener("pointerleave", stopDragging);
+    playButtons.forEach((button) => button.removeEventListener("click", handlePlayClick));
+  };
+}
 
 function openPanel(panelKey) {
   const content = panelContent[panelKey];
@@ -706,13 +1108,62 @@ function openPanel(panelKey) {
     return;
   }
 
+  activeReaderCleanup?.();
+  activeReaderCleanup = null;
   panelKicker.textContent = content.kicker;
   panelTitle.textContent = content.title;
-  panelBody.innerHTML = `
-    <ul>
-      ${content.body.map((item) => `<li>${item}</li>`).join("")}
-    </ul>
-  `;
+
+  if (content.type === "reader") {
+    const chapters = content.chapters || [{ title: content.title, items: content.items || [] }];
+    panelBody.innerHTML = `
+      <div class="archive-reader-shell" data-reader-shell>
+        ${
+          chapters.length > 1
+            ? `
+              <div class="archive-reader-nav" aria-label="El Comercio archive navigation">
+                <button class="archive-reader-arrow" type="button" data-reader-previous aria-label="Ver seccion anterior">←</button>
+                <span class="archive-reader-counter" data-reader-counter>1 / ${chapters.length}</span>
+                <button class="archive-reader-arrow" type="button" data-reader-next aria-label="Ver siguiente seccion">→</button>
+              </div>
+            `
+            : ""
+        }
+        <div class="archive-reader-viewport">
+          <div class="archive-reader-track" data-reader-track>
+            ${chapters
+              .map(
+                (chapter) => `
+                  <section class="archive-reader-chapter" aria-label="${chapter.title}">
+                    <div class="archive-reader">
+                      ${renderReaderPages(chapter.items)}
+                    </div>
+                  </section>
+                `,
+              )
+              .join("")}
+          </div>
+        </div>
+      </div>
+    `;
+    activeReaderCleanup = initializeReaderChapters(content);
+  } else if (content.type === "videoCarousel") {
+    panelBody.innerHTML = `
+      <div class="video-carousel" data-video-carousel>
+        <p class="video-carousel__intro">${content.intro}</p>
+        <div class="video-carousel__track" data-video-track aria-label="${content.title} video carousel">
+          ${renderVideoCards(content.videos)}
+        </div>
+      </div>
+    `;
+    activeReaderCleanup = initializeVideoCarousel();
+  } else {
+    panelBody.innerHTML = `
+      <ul>
+        ${content.body.map((item) => `<li>${item}</li>`).join("")}
+      </ul>
+    `;
+  }
+
   dialog.showModal();
 }
 
@@ -723,11 +1174,20 @@ document.querySelectorAll("[data-panel]").forEach((trigger) => {
 });
 
 closeButton?.addEventListener("click", () => {
+  activeReaderCleanup?.();
+  activeReaderCleanup = null;
   dialog?.close();
 });
 
 dialog?.addEventListener("click", (event) => {
   if (event.target === dialog) {
+    activeReaderCleanup?.();
+    activeReaderCleanup = null;
     dialog.close();
   }
+});
+
+dialog?.addEventListener("close", () => {
+  activeReaderCleanup?.();
+  activeReaderCleanup = null;
 });

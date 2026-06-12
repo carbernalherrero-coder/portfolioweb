@@ -211,7 +211,7 @@ p {
   font-size: clamp(0.9rem, 2.1vw, 1.5rem);
   font-weight: 100;
   letter-spacing: 0.055em;
-  text-transform: lowercase;
+  text-transform: none;
 }
 
 .hero-title__focus,
@@ -269,15 +269,26 @@ p {
   bottom: clamp(1.35rem, 3vw, 2.25rem);
   left: 0;
   z-index: 20;
+  display: flex;
+  align-items: center;
   width: 100vw;
+  min-height: clamp(3.05rem, 6.4vw, 4.05rem);
   margin: 0;
   overflow: hidden;
   background: #050608;
   cursor: grab;
   pointer-events: auto;
-  touch-action: pan-y;
+  touch-action: none;
   transform: none;
   user-select: none;
+}
+
+.hero-ticker::before {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  content: "";
+  pointer-events: none;
 }
 
 .hero-ticker:hover,
@@ -290,6 +301,8 @@ p {
 }
 
 .ticker-track {
+  position: relative;
+  z-index: 1;
   display: flex;
   width: max-content;
   animation: ticker-slide 40s linear infinite;
@@ -315,7 +328,7 @@ p {
 .ticker-item {
   display: inline-flex;
   align-items: center;
-  min-height: clamp(2.9rem, 6.8vw, 3.9rem);
+  min-height: clamp(2.05rem, 4.7vw, 2.9rem);
   color: #fffcf2;
   font-family: "PT Mono", "IBM Plex Mono", ui-monospace, SFMono-Regular, Consolas, monospace;
   font-size: clamp(0.78rem, 2vw, 1rem);
@@ -590,6 +603,317 @@ p {
   box-shadow: none;
 }
 
+.archive-mosaic-station {
+  display: grid;
+  width: min(158vw, 1710px);
+  min-height: 78svh;
+  place-items: center;
+  padding: clamp(2rem, 4vw, 4rem);
+  cursor: default;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+.archive-mosaic-station:hover,
+.archive-mosaic-station:focus-visible,
+.archive-mosaic-station.is-active {
+  border-color: transparent;
+  background: transparent;
+  outline: none;
+}
+
+.archive-mosaic {
+  position: relative;
+  display: grid;
+  width: min(100%, 1548px);
+  aspect-ratio: 16 / 5.6;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  overflow: hidden;
+  background: #050608;
+  box-shadow: 0 34px 120px rgba(0, 0, 0, 0.5);
+}
+
+.archive-mosaic-label {
+  position: absolute;
+  top: clamp(0.65rem, 1.4vw, 1.25rem);
+  left: clamp(0.75rem, 1.6vw, 1.4rem);
+  z-index: 5;
+  margin: 0;
+  color: #fffcf2;
+  font-family: "Raleway", ui-sans-serif, system-ui, sans-serif;
+  font-size: clamp(0.76rem, 1.05vw, 1rem);
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  line-height: 1;
+  text-transform: uppercase;
+  text-shadow: 0 8px 26px rgba(0, 0, 0, 0.72);
+}
+
+.archive-tile {
+  --tile-image:
+    radial-gradient(circle at 28% 42%, rgba(255, 255, 255, 0.35), transparent 15%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent 42%),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08), transparent 58%);
+  --tile-logo: none;
+  --tile-logo-size: 76%;
+  --tile-logo-y: 50%;
+
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  overflow: hidden;
+  cursor: pointer;
+  border: 0;
+  background:
+    linear-gradient(rgba(12, 13, 14, 0.63), rgba(12, 13, 14, 0.63)),
+    var(--tile-image),
+    #4a4a4a;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain, cover, cover;
+  background-blend-mode: multiply, normal, normal;
+  color: #beef9e;
+  isolation: isolate;
+}
+
+.archive-tile::before {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: var(--tile-logo);
+  background-position: center var(--tile-logo-y);
+  background-repeat: no-repeat;
+  background-size: var(--tile-logo-size);
+  content: "";
+  filter: grayscale(1) contrast(0.72) brightness(0.62);
+  opacity: 0.5;
+  transition: filter 240ms ease, opacity 240ms ease, transform 240ms ease;
+}
+
+.archive-tile::after {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(135deg, rgba(51, 81, 69, 0.9), rgba(30, 53, 47, 0.86));
+  content: "";
+  opacity: 0;
+  transition: opacity 220ms ease;
+}
+
+.archive-tile > span:not(.archive-split-logos) {
+  position: relative;
+  z-index: 2;
+  color: #beef9e !important;
+  font-family: "Newsreader", Georgia, serif;
+  max-width: 86%;
+  font-size: clamp(1.95rem, 4.25vw, 4.15rem);
+  font-style: italic;
+  font-weight: 700;
+  letter-spacing: -0.047em;
+  line-height: 0.9;
+  text-transform: none;
+  text-shadow: 0 10px 34px rgba(0, 0, 0, 0.54);
+  transition: transform 220ms ease, color 220ms ease;
+}
+
+.archive-tile:hover::after,
+.archive-tile:focus-visible::after {
+  opacity: 0.92;
+}
+
+.archive-tile:hover::before,
+.archive-tile:focus-visible::before {
+  filter: grayscale(1) contrast(0.68) brightness(0.5);
+  opacity: 0.42;
+  transform: scale(1.035);
+}
+
+.archive-tile:hover > span:not(.archive-split-logos),
+.archive-tile:focus-visible > span:not(.archive-split-logos) {
+  color: #beef9e !important;
+  transform: translateY(-3px) scale(1.025);
+}
+
+.archive-tile:focus-visible {
+  outline: 2px solid #beef9e;
+  outline-offset: -2px;
+}
+
+.archive-tile--value {
+  --tile-logo: url("../assets/icons/logo-elcomercio.svg");
+  --tile-logo-y: 72%;
+  --tile-image:
+    radial-gradient(ellipse at 30% 46%, rgba(255, 255, 255, 0.55) 0 7%, transparent 18%),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.08) 0 2px, transparent 2px 8px),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.18), transparent 54%);
+}
+
+.archive-tile--growth {
+  --tile-logo: url("../assets/icons/logo-weber-shandwick.png");
+  --tile-image:
+    linear-gradient(70deg, transparent 30%, rgba(255, 255, 255, 0.32) 31% 38%, transparent 42%),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.22) 0 3px, transparent 3px 22px),
+    linear-gradient(160deg, rgba(255, 255, 255, 0.18), transparent 62%);
+}
+
+.archive-tile--reputation {
+  --tile-logo: url("../assets/icons/logo-culturall.jpg");
+  --tile-image:
+    radial-gradient(circle at 78% 34%, rgba(255, 255, 255, 0.36) 0 13%, transparent 14%),
+    linear-gradient(90deg, transparent 0 34%, rgba(255, 255, 255, 0.22) 34% 35%, transparent 35%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.16), transparent 58%);
+}
+
+.archive-tile--diversity {
+  --tile-logo: url("../assets/icons/logo-ministere-education.png");
+  --tile-logo-y: 78%;
+  --tile-image:
+    radial-gradient(ellipse at 72% 30%, rgba(255, 255, 255, 0.36), transparent 26%),
+    linear-gradient(100deg, transparent 0 52%, rgba(255, 255, 255, 0.18) 52% 60%, transparent 60%),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.16), transparent 56%);
+}
+
+.archive-tile--share {
+  --tile-logo: url("../assets/icons/logo-la-voz-del-trubia.jpg");
+  --tile-image:
+    radial-gradient(circle at 42% 42%, rgba(255, 255, 255, 0.26) 0 4%, transparent 5%),
+    radial-gradient(circle at 55% 38%, rgba(255, 255, 255, 0.28) 0 3%, transparent 4%),
+    linear-gradient(30deg, rgba(255, 255, 255, 0.12), transparent 48%);
+}
+
+.archive-tile--ambition {
+  background:
+    linear-gradient(rgba(12, 13, 14, 0.62), rgba(12, 13, 14, 0.62)),
+    #4a4a4a;
+  --tile-image:
+    repeating-linear-gradient(110deg, rgba(255, 255, 255, 0.16) 0 2px, transparent 2px 18px),
+    linear-gradient(132deg, rgba(255, 255, 255, 0.25), transparent 42%),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.12), transparent 66%);
+}
+
+.archive-tile--ambition::before {
+  display: none;
+}
+
+.archive-tile--ambition > span:first-of-type {
+  display: grid;
+  gap: clamp(0.36rem, 1vw, 0.7rem);
+  justify-items: center;
+  font-family: "Newsreader", Georgia, serif;
+  font-size: clamp(1.95rem, 4.25vw, 4.15rem);
+  font-style: italic;
+  font-weight: 700;
+  letter-spacing: -0.047em;
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+
+.archive-tile--ambition i {
+  display: block;
+  width: min(11rem, 58%);
+  height: 1px;
+  background: rgba(255, 252, 242, 0.72);
+}
+
+.archive-split-logos {
+  position: absolute !important;
+  inset: 0;
+  z-index: 0 !important;
+  display: grid;
+  max-width: none !important;
+  grid-template-columns: 40% 60%;
+  opacity: 0.5;
+}
+
+.archive-split-logo {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 72%;
+  filter: grayscale(1) contrast(0.72) brightness(0.62);
+}
+
+.archive-split-logo--george {
+  background-size: 86%;
+}
+
+.archive-split-logo--navarra {
+  background-image: url("../assets/icons/logo-universidad-navarra.png");
+}
+
+.archive-split-logo--george {
+  background-image: url("../assets/icons/logo-george-washington-university.png");
+}
+
+.archive-tile--dispute {
+  --tile-logo: url("../assets/icons/logo-brumaria.jpg");
+  --tile-logo-size: 54%;
+  --tile-logo-y: 92%;
+  --tile-image:
+    radial-gradient(circle at 57% 48%, rgba(255, 255, 255, 0.32) 0 9%, transparent 10%),
+    radial-gradient(circle at 74% 36%, rgba(255, 255, 255, 0.18) 0 8%, transparent 9%),
+    linear-gradient(130deg, rgba(255, 255, 255, 0.14), transparent 55%);
+}
+
+.archive-tile--critical {
+  --tile-logo: url("../assets/icons/logo-hilo-rojo.jpg");
+  --tile-image:
+    radial-gradient(ellipse at 52% 34%, rgba(255, 255, 255, 0.26), transparent 22%),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.2), transparent 38%),
+    linear-gradient(12deg, rgba(255, 255, 255, 0.08), transparent 70%);
+}
+
+.archive-cross {
+  position: absolute;
+  z-index: 4;
+  width: clamp(3.8rem, 5.3vw, 5.6rem);
+  aspect-ratio: 1;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+}
+
+.archive-cross::before,
+.archive-cross::after {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  width: 100%;
+  height: 12%;
+  background: #b1cc74;
+  content: "";
+  transform: translate(-50%, -50%);
+}
+
+.archive-cross::after {
+  width: 12%;
+  height: 100%;
+}
+
+.archive-cross::before,
+.archive-cross::after {
+  background: #fffcf2;
+}
+
+.archive-cross--one {
+  top: 50%;
+  left: 25%;
+}
+
+.archive-cross--two {
+  top: 50%;
+  left: 50%;
+}
+
+.archive-cross--three {
+  top: 50%;
+  left: 75%;
+}
+
 .world-map-card {
   --map-sea: #303640;
   --map-land: #4b5056;
@@ -611,6 +935,10 @@ p {
   height: 100%;
   min-height: 100svh;
   background: var(--map-sea);
+}
+
+.portfolio-world-map > g {
+  transform: translateY(34px);
 }
 
 .map-ocean {
@@ -799,6 +1127,18 @@ p {
   transition: opacity 180ms ease;
 }
 
+.ireland-hover-hint,
+.belgium-hover-hint,
+.denmark-hover-hint {
+  cursor: crosshair;
+  pointer-events: auto;
+}
+
+.map-hover-hit {
+  fill: transparent;
+  pointer-events: all;
+}
+
 .timeline-station--map.is-us-callout-open .us-hover-hint,
 .portfolio-world-map:has(.static-world-country.is-us-country:hover) .us-hover-hint,
 .portfolio-world-map:has(.static-world-country.is-us-country:focus-visible) .us-hover-hint {
@@ -848,6 +1188,21 @@ p {
 .portfolio-world-map:has(.static-world-country.is-denmark-country:hover) .denmark-hover-hint,
 .portfolio-world-map:has(.static-world-country.is-denmark-country:focus-visible) .denmark-hover-hint {
   opacity: 0;
+}
+
+.timeline-station--map.is-ireland-callout-open .ireland-hover-hint,
+.timeline-station--map.is-belgium-callout-open .belgium-hover-hint,
+.timeline-station--map.is-denmark-callout-open .denmark-hover-hint {
+  opacity: 1;
+}
+
+.portfolio-world-map:has(.ireland-hover-hint:hover) .ireland-map-callout,
+.portfolio-world-map:has(.ireland-hover-hint:focus) .ireland-map-callout,
+.portfolio-world-map:has(.belgium-hover-hint:hover) .belgium-map-callout,
+.portfolio-world-map:has(.belgium-hover-hint:focus) .belgium-map-callout,
+.portfolio-world-map:has(.denmark-hover-hint:hover) .denmark-map-callout,
+.portfolio-world-map:has(.denmark-hover-hint:focus) .denmark-map-callout {
+  opacity: 1;
 }
 
 .us-hover-ring,
@@ -1215,11 +1570,11 @@ p {
 }
 
 .map-callout-text--spain {
-  font-size: 6.45px;
+  font-size: 5.35px;
 }
 
 .map-callout-text--france {
-  font-size: 6.85px;
+  font-size: 5.75px;
 }
 
 .map-callout-text--ireland {
@@ -1233,7 +1588,7 @@ p {
 
 .map-typewriter-copy {
   position: absolute;
-  top: clamp(25.7rem, 79svh, 45.5rem);
+  top: clamp(29rem, 86svh, 49rem);
   left: clamp(37rem, 61vw, 60rem);
   z-index: 3;
   display: grid;
@@ -1543,32 +1898,6 @@ p {
   width: 3.5rem;
 }
 
-.horizontal-folder-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0;
-  margin-top: 1rem;
-  border: 1px solid var(--line);
-}
-
-.horizontal-folder-grid button {
-  min-height: 92px;
-  padding: 1rem;
-  cursor: pointer;
-  border: 0;
-  border-right: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.04);
-  color: #fff;
-  font-weight: 900;
-  text-align: left;
-}
-
-.horizontal-folder-grid button:hover,
-.horizontal-folder-grid button:focus-visible {
-  background: rgba(166, 225, 250, 0.13);
-}
-
 .site-footer {
   padding: 2rem clamp(1rem, 4vw, 3rem);
   color: var(--muted);
@@ -1590,6 +1919,17 @@ p {
   background: #11151b;
   color: var(--ink);
   box-shadow: 0 30px 120px rgba(0, 0, 0, 0.8);
+}
+
+.detail-panel:has(.archive-reader) {
+  width: min(1220px, calc(100vw - 1.2rem));
+  max-height: calc(100svh - 1.25rem);
+  padding: clamp(0.8rem, 2vw, 1.25rem);
+}
+
+.detail-panel:has(.video-carousel) {
+  width: min(1160px, calc(100vw - 1.2rem));
+  max-height: min(760px, calc(100svh - 1.25rem));
 }
 
 .detail-panel::backdrop {
@@ -1627,6 +1967,273 @@ p {
   display: grid;
   gap: 0.6rem;
   padding-left: 1.2rem;
+}
+
+.archive-reader-shell {
+  display: grid;
+  gap: clamp(0.8rem, 2vw, 1.2rem);
+}
+
+.archive-reader-nav {
+  position: sticky;
+  top: -0.2rem;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  gap: 0.5rem;
+  padding: 0.35rem 0.45rem;
+  border: 1px solid rgba(190, 239, 158, 0.2);
+  border-radius: 999px;
+  background: rgba(8, 12, 14, 0.82);
+  backdrop-filter: blur(10px);
+}
+
+.archive-reader-arrow {
+  display: inline-grid;
+  width: 2.45rem;
+  height: 2.45rem;
+  place-items: center;
+  cursor: pointer;
+  border: 1px solid rgba(190, 239, 158, 0.38);
+  border-radius: 50%;
+  background: rgba(190, 239, 158, 0.08);
+  color: #beef9e;
+  font: 900 1rem/1 "Raleway", system-ui, sans-serif;
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.archive-reader-arrow:hover,
+.archive-reader-arrow:focus-visible {
+  border-color: rgba(190, 239, 158, 0.88);
+  background: rgba(190, 239, 158, 0.18);
+  color: #f7ffe9;
+  transform: translateX(2px);
+}
+
+.archive-reader-arrow:disabled {
+  cursor: not-allowed;
+  opacity: 0.32;
+  transform: none;
+}
+
+.archive-reader-counter {
+  min-width: 3.4rem;
+  color: rgba(255, 252, 242, 0.72);
+  font-family: "PT Mono", "IBM Plex Mono", ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-align: center;
+}
+
+.archive-reader-viewport {
+  overflow: hidden;
+}
+
+.archive-reader-track {
+  display: flex;
+  align-items: flex-start;
+  transition: transform 420ms cubic-bezier(0.2, 0.75, 0.18, 1);
+  will-change: transform;
+}
+
+.archive-reader-chapter {
+  flex: 0 0 100%;
+  min-width: 0;
+}
+
+.archive-reader {
+  display: grid;
+  gap: clamp(1.25rem, 3vw, 2rem);
+  padding: 0 0 clamp(1rem, 2vw, 1.75rem);
+}
+
+.archive-reader-page {
+  display: grid;
+  gap: 0.6rem;
+  margin: 0;
+  padding: clamp(0.65rem, 1.8vw, 1.1rem);
+  border: 1px solid rgba(255, 252, 242, 0.1);
+  border-radius: 4px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.018)),
+    rgba(5, 6, 8, 0.7);
+  box-shadow: 0 26px 90px rgba(0, 0, 0, 0.36);
+}
+
+.archive-reader-page figcaption {
+  color: #beef9e;
+  font-family: "PT Mono", "IBM Plex Mono", ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: clamp(0.68rem, 1.35vw, 0.86rem);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.archive-reader-page img {
+  display: block;
+  width: min(100%, 1040px);
+  max-height: none;
+  margin: 0 auto;
+  border-radius: 2px;
+  background: #f7f5ef;
+  object-fit: contain;
+}
+
+.video-carousel {
+  display: grid;
+  gap: clamp(1rem, 2.4vw, 1.5rem);
+}
+
+.video-carousel__intro {
+  max-width: 58ch;
+  margin: 0;
+  color: rgba(255, 252, 242, 0.72);
+  font-family: "Raleway", ui-sans-serif, system-ui, sans-serif;
+  font-size: clamp(0.9rem, 1.7vw, 1rem);
+  font-weight: 300;
+  line-height: 1.55;
+}
+
+.video-carousel__track {
+  display: flex;
+  gap: clamp(0.85rem, 2vw, 1.25rem);
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  padding: 0.25rem 0 clamp(0.85rem, 2vw, 1.25rem);
+  cursor: grab;
+  scroll-snap-type: x mandatory;
+  scrollbar-color: rgba(190, 239, 158, 0.72) rgba(255, 255, 255, 0.08);
+  touch-action: pan-x;
+  user-select: none;
+}
+
+.video-carousel__track.is-dragging {
+  cursor: grabbing;
+  scroll-snap-type: none;
+}
+
+.video-card {
+  flex: 0 0 min(82vw, 430px);
+  display: grid;
+  gap: 0.85rem;
+  scroll-snap-align: start;
+}
+
+.video-card__poster,
+.video-card__iframe {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: 1px solid rgba(190, 239, 158, 0.22);
+  border-radius: 6px;
+  background: #050608;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.42);
+}
+
+.video-card__poster {
+  padding: 0;
+  cursor: pointer;
+}
+
+.video-card__poster::after {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(5, 6, 8, 0.05), rgba(5, 6, 8, 0.42)),
+    radial-gradient(circle at 50% 50%, rgba(190, 239, 158, 0.16), transparent 32%);
+  content: "";
+  opacity: 0.82;
+  transition: opacity 180ms ease;
+}
+
+.video-card__poster img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  filter: grayscale(0.82) contrast(0.9) brightness(0.76);
+  object-fit: cover;
+  transition:
+    filter 200ms ease,
+    transform 260ms ease;
+}
+
+.video-card__poster:hover img,
+.video-card__poster:focus-visible img {
+  filter: grayscale(0.25) contrast(1.02) brightness(0.9);
+  transform: scale(1.035);
+}
+
+.video-card__poster:hover::after,
+.video-card__poster:focus-visible::after {
+  opacity: 0.38;
+}
+
+.video-card__poster:focus-visible {
+  outline: 2px solid #beef9e;
+  outline-offset: 3px;
+}
+
+.video-card__play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 2;
+  display: grid;
+  min-width: 5.2rem;
+  min-height: 5.2rem;
+  place-items: center;
+  border: 1px solid rgba(190, 239, 158, 0.7);
+  border-radius: 50%;
+  background: rgba(5, 6, 8, 0.64);
+  color: #beef9e;
+  font-family: "PT Mono", "IBM Plex Mono", ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transform: translate(-50%, -50%);
+  transition:
+    background 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.video-card__poster:hover .video-card__play,
+.video-card__poster:focus-visible .video-card__play {
+  background: rgba(190, 239, 158, 0.88);
+  color: #050608;
+  transform: translate(-50%, -50%) scale(1.04);
+}
+
+.video-card__iframe {
+  border: 0;
+}
+
+.video-card__meta {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.video-card__meta span {
+  color: #beef9e;
+  font-family: "PT Mono", "IBM Plex Mono", ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.video-card__meta h3 {
+  margin: 0;
+  color: #fffcf2;
+  font-family: "Newsreader", Georgia, serif;
+  font-size: clamp(1.45rem, 3.6vw, 2.35rem);
+  font-style: italic;
+  line-height: 0.98;
 }
 
 .reveal {
@@ -1786,6 +2393,28 @@ p {
     padding: 0;
   }
 
+  .archive-mosaic-station {
+    width: 100%;
+    min-height: auto;
+    padding: 0;
+  }
+
+  .archive-mosaic {
+    aspect-ratio: auto;
+    min-height: 82svh;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(4, minmax(9.5rem, 1fr));
+  }
+
+  .archive-tile span {
+    color: #beef9e !important;
+    font-size: clamp(2.35rem, 13vw, 4.1rem);
+  }
+
+  .archive-cross {
+    display: none;
+  }
+
   .world-map-card {
     min-height: 76svh;
   }
@@ -1818,9 +2447,6 @@ p {
     font-size: clamp(1.28rem, 5.8vw, 1.92rem);
   }
 
-  .horizontal-folder-grid {
-    grid-template-columns: 1fr;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
