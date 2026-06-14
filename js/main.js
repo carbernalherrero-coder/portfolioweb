@@ -616,34 +616,57 @@ const panelContent = {
   },
   culturall: {
     kicker: "2016 - 2018",
-    title: "Cultur'All Studio",
+    title: "CULTUR'ALL Studio",
     type: "videoCarousel",
-    intro: "Selected audiovisual production and cultural communication work published on YouTube.",
-    videos: [
+    intro: "A curated selection of audiovisual work produced during my time with Cultur'all Studio in Lille, spanning festivals, music videos, and campaign spots for cultural and institutional clients across Northern France.",
+    projects: [
       {
-        label: "01 / Cultur'All",
-        title: "Audiovisual production sample",
-        videoId: "hzGSc3bGglA",
+        heading: "Projet audiovisuel - Festival au Flow - Hip-Hop Dance",
+        videos: [
+          { label: "01 / Au Flow", title: "Festival au Flow", videoId: "hzGSc3bGglA" },
+          { label: "02 / Au Flow", title: "Scene hip-hop", url: "https://www.youtube.com/watch?v=ZwNynPC0uak" },
+          { label: "03 / Au Flow", title: "Performance danse", url: "https://www.youtube.com/watch?v=ipLX0uPDGlk&feature=youtu.be" },
+          { label: "04 / Au Flow", title: "Culture urbaine", url: "https://www.youtube.com/watch?v=APUnUTpMarU" },
+          { label: "05 / Au Flow", title: "Battle hip-hop", videoId: "3c_8DHsp6rY" },
+          { label: "06 / Au Flow", title: "Danse au Flow", url: "https://www.youtube.com/watch?v=Lg5R3KBOKX8" },
+          { label: "07 / Au Flow", title: "Backstage festival", url: "https://youtube.com/watch?v=b703NU2cmbQ&feature=youtu.be" },
+          { label: "08 / Au Flow", title: "Lille dancefloor", url: "https://www.youtube.com/watch?v=LMixjkyF2zY" },
+        ],
       },
       {
-        label: "02 / Cultur'All",
-        title: "Cultural communication sample",
-        videoId: "rk-WD544VvU",
+        heading: "Projet audiovisuel - Festival MFW / Culture Ray",
+        videos: [
+          { label: "01 / Culture Ray", title: "MFW Culture Ray", videoId: "DnRP51uEQQg" },
+          {
+            label: "02 / Interview",
+            title: "Esraa Warda Dance at CULTUR'RAI Lille France",
+            url: "https://www.youtube.com/watch?v=LjqwkHKgmzo&feature=youtu.be",
+          },
+        ],
       },
       {
-        label: "03 / Cultur'All",
-        title: "Editorial video sample",
-        videoId: "iN00tx9GprA",
+        heading: "Projet audiovisuel - Campagne municipale a Villeneuve-d'Ascq",
+        videos: [{ label: "01 / Villeneuve", title: "Campagne municipale", videoId: "rk-WD544VvU" }],
       },
       {
-        label: "04 / Cultur'All",
-        title: "Creative production sample",
-        videoId: "ipLX0uPDGlk",
+        heading: "Projet audiovisuel - Groupes metal des Hauts-de-France",
+        videos: [
+          { label: "01 / Metal", title: "Metal Hauts-de-France", videoId: "cm-nNhQwZM4" },
+          { label: "02 / Metal", title: "Scene rock locale", videoId: "05i6xgsMzkU" },
+          { label: "03 / Metal", title: "Live metal", videoId: "QbFe6fum5Xk" },
+          { label: "04 / Metal", title: "Guitares en scene", videoId: "bygewmemA7A" },
+          { label: "05 / Metal", title: "Portrait rock", videoId: "nNC5wHX-X5o" },
+        ],
       },
       {
-        label: "05 / Cultur'All",
-        title: "Visual storytelling sample",
-        videoId: "DnRP51uEQQg",
+        heading: "Projet audiovisuel - Manu Le Coq, rappeur lillois",
+        videos: [
+          { label: "01 / Manu Le Coq", title: "Portrait Manu Le Coq", videoId: "6SxTMYKzgmo" },
+          { label: "02 / Manu Le Coq", title: "Session rap lilloise", videoId: "kY6Es4Nq9FY" },
+          { label: "03 / Manu Le Coq", title: "Studio avec Manu", videoId: "hSKRHM0nhbU" },
+          { label: "04 / Manu Le Coq", title: "Clip rap", videoId: "22PmUYxJc-0" },
+          { label: "05 / Manu Le Coq", title: "Voix de Lille", videoId: "hquPNy9uMOI" },
+        ],
       },
     ],
   },
@@ -701,6 +724,87 @@ const panelContent = {
             src: "assets/images/el-comercio/portadas/06-articulo-descarga.png",
             alt: "El Comercio feature about La Descarga celebration",
           },
+          {
+            label: "04 / Sucesos",
+            src: "assets/images/el-comercio/portadas/07-portada-sucesos-incendio.png",
+            alt: "El Comercio front page about a fatal house fire in Cangas del Narcea",
+          },
+          {
+            label: "04 / Sucesos",
+            src: "assets/images/el-comercio/portadas/08-articulo-sucesos-incendio-cangas.png",
+            alt: "El Comercio article about a fatal house fire in Cangas del Narcea",
+          },
+        ],
+      },
+      {
+        title: "Reportajes multimedia en secciones especiales",
+        items: [
+          {
+            label: "Pegados a la Tierra",
+            title: "Si no te adaptas a los tiempos, trabajar en un oficio ancestral es imposible",
+            theme: "Artesania, madera y turismo rural",
+            href: "https://pegadosalatierra.elcomercio.es/victor-garcia-la-guarida-del-cunqueiro-degana-asturias/",
+          },
+          {
+            label: "Pegados a la Tierra",
+            title: "Por que no juntarnos todos y sacar provecho de nuestra biodiversidad?",
+            theme: "Turismo activo y hosteleria rural",
+            href: "https://pegadosalatierra.elcomercio.es/albergue-gato-gordo-san-pedro-pinera-cudillero/",
+          },
+          {
+            label: "Pegados a la Tierra",
+            title: "Lo artesano demanda naturaleza, por eso apostamos por Somiedo",
+            theme: "Industria agroalimentaria y cerveza artesanal",
+            href: "https://pegadosalatierra.elcomercio.es/lo-artesano-demanda-naturaleza-por-eso-apostamos-por-somiedo/",
+          },
+          {
+            label: "Pegados a la Tierra",
+            title: "En mi cocina defiendo la cultura campesina, que esta muy viva",
+            theme: "Gastronomia ambulante y productos locales de km 0",
+            href: "https://pegadosalatierra.elcomercio.es/cesar-otero-pizzas-do-pais-manores-tineo/",
+          },
+          {
+            label: "Nuestro Campo",
+            title: "La rosa del Narcea se abre paso",
+            theme: "Innovacion agricola, biotecnologia y cosmetica de lujo",
+            href: "https://nuestrocampo.elcomercio.es/la-rosa-del-narcea-se-abre-paso/",
+          },
+          {
+            label: "Nuestro Campo",
+            title: "La asturiana de los valles es la mas bella y noble",
+            theme: "Ganaderia de pureza, ferias y subastas nacionales",
+            href: "https://nuestrocampo.elcomercio.es/la-asturiana-de-los-valles-es-la-mas-bella-y-noble/",
+          },
+          {
+            label: "Nuestro Campo",
+            title: "Si estuvieramos tan unidos como los ganaderos franceses, no estariamos pasandolo tan mal",
+            theme: "Explotacion ganadera familiar y desafios sectoriales",
+            href: "https://nuestrocampo.elcomercio.es/oscar-barrera-lucia-rey-mieldes-explotacion-ganadera/?ref=https%3A%2F%2Fwww.google.com%2F",
+          },
+          {
+            label: "Nuestro Campo",
+            title: "Ocho hectareas de arandanos sin aprovechar",
+            theme: "Investigacion agricola, cooperativismo y abandono rural",
+            href: "https://nuestrocampo.elcomercio.es/ocho-hectareas-de-arandanos-sin-aprovechar/",
+          },
+          {
+            label: "Nuestro Campo",
+            title: "Los rebanos de Asturiana de los Valles",
+            theme: "Feria de montana y ganaderia tradicional",
+            href: "https://nuestrocampo.elcomercio.es/los-rebanos-de-asturiana-de-los-valles-la-imagen-de-asturias/",
+          },
+          {
+            label: "Otros",
+            title: "Hay que buscar una solucion para los puestos de trabajo de Danone y para Salas",
+            theme: "Economia y manifestacion",
+            href: "https://www.elcomercio.es/asturias/danone-salas-trabajos-protesta-oviedo-solucion-20220627203436-nt.html",
+          },
+          {
+            label: "Otros",
+            title: "Aparece un desconocido soneto de Miguel Eugenio del Riego en memoria de su hermano",
+            theme: "Cultura",
+            href: "https://www.elcomercio.es/culturas/aparece-desconocido-soneto-miguel-eugenio-riego-memoria-20231025223424-nt.html",
+          },
         ],
       },
       {
@@ -713,26 +817,36 @@ const panelContent = {
           },
           {
             label: "02 / Elecciones",
+            src: "assets/images/el-comercio/entrevistas/02-elecciones-fontaniella.png",
+            alt: "El Comercio interview with Jose Luis Fontaniella",
+          },
+          {
+            label: "03 / Investigadora CSIC",
+            src: "assets/images/el-comercio/entrevistas/03-investigadora-csic-rosa-narcea.png",
+            alt: "El Comercio interview with Carmen Martinez about the Rosa del Narcea project",
+          },
+          {
+            label: "04 / Elecciones",
             src: "assets/images/el-comercio/entrevistas/02-elecciones-oscar-ancares.png",
             alt: "El Comercio interview with Oscar Ancares",
           },
           {
-            label: "03 / Elecciones",
+            label: "05 / Elecciones",
             src: "assets/images/el-comercio/entrevistas/03-elecciones-hidalgo.png",
             alt: "El Comercio interview with Sergio Hidalgo",
           },
           {
-            label: "04 / Elecciones",
+            label: "06 / Elecciones",
             src: "assets/images/el-comercio/entrevistas/04-elecciones-feito.png",
             alt: "El Comercio interview with Jose Ramon Feito Lorences",
           },
           {
-            label: "05 / Cruz Roja",
+            label: "07 / Cruz Roja",
             src: "assets/images/el-comercio/entrevistas/05-cruz-roja-andres.png",
             alt: "El Comercio interview with Andres Rodriguez from Cruz Roja",
           },
           {
-            label: "06 / Elecciones",
+            label: "08 / Elecciones",
             src: "assets/images/el-comercio/entrevistas/06-elecciones-carmen.png",
             alt: "El Comercio interview with Carmen Lopez",
           },
@@ -747,14 +861,34 @@ const panelContent = {
             alt: "El Comercio article about Adrian Barbon and just transition works in Ibias",
           },
           {
-            label: "02 / Programa transicion justa",
+            label: "02 / fondos europeos Next Generation",
+            src: "assets/images/el-comercio/politica/02-fondos-europeos-next-generation.png",
+            alt: "El Comercio article about European Next Generation funds and economic reactivation",
+          },
+          {
+            label: "03 / Programa transicion justa",
             src: "assets/images/el-comercio/politica/02-programa-transicion-justa-mina-miura.png",
             alt: "El Comercio article about Mina Miura and the coal market in southwestern Asturias",
           },
           {
-            label: "03 / Programa transicion justa",
+            label: "04 / elecciones municipales",
+            src: "assets/images/el-comercio/politica/04-elecciones-municipales.png",
+            alt: "El Comercio article about municipal election proposals for rural economy",
+          },
+          {
+            label: "05 / Programa transicion justa",
             src: "assets/images/el-comercio/politica/03-programa-transicion-justa-restauracion-minas.png",
             alt: "El Comercio article about environmental restoration of mines and employment",
+          },
+          {
+            label: "06 / Despoblacion rural",
+            src: "assets/images/el-comercio/politica/04-despoblacion-rural.png",
+            alt: "El Comercio article about rural depopulation and Caja Rural in Somiedo",
+          },
+          {
+            label: "07 / Incidente IU",
+            src: "assets/images/el-comercio/politica/05-incidente-iu.png",
+            alt: "El Comercio article about a political incident involving IU in Cangas del Narcea",
           },
         ],
       },
@@ -762,24 +896,104 @@ const panelContent = {
         title: "El Comercio / Sociedad",
         items: [
           {
-            label: "01 / Cruz Roja",
-            src: "assets/images/el-comercio/sociedad/01-cruz-roja.png",
-            alt: "El Comercio article about Cruz Roja volunteers and immigration support",
-          },
-          {
-            label: "02 / Historia",
-            src: "assets/images/el-comercio/sociedad/02-historia.png",
-            alt: "El Comercio article about El Fuejo and local history",
-          },
-          {
-            label: "03 / Salud",
+            label: "01 / Salud",
             src: "assets/images/el-comercio/sociedad/03-salud.png",
             alt: "El Comercio article about access to healthcare on the Asturias and Galicia border",
           },
           {
-            label: "04 / Emprendimiento",
+            label: "02 / Brecha digital",
+            src: "assets/images/el-comercio/sociedad/02-brecha-digital-valle-cibea.png",
+            alt: "El Comercio article about the Valle del Cibea and the lack of mobile and internet coverage",
+          },
+          {
+            label: "03 / Cruz Roja",
+            src: "assets/images/el-comercio/sociedad/01-cruz-roja.png",
+            alt: "El Comercio article about Cruz Roja volunteers and immigration support",
+          },
+          {
+            label: "04 / Despoblacion rural",
+            src: "assets/images/el-comercio/sociedad/02-historia.png",
+            alt: "El Comercio article about El Fuejo and rural depopulation",
+          },
+          {
+            label: "05 / Emprendimiento",
             src: "assets/images/el-comercio/sociedad/04-emprendimiento.png",
             alt: "El Comercio article about rural entrepreneurship in southwestern Asturias",
+          },
+        ],
+      },
+      {
+        title: "El Comercio / Economia",
+        items: [
+          {
+            label: "01 / Turismo rural",
+            src: "assets/images/el-comercio/economia/01-turismo-rural.png",
+            alt: "El Comercio article about rural tourism and a new generation of entrepreneurs",
+          },
+          {
+            label: "02 / Mineria",
+            src: "assets/images/el-comercio/economia/02-mineria.png",
+            alt: "El Comercio article about Orovalle Minerals workers and mining rights",
+          },
+          {
+            label: "03 / Precariedad",
+            src: "assets/images/el-comercio/economia/03-precariedad.png",
+            alt: "El Comercio article about precarious job offers and young workers",
+          },
+          {
+            label: "04 / ganaderia",
+            src: "assets/images/el-comercio/economia/04-ganaderia.png",
+            alt: "El Comercio article about livestock prices and cattle farming",
+          },
+        ],
+      },
+      {
+        title: "El Comercio / Cultura",
+        items: [
+          {
+            label: "01 / Patrimonio",
+            src: "assets/images/el-comercio/cultura/01-patrimonio-basilica-cangas.png",
+            alt: "El Comercio article about the basilica of Cangas del Narcea and its heritage",
+          },
+          {
+            label: "02 / Cultura popular rural",
+            src: "assets/images/el-comercio/cultura/02-cultura-popular-rural.png",
+            alt: "El Comercio article about Os Reises and rural popular culture",
+          },
+          {
+            label: "03 / Ceramica",
+            src: "assets/images/el-comercio/cultura/02-ceramica-negra.png",
+            alt: "El Comercio article about black ceramics from Cangas del Narcea",
+          },
+          {
+            label: "04 / Patrimonio",
+            src: "assets/images/el-comercio/cultura/02-patrimonio-cornellana.png",
+            alt: "El Comercio article about the monastery of Cornellana and heritage restoration",
+          },
+          {
+            label: "05 / Literatura",
+            src: "assets/images/el-comercio/cultura/03-literatura-casona.png",
+            alt: "El Comercio article about Cangas writers and Alejandro Casona",
+          },
+        ],
+      },
+      {
+        title: "El Comercio / Sucesos",
+        items: [
+          {
+            label: "01 / Rally Tineo",
+            src: "assets/images/el-comercio/sucesos/01-rally-tineo.png",
+            alt: "El Comercio article about a fatal accident in the Rally Tineo",
+          },
+          {
+            label: "02 / Suicidio",
+            src: "assets/images/el-comercio/sucesos/02-suicidio.png",
+            alt: "El Comercio article about the death of Diego Ruiz in Valdes",
+          },
+          {
+            label: "03 / Redada",
+            src: "assets/images/el-comercio/sucesos/03-redada.png",
+            alt: "El Comercio article about a cocaine raid in Cangas del Narcea",
           },
         ],
       },
@@ -794,11 +1008,55 @@ const panelContent = {
     ],
   },
   weber: {
-    kicker: "2025",
+    kicker: "Corporate communications",
     title: "Weber Shandwick",
-    body: [
-      "Corporate communication consulting experience in Madrid.",
-      "Future detail page: non-confidential methodology, media monitoring, content systems, plans and public affairs learning.",
+    type: "stats",
+    subtitle: "Corporate Communications Team Member — 2025",
+    description:
+      "Part of the Corporate Communications team during 2025, contributing to the planning, development, and execution of strategic communication plans. Supported corporate positioning, content coordination, stakeholder messaging, and campaign delivery.",
+    logos: [
+      {
+        src: "assets/images/weber-shandwick/nespresso.svg",
+        alt: "Nespresso logo",
+      },
+      {
+        src: "assets/images/weber-shandwick/turkish-airlines-clean.png",
+        alt: "Turkish Airlines logo",
+      },
+      {
+        src: "assets/images/weber-shandwick/synergym-clean.png",
+        alt: "Synergym logo",
+      },
+      {
+        src: "assets/images/weber-shandwick/universidad-europea-clean.png",
+        alt: "Universidad Europea logo",
+      },
+    ],
+    stats: [
+      {
+        prefix: "+",
+        value: 4,
+        title: "Weber Shandwick clients",
+        subtitle: "Nespresso, Turkish Airlines, Synergym and Universidad Europea.",
+      },
+      {
+        value: 100,
+        suffix: "+",
+        title: "Press Releases",
+        subtitle: "Tier-1 content (CincoDías, La Vanguardia, La Razón, Europa Press).",
+      },
+      {
+        prefix: "+",
+        value: 1,
+        title: "Op-eds",
+        subtitle: "El Economista.",
+      },
+      {
+        prefix: "+",
+        value: 2,
+        title: "Co-organizations of events",
+        subtitle: "for Turkish Airlines and Synergym.",
+      },
     ],
   },
   george: {
@@ -946,36 +1204,193 @@ const panelBody = document.querySelector("#panel-body");
 const closeButton = document.querySelector(".panel-close");
 let activeReaderCleanup = null;
 
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
+}
+
+function getYouTubeVideoId(value) {
+  const source = String(value || "").trim();
+
+  if (!source) {
+    return "";
+  }
+
+  if (/^[a-zA-Z0-9_-]{11}$/.test(source)) {
+    return source;
+  }
+
+  try {
+    const url = new URL(source.startsWith("http") ? source : `https://${source}`);
+    const host = url.hostname.replace(/^www\./, "");
+
+    if (host === "youtu.be") {
+      return url.pathname.split("/").filter(Boolean)[0] || "";
+    }
+
+    if (host.endsWith("youtube.com")) {
+      if (url.pathname === "/watch") {
+        return url.searchParams.get("v") || "";
+      }
+
+      const [, route, id] = url.pathname.split("/");
+      if (route === "embed" || route === "shorts") {
+        return id || "";
+      }
+    }
+  } catch {
+    return source;
+  }
+
+  return source;
+}
+
 function renderReaderPages(items) {
   return items
-    .map(
-      (item) => `
+    .map((item) => {
+      if (item.href) {
+        return `
+          <article class="archive-reader-link-card">
+            <span class="archive-reader-link-card__section">${escapeHtml(item.label)}</span>
+            <a href="${escapeHtml(item.href)}" target="_blank" rel="noopener noreferrer">
+              ${escapeHtml(item.title)}
+            </a>
+            <p>${escapeHtml(item.theme)}</p>
+          </article>
+        `;
+      }
+
+      return `
         <figure class="archive-reader-page">
           <figcaption>${item.label}</figcaption>
           <img src="${item.src}" alt="${item.alt}" loading="lazy">
         </figure>
-      `,
-    )
+      `;
+    })
     .join("");
 }
 
 function renderVideoCards(videos) {
   return videos
-    .map(
-      (video) => `
+    .map((video) => {
+      const rawVideoId = getYouTubeVideoId(video.videoId || video.url);
+      const videoId = escapeHtml(rawVideoId);
+      const title = escapeHtml(video.title);
+      const label = escapeHtml(video.label);
+
+      if (!rawVideoId) {
+        return "";
+      }
+
+      return `
         <article class="video-card">
-          <button class="video-card__poster" type="button" data-video-id="${video.videoId}" aria-label="Play ${video.title}">
-            <img src="https://i.ytimg.com/vi/${video.videoId}/hqdefault.jpg" alt="${video.title}" loading="lazy">
+          <button class="video-card__poster" type="button" data-video-id="${videoId}" data-video-title="${title}" aria-label="Play ${title}">
+            <img src="https://i.ytimg.com/vi/${videoId}/hqdefault.jpg" alt="${title}" loading="lazy">
             <span class="video-card__play" aria-hidden="true">Play</span>
           </button>
           <div class="video-card__meta">
-            <span>${video.label}</span>
-            <h3>${video.title}</h3>
+            <span>${label}</span>
+            <h3>${title}</h3>
           </div>
+        </article>
+      `;
+    })
+    .join("");
+}
+
+function renderVideoProjects(projects) {
+  return projects
+    .map(
+      (project) => `
+        <section class="video-project" data-video-carousel>
+          <div class="video-project__header">
+            <h3>${project.heading}</h3>
+          </div>
+          <div class="video-carousel__track" data-video-track aria-label="${project.heading}">
+            ${renderVideoCards(project.videos)}
+          </div>
+        </section>
+      `,
+    )
+    .join("");
+}
+
+function renderStatsPanel(content) {
+  const logos = (content.logos || [])
+    .map(
+      (logo) => `
+        <img src="${escapeHtml(logo.src)}" alt="${escapeHtml(logo.alt)}" loading="lazy">
+      `,
+    )
+    .join("");
+  const stats = (content.stats || [])
+    .map(
+      (stat) => `
+        <article class="weber-stat-card">
+          <span
+            class="weber-stat-card__number"
+            data-counter-value="${Number(stat.value) || 0}"
+            data-counter-prefix="${escapeHtml(stat.prefix || "")}"
+            data-counter-suffix="${escapeHtml(stat.suffix || "")}"
+          >${escapeHtml(stat.prefix || "")}0${escapeHtml(stat.suffix || "")}</span>
+          <h3>${escapeHtml(stat.title)}</h3>
+          <p>${escapeHtml(stat.subtitle)}</p>
         </article>
       `,
     )
     .join("");
+
+  return `
+    <div class="weber-logo-cloud" aria-hidden="true">${logos}</div>
+    <section class="weber-stats-panel">
+      <div class="weber-stats-panel__intro">
+        <p class="weber-stats-panel__subtitle">${escapeHtml(content.subtitle)}</p>
+        <p>${escapeHtml(content.description)}</p>
+      </div>
+      <div class="weber-stats-grid">
+        ${stats}
+      </div>
+    </section>
+  `;
+}
+
+function initializeStatCounters() {
+  const counters = [...(panelBody?.querySelectorAll("[data-counter-value]") || [])];
+
+  if (!counters.length) {
+    return () => {};
+  }
+
+  const duration = 1700;
+  const startedAt = performance.now();
+  let frameId = 0;
+  const easeOut = (progress) => 1 - Math.pow(1 - progress, 3);
+
+  const tick = (now) => {
+    const progress = Math.min((now - startedAt) / duration, 1);
+    const easedProgress = easeOut(progress);
+
+    counters.forEach((counter) => {
+      const target = Number(counter.dataset.counterValue) || 0;
+      const prefix = counter.dataset.counterPrefix || "";
+      const suffix = counter.dataset.counterSuffix || "";
+      const currentValue = Math.round(target * easedProgress);
+
+      counter.textContent = `${prefix}${currentValue}${suffix}`;
+    });
+
+    if (progress < 1) {
+      frameId = requestAnimationFrame(tick);
+    }
+  };
+
+  frameId = requestAnimationFrame(tick);
+
+  return () => cancelAnimationFrame(frameId);
 }
 
 function initializeReaderChapters(content) {
@@ -1021,82 +1436,157 @@ function initializeReaderChapters(content) {
 }
 
 function initializeVideoCarousel() {
-  const carousel = panelBody?.querySelector("[data-video-carousel]");
-  const track = carousel?.querySelector("[data-video-track]");
-  const playButtons = carousel?.querySelectorAll("[data-video-id]");
+  const tracks = [...(panelBody?.querySelectorAll("[data-video-track]") || [])];
+  const playButtons = [...(panelBody?.querySelectorAll("[data-video-id]") || [])];
 
-  if (!carousel || !track || !playButtons?.length) {
+  if (!tracks.length || !playButtons.length) {
     return () => {};
   }
 
-  let isDragging = false;
-  let startX = 0;
-  let startScrollLeft = 0;
-  let moved = false;
+  let activeVideoModal = null;
+  const trackCleanups = [];
 
-  const handlePointerDown = (event) => {
-    isDragging = true;
-    moved = false;
-    startX = event.clientX;
-    startScrollLeft = track.scrollLeft;
-    track.classList.add("is-dragging");
-    track.setPointerCapture?.(event.pointerId);
-  };
+  const closeVideoModal = () => {
+    const modal = activeVideoModal;
 
-  const handlePointerMove = (event) => {
-    if (!isDragging) {
+    if (!modal) {
       return;
     }
 
-    const delta = event.clientX - startX;
-    if (Math.abs(delta) > 6) {
-      moved = true;
-    }
-    track.scrollLeft = startScrollLeft - delta;
-  };
-
-  const stopDragging = (event) => {
-    if (!isDragging) {
+    if (typeof modal.close === "function" && modal.open) {
+      modal.close();
       return;
     }
 
-    isDragging = false;
-    track.classList.remove("is-dragging");
-    track.releasePointerCapture?.(event.pointerId);
+    modal.remove();
+    activeVideoModal = null;
+    document.body.classList.remove("video-modal-open");
   };
+
+  const openVideoModal = (videoId, title) => {
+    closeVideoModal();
+    const safeTitle = escapeHtml(title);
+    const modal = document.createElement("dialog");
+    modal.className = "video-modal is-open";
+    modal.innerHTML = `
+      <div class="video-modal__backdrop" data-video-modal-close></div>
+      <div class="video-modal__dialog" role="dialog" aria-modal="true" aria-label="${safeTitle}">
+        <button class="video-modal__close" type="button" data-video-modal-close aria-label="Close video">×</button>
+        <div class="video-modal__frame">
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1"
+            title="${safeTitle}"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
+    `;
+
+    modal.querySelectorAll("[data-video-modal-close]").forEach((closeTrigger) => {
+      closeTrigger.addEventListener("click", closeVideoModal);
+    });
+
+    modal.addEventListener(
+      "close",
+      () => {
+        modal.remove();
+        if (activeVideoModal === modal) {
+          activeVideoModal = null;
+        }
+        document.body.classList.remove("video-modal-open");
+      },
+      { once: true },
+    );
+
+    document.body.append(modal);
+    if (typeof modal.showModal === "function") {
+      modal.showModal();
+    }
+    document.body.classList.add("video-modal-open");
+    activeVideoModal = modal;
+    modal.querySelector(".video-modal__close")?.focus();
+  };
+
+  tracks.forEach((track) => {
+    let isDragging = false;
+    let startX = 0;
+    let startScrollLeft = 0;
+
+    const handlePointerDown = (event) => {
+      if (event.target.closest("[data-video-id]")) {
+        return;
+      }
+
+      isDragging = true;
+      startX = event.clientX;
+      startScrollLeft = track.scrollLeft;
+      track.classList.add("is-dragging");
+      track.setPointerCapture?.(event.pointerId);
+    };
+
+    const handlePointerMove = (event) => {
+      if (!isDragging) {
+        return;
+      }
+
+      const delta = event.clientX - startX;
+      track.scrollLeft = startScrollLeft - delta;
+    };
+
+    const stopDragging = (event) => {
+      if (!isDragging) {
+        return;
+      }
+
+      isDragging = false;
+      track.classList.remove("is-dragging");
+      track.releasePointerCapture?.(event.pointerId);
+    };
+
+    track.addEventListener("pointerdown", handlePointerDown);
+    track.addEventListener("pointermove", handlePointerMove);
+    track.addEventListener("pointerup", stopDragging);
+    track.addEventListener("pointercancel", stopDragging);
+    track.addEventListener("pointerleave", stopDragging);
+    trackCleanups.push(() => {
+      track.removeEventListener("pointerdown", handlePointerDown);
+      track.removeEventListener("pointermove", handlePointerMove);
+      track.removeEventListener("pointerup", stopDragging);
+      track.removeEventListener("pointercancel", stopDragging);
+      track.removeEventListener("pointerleave", stopDragging);
+    });
+  });
 
   const handlePlayClick = (event) => {
-    if (moved) {
-      event.preventDefault();
-      return;
-    }
+    event.preventDefault();
+    event.stopPropagation();
 
     const button = event.currentTarget;
     const videoId = button.dataset.videoId;
-    button.outerHTML = `
-      <iframe
-        class="video-card__iframe"
-        src="https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1"
-        title="Cultur'All YouTube video"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen
-      ></iframe>
-    `;
+    const title = button.dataset.videoTitle || "CULTUR'ALL YouTube video";
+    if (!videoId) {
+      return;
+    }
+
+    openVideoModal(videoId, title);
   };
 
-  track.addEventListener("pointerdown", handlePointerDown);
-  track.addEventListener("pointermove", handlePointerMove);
-  track.addEventListener("pointerup", stopDragging);
-  track.addEventListener("pointercancel", stopDragging);
-  track.addEventListener("pointerleave", stopDragging);
+  const handleKeydown = (event) => {
+    if (event.key === "Escape" && activeVideoModal) {
+      event.preventDefault();
+      event.stopPropagation();
+      closeVideoModal();
+    }
+  };
+
+  document.addEventListener("keydown", handleKeydown, true);
   playButtons.forEach((button) => button.addEventListener("click", handlePlayClick));
 
   return () => {
-    track.removeEventListener("pointerdown", handlePointerDown);
-    track.removeEventListener("pointermove", handlePointerMove);
-    track.removeEventListener("pointerup", stopDragging);
-    track.removeEventListener("pointercancel", stopDragging);
-    track.removeEventListener("pointerleave", stopDragging);
+    closeVideoModal();
+    document.removeEventListener("keydown", handleKeydown, true);
+    trackCleanups.forEach((cleanup) => cleanup());
     playButtons.forEach((button) => button.removeEventListener("click", handlePlayClick));
   };
 }
@@ -1148,14 +1638,15 @@ function openPanel(panelKey) {
     activeReaderCleanup = initializeReaderChapters(content);
   } else if (content.type === "videoCarousel") {
     panelBody.innerHTML = `
-      <div class="video-carousel" data-video-carousel>
+      <div class="video-carousel">
         <p class="video-carousel__intro">${content.intro}</p>
-        <div class="video-carousel__track" data-video-track aria-label="${content.title} video carousel">
-          ${renderVideoCards(content.videos)}
-        </div>
+        ${renderVideoProjects(content.projects || [])}
       </div>
     `;
     activeReaderCleanup = initializeVideoCarousel();
+  } else if (content.type === "stats") {
+    panelBody.innerHTML = renderStatsPanel(content);
+    activeReaderCleanup = initializeStatCounters();
   } else {
     panelBody.innerHTML = `
       <ul>
@@ -1179,15 +1670,11 @@ closeButton?.addEventListener("click", () => {
   dialog?.close();
 });
 
-dialog?.addEventListener("click", (event) => {
-  if (event.target === dialog) {
-    activeReaderCleanup?.();
-    activeReaderCleanup = null;
-    dialog.close();
-  }
-});
-
 dialog?.addEventListener("close", () => {
   activeReaderCleanup?.();
   activeReaderCleanup = null;
+});
+
+dialog?.addEventListener("cancel", (event) => {
+  event.preventDefault();
 });

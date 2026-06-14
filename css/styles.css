@@ -1928,8 +1928,153 @@ p {
 }
 
 .detail-panel:has(.video-carousel) {
-  width: min(1160px, calc(100vw - 1.2rem));
+  width: min(1240px, calc(100vw - 1.2rem));
+  max-height: min(860px, calc(100svh - 1.25rem));
+}
+
+.detail-panel:has(.weber-stats-panel) {
+  width: min(1180px, calc(100vw - 1.2rem));
   max-height: min(760px, calc(100svh - 1.25rem));
+  padding-top: clamp(1rem, 2.4vw, 1.7rem);
+  background:
+    radial-gradient(circle at 82% 16%, rgba(190, 239, 158, 0.1), transparent 30%),
+    linear-gradient(135deg, #11151b 0%, #080c0e 100%);
+}
+
+.detail-panel:has(.weber-stats-panel) #panel-body {
+  gap: clamp(0.65rem, 1.6vw, 1rem);
+}
+
+.weber-stats-panel {
+  position: relative;
+  display: grid;
+  min-height: min(500px, calc(100svh - 11rem));
+  gap: clamp(0.85rem, 2.2vw, 1.45rem);
+  overflow: hidden;
+  padding: clamp(0.95rem, 2.6vw, 1.85rem);
+  border: 1px solid rgba(190, 239, 158, 0.18);
+  border-radius: 8px;
+  background:
+    linear-gradient(120deg, rgba(255, 252, 242, 0.04), transparent 45%),
+    rgba(8, 12, 14, 0.62);
+}
+
+.weber-logo-cloud {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: center;
+  justify-items: center;
+  gap: clamp(0.75rem, 1.7vw, 1.35rem);
+  width: min(1040px, 92%);
+  margin: clamp(-0.2rem, -0.5vw, 0rem) clamp(3.1rem, 7vw, 5.25rem) 0 auto;
+  padding: 0 clamp(0.2rem, 1vw, 0.55rem);
+  pointer-events: none;
+  opacity: 0.24;
+  filter: grayscale(1) contrast(0.64);
+}
+
+.weber-logo-cloud img {
+  position: static;
+  width: min(100%, 330px);
+  max-height: clamp(72px, 9.5vw, 126px);
+  object-fit: contain;
+  opacity: 0.48;
+  mix-blend-mode: screen;
+}
+
+.weber-stats-panel__intro,
+.weber-stats-grid {
+  position: relative;
+  z-index: 2;
+}
+
+.weber-stats-panel__intro {
+  max-width: 760px;
+}
+
+.weber-stats-panel__subtitle {
+  margin: 0 0 0.8rem;
+  color: #beef9e;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.weber-stats-panel__intro p:last-child {
+  margin: 0;
+  color: rgba(255, 252, 242, 0.76);
+  font-family: "Raleway", system-ui, sans-serif;
+  font-size: clamp(0.9rem, 1.4vw, 1.08rem);
+  line-height: 1.4;
+}
+
+.weber-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  border: 1px solid rgba(190, 239, 158, 0.18);
+  background: rgba(190, 239, 158, 0.16);
+}
+
+.weber-stat-card {
+  display: grid;
+  min-height: 148px;
+  align-content: start;
+  gap: 0.45rem;
+  padding: clamp(0.8rem, 1.65vw, 1.1rem);
+  background: rgba(8, 12, 14, 0.66);
+  backdrop-filter: blur(2px);
+}
+
+.weber-stat-card__number {
+  color: #beef9e;
+  font-family: "Space Grotesk", "Raleway", system-ui, sans-serif;
+  font-size: clamp(2.7rem, 9vw, 4.95rem);
+  font-weight: 800;
+  line-height: 0.86;
+  letter-spacing: -0.07em;
+}
+
+.weber-stat-card h3 {
+  margin: 0;
+  color: #fffcf2;
+  font-size: clamp(0.82rem, 2.1vw, 1rem);
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.weber-stat-card p {
+  margin: 0;
+  color: rgba(255, 252, 242, 0.68);
+  font-family: "Raleway", system-ui, sans-serif;
+  font-size: 0.8rem;
+  line-height: 1.34;
+}
+
+@media (min-width: 760px) {
+  .weber-stats-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .weber-stat-card__number {
+    font-size: clamp(3.5rem, 5.2vw, 4.95rem);
+  }
+}
+
+@media (max-width: 560px) {
+  .weber-logo-cloud {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+    margin: 0;
+    opacity: 0.16;
+  }
+
+  .weber-stats-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .detail-panel::backdrop {
@@ -2083,9 +2228,62 @@ p {
   object-fit: contain;
 }
 
+.archive-reader-link-card {
+  display: grid;
+  gap: clamp(0.65rem, 1.8vw, 0.9rem);
+  max-width: 980px;
+  padding: clamp(1rem, 3vw, 1.65rem);
+  border: 1px solid rgba(190, 239, 158, 0.16);
+  border-radius: 4px;
+  background:
+    linear-gradient(135deg, rgba(190, 239, 158, 0.085), rgba(51, 81, 69, 0.16)),
+    rgba(5, 6, 8, 0.74);
+  box-shadow: 0 26px 90px rgba(0, 0, 0, 0.32);
+}
+
+.archive-reader-link-card__section {
+  width: fit-content;
+  color: rgba(190, 239, 158, 0.78);
+  font-family: "PT Mono", "IBM Plex Mono", ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: clamp(0.66rem, 1.25vw, 0.78rem);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.archive-reader-link-card a {
+  color: #fffcf2;
+  font-family: "Newsreader", Georgia, "Times New Roman", serif;
+  font-size: clamp(1.55rem, 4vw, 3.1rem);
+  font-style: italic;
+  font-weight: 700;
+  line-height: 0.98;
+  text-decoration: none;
+  text-wrap: balance;
+  transition:
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.archive-reader-link-card a:hover,
+.archive-reader-link-card a:focus-visible {
+  color: #beef9e;
+  outline: none;
+  transform: translateX(0.35rem);
+}
+
+.archive-reader-link-card p {
+  max-width: 58ch;
+  margin: 0;
+  color: rgba(255, 252, 242, 0.68);
+  font-family: "Raleway", ui-sans-serif, system-ui, sans-serif;
+  font-size: clamp(0.84rem, 1.7vw, 1rem);
+  font-weight: 300;
+  line-height: 1.45;
+}
+
 .video-carousel {
   display: grid;
-  gap: clamp(1rem, 2.4vw, 1.5rem);
+  gap: clamp(1.2rem, 2.8vw, 1.9rem);
 }
 
 .video-carousel__intro {
@@ -2109,6 +2307,22 @@ p {
   scrollbar-color: rgba(190, 239, 158, 0.72) rgba(255, 255, 255, 0.08);
   touch-action: pan-x;
   user-select: none;
+}
+
+.video-project {
+  display: grid;
+  gap: clamp(0.75rem, 1.8vw, 1rem);
+}
+
+.video-project__header h3 {
+  max-width: 58rem;
+  margin: 0;
+  color: #beef9e;
+  font-family: "Raleway", ui-sans-serif, system-ui, sans-serif;
+  font-size: clamp(1.15rem, 2.4vw, 1.65rem);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1.12;
 }
 
 .video-carousel__track.is-dragging {
@@ -2231,9 +2445,105 @@ p {
   margin: 0;
   color: #fffcf2;
   font-family: "Newsreader", Georgia, serif;
-  font-size: clamp(1.45rem, 3.6vw, 2.35rem);
+  font-size: clamp(1.22rem, 3vw, 2rem);
   font-style: italic;
   line-height: 0.98;
+}
+
+.video-modal-open {
+  overflow: hidden;
+}
+
+.video-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: grid;
+  place-items: center;
+  width: 100vw;
+  max-width: none;
+  height: 100svh;
+  max-height: none;
+  margin: 0;
+  padding: clamp(1rem, 3vw, 2.5rem);
+  border: 0;
+  background: transparent;
+  color: inherit;
+}
+
+.video-modal::backdrop {
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(10px);
+}
+
+.video-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(10px);
+}
+
+.video-modal__dialog {
+  position: relative;
+  z-index: 1;
+  width: min(78vw, 1080px);
+  border: 1px solid rgba(190, 239, 158, 0.28);
+  border-radius: 8px;
+  background: rgba(5, 6, 8, 0.94);
+  box-shadow: 0 1.5rem 5rem rgba(0, 0, 0, 0.55);
+}
+
+.video-modal__close {
+  position: absolute;
+  top: -2.6rem;
+  right: 0;
+  display: inline-grid;
+  width: 2.3rem;
+  height: 2.3rem;
+  place-items: center;
+  border: 1px solid rgba(255, 252, 242, 0.28);
+  border-radius: 999px;
+  padding: 0;
+  background: rgba(5, 6, 8, 0.82);
+  color: #fffcf2;
+  cursor: pointer;
+  font-family: "PT Mono", "IBM Plex Mono", ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.video-modal__close:hover,
+.video-modal__close:focus-visible {
+  border-color: rgba(190, 239, 158, 0.82);
+  color: #beef9e;
+  outline: none;
+}
+
+.video-modal__frame {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.video-modal__frame iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+@media (max-width: 720px) {
+  .video-modal {
+    padding: 1rem;
+  }
+
+  .video-modal__dialog {
+    width: min(94vw, 680px);
+  }
+
+  .video-modal__close {
+    top: -2.35rem;
+  }
 }
 
 .reveal {
