@@ -1049,7 +1049,8 @@ const panelContent = {
         prefix: "+",
         value: 1,
         title: "Op-eds",
-        subtitle: "El Economista.",
+        subtitle: "Opinion piece for El Economista on behalf of Nespresso's CEO.",
+        href: "https://www.eleconomista.es/retail-consumo/noticias/13395485/06/25/la-innovacion-va-mas-alla-del-lanzamiento-de-nuevos-productos.html#:~:text=Brigitte%20Felber,flexibilidad%20para%20alcanzar%20el%20%C3%A9xito",
       },
       {
         prefix: "+",
@@ -1328,9 +1329,16 @@ function renderStatsPanel(content) {
     )
     .join("");
   const stats = (content.stats || [])
-    .map(
-      (stat) => `
-        <article class="weber-stat-card">
+    .map((stat) => {
+      const isLinked = Boolean(stat.href);
+      const cardTag = isLinked ? "a" : "article";
+      const cardClass = `weber-stat-card${isLinked ? " weber-stat-card--link" : ""}`;
+      const linkAttributes = isLinked
+        ? ` href="${escapeHtml(stat.href)}" target="_blank" rel="noopener noreferrer" aria-label="${escapeHtml(`Open ${stat.title} article`)}"`
+        : "";
+
+      return `
+        <${cardTag} class="${cardClass}"${linkAttributes}>
           <span
             class="weber-stat-card__number"
             data-counter-value="${Number(stat.value) || 0}"
@@ -1339,9 +1347,9 @@ function renderStatsPanel(content) {
           >${escapeHtml(stat.prefix || "")}0${escapeHtml(stat.suffix || "")}</span>
           <h3>${escapeHtml(stat.title)}</h3>
           <p>${escapeHtml(stat.subtitle)}</p>
-        </article>
-      `,
-    )
+        </${cardTag}>
+      `;
+    })
     .join("");
 
   return `
