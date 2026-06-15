@@ -7,11 +7,6 @@ if (yearElement) {
 const revealObserver = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
-      if (entry.target.classList.contains("timeline-station--intro")) {
-        entry.target.classList.toggle("is-visible", entry.isIntersecting);
-        return;
-      }
-
       if (entry.isIntersecting) {
         entry.target.classList.add("is-visible");
         revealObserver.unobserve(entry.target);
@@ -33,7 +28,6 @@ let tickerStartX = 0;
 let tickerOffset = 0;
 let tickerStartOffset = 0;
 let tickerIsDragging = false;
-let tickerLastPointerX = null;
 
 function getTickerLoopWidth() {
   return tickerGroup?.getBoundingClientRect().width || 0;
@@ -89,36 +83,30 @@ function releaseTickerControl() {
   tickerTrack.style.removeProperty("transform");
 }
 
+function pauseTickerControl() {
+  if (!heroTicker || !tickerTrack || heroTicker.classList.contains("is-paused")) {
+    return;
+  }
+
+  syncTickerOffsetFromAnimation();
+  heroTicker.classList.add("is-paused");
+}
+
+function startTickerDrag(event) {
+  event.preventDefault();
+  tickerIsDragging = true;
+  tickerStartX = event.clientX;
+  syncTickerOffsetFromAnimation();
+  tickerStartOffset = tickerOffset;
+  heroTicker.classList.add("is-dragging", "is-manual", "is-paused");
+}
+
 if (heroTicker && tickerTrack) {
-  heroTicker.addEventListener("pointerenter", (event) => {
-    syncTickerOffsetFromAnimation();
-    tickerLastPointerX = event.clientX;
-    heroTicker.classList.add("is-paused");
+  heroTicker.addEventListener("pointerenter", () => {
+    pauseTickerControl();
   });
 
   heroTicker.addEventListener("pointerleave", () => {
-    tickerLastPointerX = null;
-    releaseTickerControl();
-  });
-
-  document.addEventListener("pointermove", (event) => {
-    if (isPointerInsideTicker(event)) {
-      heroTicker.classList.add("is-paused");
-
-      if (!tickerIsDragging && tickerLastPointerX !== null) {
-        const pointerDelta = event.clientX - tickerLastPointerX;
-
-        if (Math.abs(pointerDelta) > 0.2) {
-          heroTicker.classList.add("is-manual");
-          applyTickerOffset(tickerOffset + pointerDelta * 1.8);
-        }
-      }
-
-      tickerLastPointerX = event.clientX;
-      return;
-    }
-
-    tickerLastPointerX = null;
     releaseTickerControl();
   });
 
@@ -133,28 +121,34 @@ if (heroTicker && tickerTrack) {
 
       const wheelDelta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
       heroTicker.classList.add("is-manual");
-      applyTickerOffset(tickerOffset - wheelDelta * 1.25);
+      applyTickerOffset(tickerOffset - wheelDelta * 0.55);
     },
     { passive: false },
   );
 
-  heroTicker.addEventListener("pointerdown", (event) => {
-    event.preventDefault();
-    tickerIsDragging = true;
-    tickerStartX = event.clientX;
-    syncTickerOffsetFromAnimation();
-    tickerStartOffset = tickerOffset;
-    heroTicker.classList.add("is-dragging", "is-manual");
-    heroTicker.setPointerCapture?.(event.pointerId);
+  document.addEventListener("pointerdown", (event) => {
+    if (isPointerInsideTicker(event)) {
+      startTickerDrag(event);
+    }
   });
 
   document.addEventListener("pointermove", (event) => {
+    if (!tickerIsDragging && isPointerInsideTicker(event)) {
+      pauseTickerControl();
+      return;
+    }
+
+    if (!tickerIsDragging && heroTicker.classList.contains("is-paused") && !isPointerInsideTicker(event)) {
+      releaseTickerControl();
+      return;
+    }
+
     if (!tickerIsDragging) {
       return;
     }
 
     event.preventDefault();
-    applyTickerOffset(tickerStartOffset + event.clientX - tickerStartX);
+    applyTickerOffset(tickerStartOffset + (event.clientX - tickerStartX) * 0.82);
   });
 
   document.addEventListener("pointerup", (event) => {
@@ -164,7 +158,6 @@ if (heroTicker && tickerTrack) {
 
     tickerIsDragging = false;
     heroTicker.classList.remove("is-dragging");
-    heroTicker.releasePointerCapture?.(event.pointerId);
 
     if (!isPointerInsideTicker(event)) {
       releaseTickerControl();
@@ -174,6 +167,7 @@ if (heroTicker && tickerTrack) {
   document.addEventListener("pointercancel", () => {
     tickerIsDragging = false;
     heroTicker.classList.remove("is-dragging");
+    releaseTickerControl();
   });
 
   heroTicker.addEventListener("mouseleave", () => {
@@ -187,10 +181,10 @@ const calendarRuler = document.querySelector(".calendar-ruler");
 const currentYearElement = document.querySelector(".timeline-current-year");
 const timelineVideoBackground = document.querySelector(".timeline-video-background");
 const stations = Array.from(document.querySelectorAll(".timeline-station"));
+const heroCopy = document.querySelector(".timeline-station--hero .intro-station-copy");
 const timelineStations = stations.filter(
   (station) =>
     !station.classList.contains("timeline-station--hero") &&
-    !station.classList.contains("timeline-station--intro") &&
     !station.classList.contains("timeline-station--map") &&
     !station.classList.contains("timeline-station--archive"),
 );
@@ -222,6 +216,7 @@ function setUniverseHeight() {
     universe.style.removeProperty("height");
     universe.style.removeProperty("min-height");
     track.style.transform = "none";
+    heroCopy?.style.removeProperty("--hero-copy-parallax");
     if (calendarRuler) {
       calendarRuler.style.transform = "none";
     }
@@ -290,6 +285,8 @@ function updateHorizontalScroll() {
   track.style.transform = `translate3d(${currentX}px, 0, 0)`;
 
   const scrollX = maxTranslate * progress;
+  const heroCopyParallax = Math.min(1, Math.max(0, scrollX / Math.max(1, window.innerWidth * 0.82)));
+  heroCopy?.style.setProperty("--hero-copy-parallax", heroCopyParallax.toFixed(4));
   const timelineProgress = Math.min(
     1,
     Math.max(0, (scrollX - timelineStartX) / Math.max(1, timelineEndX - timelineStartX)),

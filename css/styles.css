@@ -118,6 +118,21 @@ button {
   box-shadow: none;
 }
 
+.story-hero::before {
+  position: absolute;
+  inset: -8%;
+  z-index: 0;
+  content: "";
+  background-image: url("../assets/images/crossroads.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  filter: blur(14px) saturate(0.92) contrast(1.08);
+  opacity: 0.72;
+  transform: scale(1.08);
+  pointer-events: none;
+}
+
 .hero-media,
 .hero-video,
 .hero-overlay {
@@ -126,9 +141,9 @@ button {
 }
 
 .hero-video {
-  z-index: 0;
+  z-index: 1;
   overflow: hidden;
-  background: #050608;
+  background: transparent;
 }
 
 .hero-video video {
@@ -136,14 +151,14 @@ button {
   height: 100%;
   object-fit: cover;
   filter: saturate(0.9) contrast(1.05);
-  opacity: 0.62;
+  opacity: 0.56;
 }
 
 .hero-media {
-  top: 50%;
+  top: 56%;
   left: clamp(0.85rem, 4vw, 4rem);
-  z-index: 1;
-  width: min(42vw, 30rem);
+  z-index: 2;
+  width: min(49vw, 35rem);
   aspect-ratio: 9 / 16;
   transform: translateY(-50%);
   overflow: visible;
@@ -164,7 +179,7 @@ button {
 }
 
 .hero-overlay {
-  z-index: 2;
+  z-index: 3;
   background:
     linear-gradient(90deg, rgba(5, 6, 8, 0.16), rgba(5, 6, 8, 0.18) 38%, rgba(5, 6, 8, 0.78) 56%, rgba(5, 6, 8, 0.95)),
     linear-gradient(to top, rgba(5, 6, 8, 0.92), transparent 46%);
@@ -172,10 +187,11 @@ button {
 
 .hero-copy {
   position: relative;
-  z-index: 3;
+  z-index: 4;
   max-width: min(720px, 48vw);
   margin-left: auto;
-  margin-bottom: clamp(0.4rem, 2.7vw, 1.35rem);
+  margin-bottom: 0;
+  transform: translateY(clamp(2.2rem, 7vh, 5rem));
 }
 
 h1,
@@ -246,8 +262,7 @@ p {
   margin-left: clamp(2rem, 8vw, 6.8rem);
 }
 
-.hero-bridge-name,
-.intro-station-name {
+.hero-bridge-name {
   color: #e3c0d3;
   font-family: "Archivo Black", "Arial Black", Impact, sans-serif;
   font-size: clamp(4.8rem, 13vw, 12.5rem);
@@ -259,20 +274,22 @@ p {
 }
 
 .hero-bridge-name {
-  margin-top: clamp(1.45rem, 4vw, 2.8rem);
-  font-size: clamp(4.3rem, 11.7vw, 11.25rem);
+  width: max-content;
+  margin-top: clamp(1.1rem, 2.8vw, 2rem);
+  font-size: clamp(2.15rem, 5.85vw, 5.65rem);
+  transform: translate(clamp(-15.5rem, -18vw, -6rem), clamp(0.75rem, 2.8vh, 1.5rem));
 }
 
 .hero-ticker {
   position: absolute;
   right: 0;
-  bottom: clamp(1.35rem, 3vw, 2.25rem);
+  bottom: 0;
   left: 0;
   z-index: 20;
   display: flex;
   align-items: center;
   width: 100vw;
-  min-height: clamp(3.05rem, 6.4vw, 4.05rem);
+  height: clamp(5rem, 8vw, 6.5rem);
   margin: 0;
   overflow: hidden;
   background: #050608;
@@ -284,16 +301,12 @@ p {
 }
 
 .hero-ticker::before {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  content: "";
-  pointer-events: none;
+  content: none;
 }
 
 .hero-ticker:hover,
 .hero-ticker.is-paused {
-  cursor: ew-resize;
+  cursor: grab;
 }
 
 .hero-ticker.is-dragging {
@@ -309,7 +322,6 @@ p {
   will-change: transform;
 }
 
-.hero-ticker:hover .ticker-track,
 .hero-ticker:focus-within .ticker-track,
 .hero-ticker.is-paused .ticker-track,
 .hero-ticker.is-dragging .ticker-track {
@@ -328,7 +340,7 @@ p {
 .ticker-item {
   display: inline-flex;
   align-items: center;
-  min-height: clamp(2.05rem, 4.7vw, 2.9rem);
+  min-height: clamp(1.55rem, 3.2vw, 2.05rem);
   color: #fffcf2;
   font-family: "PT Mono", "IBM Plex Mono", ui-monospace, SFMono-Regular, Consolas, monospace;
   font-size: clamp(0.78rem, 2vw, 1rem);
@@ -529,7 +541,6 @@ p {
 }
 
 .timeline-station--hero,
-.timeline-station--intro,
 .timeline-station--map,
 .timeline-station--archive {
   transform: none !important;
@@ -570,22 +581,9 @@ p {
   outline: none;
 }
 
-.timeline-station--intro,
 .timeline-station--archive {
   width: min(90vw, 620px);
   cursor: default;
-}
-
-.timeline-station--intro {
-  width: min(100vw, 1040px);
-  min-height: 100svh;
-  overflow: hidden;
-  align-content: stretch;
-  justify-content: stretch;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  box-shadow: none;
 }
 
 .timeline-station--map {
@@ -1767,30 +1765,6 @@ p {
   }
 }
 
-.intro-station-bg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background:
-    linear-gradient(90deg, rgba(5, 6, 8, 0.52), rgba(5, 6, 8, 0.16)),
-    url("../assets/images/crossroads.png") center / cover;
-  filter: blur(4px) saturate(0.82) contrast(1.08);
-  transform: scale(1.025);
-}
-
-.intro-station-name {
-  position: absolute;
-  top: auto;
-  bottom: clamp(4.9rem, 10vw, 7.6rem);
-  left: clamp(1rem, 4vw, 3rem);
-  z-index: 1;
-  display: grid;
-  opacity: 1;
-  clip-path: inset(0 100% 0 0);
-  filter: blur(14px);
-  transform: translateY(14px);
-}
-
 .intro-station-copy {
   position: absolute;
   right: clamp(3rem, 10vw, 8rem);
@@ -1803,10 +1777,10 @@ p {
   font-family:
     "Raleway", "Aktiv Grotesk", Inter, ui-sans-serif, system-ui, -apple-system,
     BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-size: clamp(1.35rem, 2.75vw, 2.95rem);
+  font-size: clamp(1.49rem, 3.03vw, 3.25rem);
   font-weight: 700;
   letter-spacing: -0.035em;
-  line-height: 1.12;
+  line-height: 1.18;
   text-align: right;
   text-shadow: 0 14px 44px rgba(0, 0, 0, 0.68);
   clip-path: inset(0 0 100% 0);
@@ -1819,11 +1793,34 @@ p {
   color: #fb4d3d;
 }
 
-.timeline-station--intro.is-visible .intro-station-name {
-  animation: editorial-name-reveal 980ms cubic-bezier(0.16, 1, 0.3, 1) 120ms both;
+.timeline-station--hero .intro-station-copy {
+  --hero-copy-parallax: 0;
+  position: static;
+  max-width: min(720px, 48vw);
 }
 
-.timeline-station--intro.is-visible .intro-station-copy {
+.intro-station-copy__line {
+  display: block;
+  will-change: transform, opacity;
+  transition:
+    opacity 180ms linear,
+    transform 180ms linear;
+}
+
+.intro-station-copy__line--lead {
+  transform: translate3d(calc(var(--hero-copy-parallax) * -16px), calc(var(--hero-copy-parallax) * 5px), 0);
+}
+
+.intro-station-copy__line--crossroads {
+  transform: translate3d(calc(var(--hero-copy-parallax) * 10px), calc(var(--hero-copy-parallax) * -4px), 0);
+}
+
+.intro-station-copy__line--field {
+  opacity: calc(1 - (var(--hero-copy-parallax) * 0.16));
+  transform: translate3d(calc(var(--hero-copy-parallax) * -7px), calc(var(--hero-copy-parallax) * 8px), 0);
+}
+
+.timeline-station--hero.is-visible .intro-station-copy {
   animation: editorial-copy-reveal 860ms cubic-bezier(0.16, 1, 0.3, 1) 520ms both;
 }
 
@@ -2030,6 +2027,8 @@ p {
 
 .weber-stat-card--link {
   cursor: pointer;
+  background: rgba(51, 81, 69, 0.44);
+  box-shadow: inset 0 0 0 1px rgba(190, 239, 158, 0.34);
   color: inherit;
   text-decoration: none;
   transition: background 180ms ease, box-shadow 180ms ease, transform 180ms ease;
@@ -2037,8 +2036,8 @@ p {
 
 .weber-stat-card--link:hover,
 .weber-stat-card--link:focus-visible {
-  background: rgba(51, 81, 69, 0.7);
-  box-shadow: inset 0 0 0 1px rgba(190, 239, 158, 0.7), 0 18px 38px rgba(0, 0, 0, 0.28);
+  background: rgba(51, 81, 69, 0.76);
+  box-shadow: inset 0 0 0 2px rgba(190, 239, 158, 0.78), 0 18px 38px rgba(0, 0, 0, 0.28);
   transform: translateY(-2px);
 }
 
@@ -2651,9 +2650,9 @@ p {
   }
 
   .hero-media {
-    top: 52%;
+    top: 57%;
     left: 50%;
-    width: min(72vw, 20rem);
+    width: min(82vw, 23rem);
     transform: translate(-50%, -50%);
   }
 
@@ -2665,6 +2664,7 @@ p {
   .hero-copy {
     max-width: 92vw;
     margin-left: 0;
+    transform: translateY(clamp(1.8rem, 8vh, 4.1rem));
   }
 
   .hero-title {
@@ -2681,7 +2681,8 @@ p {
   }
 
   .hero-bridge-name {
-    font-size: clamp(3.65rem, 17.4vw, 5.8rem);
+    font-size: clamp(1.9rem, 8.7vw, 2.9rem);
+    transform: translate(clamp(-2.7rem, -10vw, -1rem), clamp(0.55rem, 2.4vh, 1.1rem));
   }
 
   .career-universe {
@@ -2716,11 +2717,6 @@ p {
     width: 100%;
     min-height: auto;
     transform: none;
-  }
-
-  .timeline-station--intro,
-  .timeline-station--intro:nth-child(odd) {
-    min-height: 78svh;
   }
 
   .timeline-station--map {
@@ -2768,19 +2764,16 @@ p {
     font-size: clamp(0.97rem, 4.4vw, 1.28rem);
   }
 
-  .intro-station-name {
-    top: auto;
-    bottom: clamp(4.6rem, 18vw, 6.2rem);
-    left: 0.85rem;
-    font-size: clamp(3.65rem, 17.4vw, 5.8rem);
-  }
-
   .intro-station-copy {
     top: clamp(4.8rem, 14vw, 6.5rem);
     right: 0.85rem;
     bottom: auto;
     max-width: 84%;
-    font-size: clamp(1.28rem, 5.8vw, 1.92rem);
+    font-size: clamp(1.41rem, 6.38vw, 2.11rem);
+  }
+
+  .timeline-station--hero .intro-station-copy {
+    max-width: 92vw;
   }
 
 }
@@ -2793,18 +2786,22 @@ p {
   .ticker-track,
   .map-typewriter-copy span,
   .map-typewriter-copy::after,
-  .timeline-station--intro.is-visible .intro-station-name,
-  .timeline-station--intro.is-visible .intro-station-copy {
+  .timeline-station--hero.is-visible .intro-station-copy {
     animation: none;
     transition: none;
   }
 
-  .intro-station-name,
   .intro-station-copy {
     clip-path: none;
     filter: none;
     opacity: 1;
     transform: none;
+  }
+
+  .intro-station-copy__line {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 
   .career-track,
