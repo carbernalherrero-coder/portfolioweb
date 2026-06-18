@@ -216,7 +216,7 @@ function setUniverseHeight() {
     universe.style.removeProperty("height");
     universe.style.removeProperty("min-height");
     track.style.transform = "none";
-    heroCopy?.style.removeProperty("--hero-copy-parallax");
+    heroCopy?.style.removeProperty("--hero-copy-scan");
     if (calendarRuler) {
       calendarRuler.style.transform = "none";
     }
@@ -229,18 +229,21 @@ function setUniverseHeight() {
 
   maxTranslate = Math.max(0, track.scrollWidth - window.innerWidth);
 
-  const firstTimelineStation = timelineStations.at(0);
-  const lastTimelineStation = timelineStations.at(-1);
+  const firstTimelineStation = timelineStations.find((station) => station.dataset.dateLabel) ?? timelineStations.at(0);
+  const lastTimelineStation =
+    timelineStations.find((station) => station.dataset.panel === "urjc") ??
+    [...timelineStations].reverse().find((station) => station.dataset.dateLabel) ??
+    timelineStations.at(-1);
   timelineStartX = firstTimelineStation
     ? Math.min(
         maxTranslate,
-        Math.max(0, firstTimelineStation.offsetLeft + firstTimelineStation.offsetWidth / 2 - window.innerWidth / 2),
+        Math.max(0, firstTimelineStation.offsetLeft - window.innerWidth * 0.55),
       )
     : 0;
   timelineEndX = lastTimelineStation
     ? Math.min(
         maxTranslate,
-        Math.max(timelineStartX + 1, lastTimelineStation.offsetLeft + lastTimelineStation.offsetWidth / 2 - window.innerWidth / 2),
+        Math.max(timelineStartX + 1, lastTimelineStation.offsetLeft + lastTimelineStation.offsetWidth - window.innerWidth * 0.35),
       )
     : maxTranslate;
 
@@ -250,11 +253,13 @@ function setUniverseHeight() {
 }
 
 function updateActiveStation() {
-  const center = window.innerWidth / 2;
+  const center = window.innerWidth * 0.34;
   let closest = null;
   let closestDistance = Number.POSITIVE_INFINITY;
 
-  stations.forEach((station) => {
+  const dateStations = timelineStations.filter((station) => station.dataset.dateLabel);
+
+  dateStations.forEach((station) => {
     const rect = station.getBoundingClientRect();
     const stationCenter = rect.left + rect.width / 2;
     const distance = Math.abs(center - stationCenter);
@@ -268,6 +273,10 @@ function updateActiveStation() {
   stations.forEach((station) => {
     station.classList.toggle("is-active", station === closest);
   });
+
+  if (currentYearElement && closest?.dataset.dateLabel) {
+    currentYearElement.textContent = closest.dataset.dateLabel;
+  }
 }
 
 function updateHorizontalScroll() {
@@ -285,8 +294,8 @@ function updateHorizontalScroll() {
   track.style.transform = `translate3d(${currentX}px, 0, 0)`;
 
   const scrollX = maxTranslate * progress;
-  const heroCopyParallax = Math.min(1, Math.max(0, scrollX / Math.max(1, window.innerWidth * 0.82)));
-  heroCopy?.style.setProperty("--hero-copy-parallax", heroCopyParallax.toFixed(4));
+  const heroCopyScan = Math.min(1, Math.max(0, scrollX / Math.max(1, window.innerWidth * 0.42)));
+  heroCopy?.style.setProperty("--hero-copy-scan", heroCopyScan.toFixed(4));
   const timelineProgress = Math.min(
     1,
     Math.max(0, (scrollX - timelineStartX) / Math.max(1, timelineEndX - timelineStartX)),
@@ -297,12 +306,19 @@ function updateHorizontalScroll() {
     calendarRuler.style.transform = `translate3d(${-maxRulerTranslate * timelineProgress}px, 0, 0)`;
   }
 
-  if (currentYearElement) {
-    const activeYear = 2026 - Math.round(timelineProgress * 16);
-    currentYearElement.textContent = String(Math.max(2010, Math.min(2026, activeYear)));
-  }
-
   updateActiveStation();
+
+  if (timelineProgress > 0.9) {
+    const finalStation = timelineStations.find((station) => station.dataset.panel === "urjc");
+    if (finalStation) {
+      stations.forEach((station) => {
+        station.classList.toggle("is-active", station === finalStation);
+      });
+      if (currentYearElement) {
+        currentYearElement.textContent = finalStation.dataset.dateLabel || "Sep 2010 - Jun 2015";
+      }
+    }
+  }
 
   if (Math.abs(targetX - currentX) > 0.5) {
     window.requestAnimationFrame(updateHorizontalScroll);
@@ -580,7 +596,7 @@ function renderStaticWorldMap() {
 renderStaticWorldMap();
 const panelContent = {
   urjc: {
-    kicker: "2010 - 2015",
+    kicker: "01-09-2010 / 30-06-2015",
     title: "Journalism and Audiovisual Communication",
     body: [
       "Academic starting point for the timeline: reporting, audiovisual language, scripts and public storytelling.",
@@ -588,7 +604,7 @@ const panelContent = {
     ],
   },
   screenwriting: {
-    kicker: "2013",
+    kicker: "15-09-2013 / 15-06-2014",
     title: "La Factoria del Guion",
     body: [
       "Film and TV screenwriting training.",
@@ -596,15 +612,92 @@ const panelContent = {
     ],
   },
   brumaria: {
-    kicker: "2014",
+    kicker: "30-09-2018 / 21-12-2019",
     title: "Editorial Brumaria",
-    body: [
-      "Assistant editorial project experience in Madrid.",
-      "Future assets: editorial documents, art-publishing context, production notes and selected references.",
+    type: "photoMosaic",
+    mosaicTheme: "brumaria",
+    mosaicLabel: "Editorial Brumaria visual archive",
+    mainLabel: "Publishing / Cultural production",
+    intro:
+      "During 16 months at Editorial Brumaria, I supported the publisher's digital transition, helping launch its website and e-commerce platform while assisting communications, editorial production and cultural programming. I worked across the full publishing cycle: author relations in English and French, copy-editing, layout support, print coordination, magazine content and book launches across several collections.",
+    socialTitle: "Digital Content Producer",
+    socialIntro:
+      "I also contributed to digital content creation, combining graphic design skills, editorial editing and sharp social media copywriting to strengthen Brumaria's online voice, visual identity and audience engagement.",
+    images: [
+      {
+        src: "assets/images/brumaria/brumaria-books-large.png",
+        alt: "Brumaria books from visual and critical collections",
+        variant: "feature",
+      },
+      {
+        src: "assets/images/brumaria/ficciones-patogenas.png",
+        alt: "Ficciones patogenas book cover by Duen Sacchi",
+        variant: "tall",
+      },
+      {
+        src: "assets/images/brumaria/otras-protagonistas-poster.png",
+        alt: "Poster for Las otras protagonistas de la transicion",
+        variant: "tall",
+      },
+      {
+        src: "assets/images/brumaria/arte-transicion-open-book.png",
+        alt: "Open book render for Arte y transicion",
+        variant: "wide",
+      },
+      {
+        src: "assets/images/brumaria/poeticas-oposicion.png",
+        alt: "Poeticas de la oposicion event poster",
+        variant: "feature",
+      },
+      {
+        src: "assets/images/brumaria/laura-kait.png",
+        alt: "Brumaria and Laura Kait author graphic",
+        variant: "feature",
+      },
+      {
+        src: "assets/images/brumaria/duchamp-badiou.png",
+        alt: "Alain Badiou book cover about Marcel Duchamp",
+        variant: "feature",
+      },
+      {
+        src: "assets/images/brumaria/speakers-corner.png",
+        alt: "Speakers Corner event graphic with Nino de Elche and Dario Corbeira",
+        variant: "feature wide",
+      },
+      {
+        src: "assets/images/brumaria/joelle-mesnil.png",
+        alt: "Brumaria and Joelle Mesnil author graphic",
+        variant: "feature",
+      },
+      {
+        src: "assets/images/brumaria/brumaria-ecommerce.png",
+        alt: "Brumaria e-commerce platform preview on a tablet",
+        variant: "wide",
+      },
+      {
+        src: "assets/images/brumaria/transparente-opacidad.png",
+        alt: "Transparente opacidad book render by Jaime Vindel",
+        variant: "feature",
+      },
+      {
+        src: "assets/images/brumaria/dario-corbeira.png",
+        alt: "Brumaria and Dario Corbeira editorial graphic",
+        variant: "feature",
+      },
+      {
+        src: "assets/images/brumaria/facebook-profile.png",
+        alt: "Brumaria Facebook profile screenshot",
+        variant: "wide",
+      },
+      {
+        src: "assets/images/brumaria/instagram-profile.png",
+        alt: "Brumaria Instagram profile screenshot",
+        variant: "wide",
+      },
     ],
   },
   ministry: {
-    kicker: "2015",
+    kicker: "01-09-2015 / 30-06-2016",
     title: "French Ministry of Education / CEMEA",
     body: [
       "BPJEPS / socio-cultural project coordination training in France.",
@@ -612,7 +705,7 @@ const panelContent = {
     ],
   },
   culturall: {
-    kicker: "2016 - 2018",
+    kicker: "01-09-2016 / 30-08-2018",
     title: "CULTUR'ALL Studio",
     type: "videoCarousel",
     intro: "A curated selection of audiovisual work produced during my time with Cultur'all Studio in Lille, spanning festivals, music videos, and campaign spots for cultural and institutional clients across Northern France.",
@@ -668,7 +761,7 @@ const panelContent = {
     ],
   },
   busette: {
-    kicker: "2018",
+    kicker: "01-09-2015 / 30-08-2016",
     title: "Centre Social La Busette",
     body: [
       "Project management and community work in Lille.",
@@ -676,7 +769,7 @@ const panelContent = {
     ],
   },
   trazos: {
-    kicker: "2020",
+    kicker: "01-09-2020 / 30-06-2021",
     title: "Graphic Design and Web Development",
     body: [
       "Digital design and web-development training at Trazos.",
@@ -684,7 +777,7 @@ const panelContent = {
     ],
   },
   comercio: {
-    kicker: "2021 - 2024",
+    kicker: "01-09-2021 / 15-12-2023",
     title: "El Comercio / Portadas",
     type: "reader",
     chapters: [
@@ -997,15 +1090,148 @@ const panelContent = {
     ],
   },
   navarra: {
-    kicker: "2024 - 2025",
-    title: "Universidad de Navarra",
+    kicker: "Archive",
+    title: "Títulos académicos",
+    type: "reader",
+    chapters: [
+      {
+        title: "Títulos académicos",
+        items: [
+          {
+            type: "academicList",
+            entries: [
+              {
+                institution: "Universidad Politécnica de Madrid",
+                credential: "Transformación Digital - Agente del Cambio - 2026",
+              },
+              {
+                institution: "The Graduate School of Political Management",
+                credential: "The George Washington University - 2025",
+              },
+              {
+                institution: "Universidad de Navarra",
+                credentialLines: [
+                  "Máster en Comunicación Política, Corporativa y Asuntos Públicos",
+                  "2024/25",
+                ],
+                credentialDocument: {
+                  label: "TFM - Estrategia y análisis de comunicación Auditorio Sony - 8,87",
+                  href: "assets/documents/academic/tfm-mcpc-auditorio-sony-2025.pdf",
+                },
+                project: {
+                  title: "Colaboración en la newsletter del máster",
+                  publication: "PRECISA/MENTE",
+                  meta: "1.587 suscriptores",
+                  description: "Escuchar, reencuadrar, liderar: la fórmula Nike para dominar la agenda",
+                  links: {
+                    publication: "https://www.linkedin.com/newsletters/precisa-mente-7031193333930561536/",
+                    article:
+                      "https://www.linkedin.com/pulse/escuchar-reencuadrar-liderar-la-formula-nike-para-dominar-agenda-r0mwf/",
+                  },
+                },
+              },
+              {
+                institution: "Master en Desarrollo Web y Motion Graphics",
+                credential: "Escuela Trazos - 2021",
+              },
+              {
+                institution: "The Cambridge C1 Advanced (CAE)",
+                credential: "High-level English certification - 2020",
+              },
+              {
+                institution: "Universidad Rey Juan Carlos",
+                credential: "Grado en Comunicación Audiovisual - 2015",
+                project: {
+                  title: "Trabajo TFG: Sobresaliente (9.3/10)",
+                  description:
+                    "Análisis comparativo entre un cómic y su adaptación cinematográfica. Estudio de caso: Persepolis.",
+                  href: "assets/documents/academic/tfg-audiovisual-persepolis.pdf",
+                },
+              },
+              {
+                institution: "Universidad Rey Juan Carlos",
+                credential: "Grado en Periodismo - 2015",
+              },
+              {
+                institution: "La Factoría del Guión",
+                credential: "Curso en guion de Cine y TV - 2013",
+              },
+            ],
+          },
+        ],
+      },
+      {
+        title: "Universidad Politécnica de Madrid",
+        items: [
+          {
+            label: "2026 / Transformación Digital",
+            src: "assets/images/academic/politecnica-transformacion-digital.jpg",
+            alt: "Diploma de Transformacion Digital Agentes del Cambio de la Universidad Politecnica de Madrid",
+          },
+        ],
+      },
+      {
+        title: "The Graduate School of Political Management",
+        items: [
+          {
+            label: "2025 / GSPM",
+            src: "assets/images/academic/gspm-political-management.jpg",
+            alt: "Certificate from The Graduate School of Political Management at The George Washington University",
+          },
+        ],
+      },
+      {
+        title: "Universidad de Navarra",
+        items: [
+          {
+            label: "2024-25 / MCPC",
+            src: "assets/images/academic/mcpc-universidad-navarra.jpg",
+            alt: "Diploma del Master en Comunicacion Politica y Corporativa de la Universidad de Navarra",
+          },
+        ],
+      },
+      {
+        title: "Cambridge C1 Advanced",
+        items: [
+          {
+            label: "2020 / CAE",
+            src: "assets/images/academic/cambridge-c1-advanced.jpg",
+            alt: "Cambridge Assessment English C1 Advanced certificate",
+          },
+        ],
+      },
+      {
+        title: "Universidad Rey Juan Carlos - Comunicación Audiovisual",
+        items: [
+          {
+            label: "2015 / Comunicación Audiovisual",
+            src: "assets/images/academic/urjc-comunicacion-audiovisual.jpg",
+            alt: "Titulo de Graduado en Comunicacion Audiovisual por la Universidad Rey Juan Carlos",
+          },
+        ],
+      },
+      {
+        title: "Universidad Rey Juan Carlos - Periodismo",
+        items: [
+          {
+            label: "2015 / Periodismo",
+            src: "assets/images/academic/urjc-periodismo.jpg",
+            alt: "Titulo de Graduado en Periodismo por la Universidad Rey Juan Carlos",
+          },
+        ],
+      },
+    ],
+  },
+  openworld: {
+    kicker: "06-07-2011 / 06-07-2012",
+    title: "Open World Education",
     body: [
-      "Master in Corporate Communication and Public Affairs.",
-      "Future assets: papers, presentations, certificates, public affairs projects and selected research.",
+      "Coordination of language exchanges between Dublin and Madrid.",
+      "Early international education work connected to languages, mobility and cross-cultural communication.",
     ],
   },
   weber: {
-    kicker: "Corporate communications",
+    kicker: "01-04-2025 / 30-11-2025",
     title: "Weber Shandwick",
     type: "stats",
     subtitle: "Corporate Communications Team Member — 2025",
@@ -1058,7 +1284,7 @@ const panelContent = {
     ],
   },
   george: {
-    kicker: "2025",
+    kicker: "15-01-2025 / 15-03-2025",
     title: "The George Washington University",
     body: [
       "School of Political Management experience.",
@@ -1066,15 +1292,86 @@ const panelContent = {
     ],
   },
   hilo: {
-    kicker: "2026",
+    kicker: "15-01-2026 / 15-05-2026",
     title: "ONG Hilo Rojo | Trujillo, Peru",
-    body: [
-      "Education volunteer and digital content assistant.",
-      "Future detail page: field diary, workshop documentation, digital content, photos, videos and project outcomes.",
+    type: "photoMosaic",
+    intro:
+      "At HiloRojo, I shared my passion for communication as a bridge between people, cultures, and stories. Working in a diverse environment taught me to listen with care and communicate with purpose. It was a lesson in empathy, creativity, and human connection.",
+    socialTitle: "Digital Content Producer",
+    socialIntro:
+      "For four months, I managed HiloRojo Perú’s Instagram and Facebook presence, engaging communities of 3,625 and 6.5K followers through original video content that I planned, filmed, edited, and post-produced.",
+    images: [
+      {
+        src: "assets/images/hilo-rojo/hilo-rojo-group-wave.jpg",
+        alt: "Hilo Rojo volunteers and children waving at a community activity",
+        variant: "feature wide",
+      },
+      {
+        src: "assets/images/hilo-rojo/beach-selfie.jpg",
+        alt: "Beach selfie with young people from the project",
+        variant: "wide",
+      },
+      {
+        src: "assets/images/hilo-rojo/child-selfie-pink.jpg",
+        alt: "Smiling selfie with a child in the Hilo Rojo classroom",
+        variant: "feature",
+      },
+      {
+        src: "assets/images/hilo-rojo/puppy-conversation.gif",
+        alt: "Animated moment with volunteers and puppies in Peru",
+        variant: "centerpiece feature",
+      },
+      {
+        src: "assets/images/hilo-rojo/street-puppies.jpg",
+        alt: "Carlos holding puppies near the Hilo Rojo mural",
+        variant: "tall",
+      },
+      {
+        src: "assets/images/hilo-rojo/director-selfie.jpg",
+        alt: "Portrait with the Hilo Rojo director",
+        variant: "tall",
+      },
+      {
+        src: "assets/images/hilo-rojo/happy-workshop-board.jpg",
+        alt: "Hilo Rojo workshop group holding balloons and a happiness board",
+        variant: "feature wide",
+      },
+      {
+        src: "assets/images/hilo-rojo/volunteer-team-room.jpg",
+        alt: "Hilo Rojo volunteer team sitting in a community room",
+        variant: "feature",
+      },
+      {
+        src: "assets/images/hilo-rojo/facebook-profile.png",
+        alt: "Facebook profile screenshot from ONG Hilo Rojo Trujillo",
+        variant: "wide",
+        href: "https://www.facebook.com/ONG.HiloRojo.TRUJILLO",
+      },
+      {
+        src: "assets/images/hilo-rojo/traditional-group.jpg",
+        alt: "Children in traditional clothing with Carlos in Peru",
+        variant: "wide",
+      },
+      {
+        src: "assets/images/hilo-rojo/instagram-management.png",
+        alt: "Instagram profile screenshot from ONG Hilo Rojo Peru",
+        variant: "wide",
+        href: "https://www.instagram.com/onghilorojoperu/",
+      },
+      {
+        src: "assets/images/hilo-rojo/beach-group.jpg",
+        alt: "Group portrait on the beach with Hilo Rojo children and volunteers",
+        variant: "feature wide",
+      },
+      {
+        src: "assets/images/hilo-rojo/volunteer-portrait-red.jpg",
+        alt: "Volunteer portrait wearing the Hilo Rojo vest",
+        variant: "tall",
+      },
     ],
   },
   lavoz: {
-    kicker: "2026",
+    kicker: "01-06-2026 / present",
     title: "La Voz del Trubia",
     body: [
       "Madrid correspondent for local journalism, interviews and field reporting.",
@@ -1250,6 +1547,80 @@ function getYouTubeVideoId(value) {
 function renderReaderPages(items) {
   return items
     .map((item) => {
+      if (item.type === "academicList") {
+        return `
+          <section class="academic-title-list" aria-label="Academic titles list">
+            ${(item.entries || [])
+              .map(
+                (entry) => `
+                  <article class="academic-title-item">
+                    <div class="academic-title-item__main">
+                      <strong>${escapeHtml(entry.institution)}</strong>
+                      <span>
+                        ${(entry.credentialLines || [entry.credential])
+                          .filter(Boolean)
+                          .map((line) => `<em>${escapeHtml(line)}</em>`)
+                          .join("")}
+                      </span>
+                      ${
+                        entry.credentialDocument
+                          ? `
+                            <a
+                              class="academic-title-document"
+                              href="${escapeHtml(entry.credentialDocument.href)}"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >${escapeHtml(entry.credentialDocument.label)}</a>
+                          `
+                          : ""
+                      }
+                    </div>
+                    ${
+                      entry.project
+                        ? entry.project.links
+                          ? `
+                            <div class="academic-title-project">
+                              <a
+                                class="academic-title-project__heading"
+                                href="${escapeHtml(entry.project.links.publication)}"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              >${escapeHtml(entry.project.title)}</a>
+                              <span>
+                                <a href="${escapeHtml(entry.project.links.publication)}" target="_blank" rel="noopener noreferrer">
+                                  ${escapeHtml(entry.project.publication)}
+                                </a>
+                                ${escapeHtml(`(${entry.project.meta})`)}
+                              </span>
+                              <a
+                                class="academic-title-project__article"
+                                href="${escapeHtml(entry.project.links.article)}"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              >${escapeHtml(entry.project.description)}</a>
+                            </div>
+                          `
+                          : `
+                            <a
+                              class="academic-title-project"
+                              href="${escapeHtml(entry.project.href)}"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              <strong>${escapeHtml(entry.project.title)}</strong>
+                              <span>${escapeHtml(entry.project.description)}</span>
+                            </a>
+                          `
+                        : ""
+                    }
+                  </article>
+                `,
+              )
+              .join("")}
+          </section>
+        `;
+      }
+
       if (item.href) {
         return `
           <article class="archive-reader-link-card">
@@ -1358,6 +1729,60 @@ function renderStatsPanel(content) {
       </div>
       <div class="weber-stats-grid">
         ${stats}
+      </div>
+    </section>
+  `;
+}
+
+function renderPhotoMosaic(content) {
+  const mosaicTheme = content.mosaicTheme || "hilo";
+  const mainLabel = content.mainLabel || "Fieldwork / Human connection";
+  const mosaicLabel = content.mosaicLabel || `${content.title} photo mosaic`;
+  const tiles = (content.images || [])
+    .map((image) => {
+      const variantClasses = (image.variant || "")
+        .split(" ")
+        .filter(Boolean)
+        .map((variant) => ` photo-mosaic__tile--${variant}`)
+        .join("");
+      const imageMarkup = `<img src="${escapeHtml(image.src)}" alt="${escapeHtml(image.alt)}" loading="lazy" decoding="async">`;
+
+      if (image.href) {
+        return `
+          <a
+            class="photo-mosaic__tile photo-mosaic__tile--link${variantClasses}"
+            href="${escapeHtml(image.href)}"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="${escapeHtml(`Open ${image.alt}`)}"
+          >
+            ${imageMarkup}
+          </a>
+        `;
+      }
+
+      return `
+        <figure class="photo-mosaic__tile${variantClasses}">
+          ${imageMarkup}
+        </figure>
+      `;
+    })
+    .join("");
+
+  return `
+    <section class="hilo-mosaic-panel photo-mosaic-panel photo-mosaic-panel--${escapeHtml(mosaicTheme)}">
+      <div class="hilo-mosaic-copy">
+        <div class="hilo-mosaic-copy__fieldwork">
+          <span>${escapeHtml(mainLabel)}</span>
+          <p class="hilo-mosaic-copy__intro">${escapeHtml(content.intro)}</p>
+        </div>
+        <div class="hilo-social-copy" tabindex="0">
+          <span>${escapeHtml(content.socialTitle)}</span>
+          <p>${escapeHtml(content.socialIntro)}</p>
+        </div>
+      </div>
+      <div class="hilo-photo-mosaic photo-mosaic-grid photo-mosaic-grid--${escapeHtml(mosaicTheme)}" aria-label="${escapeHtml(mosaicLabel)}">
+        ${tiles}
       </div>
     </section>
   `;
@@ -1615,10 +2040,10 @@ function openPanel(panelKey) {
         ${
           chapters.length > 1
             ? `
-              <div class="archive-reader-nav" aria-label="El Comercio archive navigation">
-                <button class="archive-reader-arrow" type="button" data-reader-previous aria-label="Ver seccion anterior">←</button>
+              <div class="archive-reader-nav" aria-label="Archive navigation">
+                <button class="archive-reader-arrow" type="button" data-reader-previous aria-label="Ver sección anterior">←</button>
                 <span class="archive-reader-counter" data-reader-counter>1 / ${chapters.length}</span>
-                <button class="archive-reader-arrow" type="button" data-reader-next aria-label="Ver siguiente seccion">→</button>
+                <button class="archive-reader-arrow" type="button" data-reader-next aria-label="Ver siguiente sección">→</button>
               </div>
             `
             : ""
@@ -1652,6 +2077,8 @@ function openPanel(panelKey) {
   } else if (content.type === "stats") {
     panelBody.innerHTML = renderStatsPanel(content);
     activeReaderCleanup = initializeStatCounters();
+  } else if (content.type === "photoMosaic") {
+    panelBody.innerHTML = renderPhotoMosaic(content);
   } else {
     panelBody.innerHTML = `
       <ul>

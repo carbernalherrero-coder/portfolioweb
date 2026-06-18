@@ -14,7 +14,7 @@
       href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Caveat:wght@700&family=IBM+Plex+Mono:wght@500;600&family=Newsreader:opsz,wght@6..72,500;6..72,700&family=PT+Mono&family=Prata&family=Raleway:wght@100;300;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
       rel="stylesheet"
     >
-    <link rel="stylesheet" href="css/styles.css?v=20260615-crossroads-parallax-type">
+    <link rel="stylesheet" href="css/styles.css?v=20260618-mobile-hero">
   </head>
   <body>
     <header class="site-header">
@@ -69,9 +69,18 @@
               <div class="hero-overlay"></div>
               <div class="hero-copy reveal">
                 <h1 id="hero-title" class="intro-station-copy">
-                  <span class="intro-station-copy__line intro-station-copy__line--lead">Journalist</span>
-                  <span class="intro-station-copy__line intro-station-copy__line--crossroads">working at the crossroads where</span>
-                  <span class="intro-station-copy__line intro-station-copy__line--field">field reporting, strategic communication, and public-impact work meet.</span>
+                  <span class="intro-station-copy__line intro-station-copy__line--desktop">Journalist</span>
+                  <span class="intro-station-copy__line intro-station-copy__line--desktop">working at the crossroads where</span>
+                  <span class="intro-station-copy__line intro-station-copy__line--desktop">field reporting, strategic communication, and public-impact work meet.</span>
+                  <span class="intro-station-copy__line intro-station-copy__line--mobile">Journalist</span>
+                  <span class="intro-station-copy__line intro-station-copy__line--mobile">working</span>
+                  <span class="intro-station-copy__line intro-station-copy__line--mobile">at</span>
+                  <span class="intro-station-copy__line intro-station-copy__line--mobile">the crossroads</span>
+                  <span class="intro-station-copy__line intro-station-copy__line--mobile">where</span>
+                  <span class="intro-station-copy__line intro-station-copy__line--mobile">field reporting,</span>
+                  <span class="intro-station-copy__line intro-station-copy__line--mobile">strategic communication</span>
+                  <span class="intro-station-copy__line intro-station-copy__line--mobile">and public impact</span>
+                  <span class="intro-station-copy__line intro-station-copy__line--mobile">work meet.</span>
                 </h1>
                 <div class="hero-bridge-name" aria-hidden="true">Carlos Bernal</div>
               </div>
@@ -120,7 +129,7 @@
                   <span>La Voz<br>del Trubia</span>
                 </button>
                 <button class="archive-tile archive-tile--ambition" data-panel="navarra" type="button">
-                  <span>MCPC<i></i>GSPM</span>
+                  <span>Títulos, trabajos<br>colaboraciones<br>académicas</span>
                   <span class="archive-split-logos" aria-hidden="true">
                     <span class="archive-split-logo archive-split-logo--navarra"></span>
                     <span class="archive-split-logo archive-split-logo--george"></span>
@@ -329,107 +338,129 @@
               </div>
             </article>
 
-            <button class="timeline-station reveal" data-panel="lavoz">
-              <time>2026</time>
+            <button class="timeline-station timeline-station--lane-high reveal" data-panel="lavoz" data-date-label="Jun 2026 / present">
+              <time>01-06-2026 / present</time>
+              <span class="timeline-duration" style="--duration: 1.1" aria-hidden="true"><i></i></span>
               <img src="assets/icons/logo-la-voz-del-trubia.jpg" alt="La Voz del Trubia logo">
               <h3>La Voz del Trubia</h3>
               <p>Madrid correspondent: local journalism, interviews and field reporting.</p>
               <small>Journalism archive</small>
             </button>
 
-            <button class="timeline-station reveal" data-panel="hilo">
-              <time>2026</time>
+            <button class="timeline-station timeline-station--lane-low reveal" data-panel="hilo" data-date-label="Jan - May 2026">
+              <time>15-01-2026 / 15-05-2026</time>
+              <span class="timeline-duration" style="--duration: 4" aria-hidden="true"><i></i></span>
               <img src="assets/icons/logo-hilo-rojo.jpg" alt="Hilo Rojo logo">
               <h3>ONG Hilo Rojo</h3>
               <p>Education volunteer and digital content assistant in Trujillo, Peru.</p>
               <small>Third sector / Peru</small>
             </button>
 
-            <button class="timeline-station reveal" data-panel="george">
-              <time>2025</time>
+            <button class="timeline-station timeline-station--lane-high reveal" data-panel="george" data-date-label="Jan - Mar 2025">
+              <time>15-01-2025 / 15-03-2025</time>
+              <span class="timeline-duration timeline-duration--academic" style="--duration: 2" aria-hidden="true"><i></i></span>
               <img src="assets/icons/logo-george-washington-university.png" alt="The George Washington University logo">
               <h3>School of Political Management</h3>
               <p>The George Washington University. Political management and public affairs learning.</p>
               <small>International training</small>
             </button>
 
-            <button class="timeline-station reveal" data-panel="weber">
-              <time>2025</time>
+            <button class="timeline-station timeline-station--lane-mid reveal" data-panel="weber" data-date-label="Apr - Nov 2025">
+              <time>01-04-2025 / 30-11-2025</time>
+              <span class="timeline-duration" style="--duration: 8" aria-hidden="true"><i></i></span>
               <img src="assets/icons/logo-weber-shandwick.png" alt="Weber Shandwick logo">
               <h3>Weber Shandwick</h3>
               <p>Corporate communication consulting in Madrid: monitoring, plans, content and public affairs support.</p>
               <small>Agency / corporate PR</small>
             </button>
 
-            <button class="timeline-station reveal" data-panel="navarra">
-              <time>2024 - 2025</time>
+            <button class="timeline-station timeline-station--lane-low reveal" data-panel="navarra" data-date-label="Sep 2024 - Jun 2025">
+              <time>01-09-2024 / 30-06-2025</time>
+              <span class="timeline-duration timeline-duration--academic" style="--duration: 10" aria-hidden="true"><i></i></span>
               <img src="assets/icons/logo-universidad-navarra.png" alt="Universidad de Navarra logo">
-              <h3>Corporate Communication and Public Affairs</h3>
-              <p>Master at Universidad de Navarra. Strategy, reputation and institutional communication.</p>
+              <h3>Corporate Communication</h3>
+              <p>Universidad de Navarra master: political communication, public affairs, institutional and crisis communication.</p>
               <small>Master</small>
             </button>
 
-            <button class="timeline-station timeline-station--large reveal" data-panel="comercio">
-              <time>2021 - 2024</time>
+            <button class="timeline-station timeline-station--large timeline-station--lane-high reveal" data-panel="comercio" data-date-label="Sep 2021 - Dec 2023">
+              <time>01-09-2021 / 15-12-2023</time>
+              <span class="timeline-duration" style="--duration: 28" aria-hidden="true"><i></i></span>
               <img src="assets/icons/logo-elcomercio.svg" alt="El Comercio logo">
               <h3>El Comercio</h3>
-              <p>Reporter and editor in Asturias: field reporting, interviews, local beats, print, digital and video.</p>
+              <p>Reporter and editor in Asturias across field reporting, interviews, local beats and video.</p>
               <small>+5 years in field reporting</small>
             </button>
 
-            <button class="timeline-station reveal" data-panel="trazos">
-              <time>2020</time>
+            <button class="timeline-station timeline-station--lane-low reveal" data-panel="trazos" data-date-label="Sep 2020 - Jun 2021">
+              <time>01-09-2020 / 30-06-2021</time>
+              <span class="timeline-duration timeline-duration--academic" style="--duration: 10" aria-hidden="true"><i></i></span>
               <img src="assets/icons/logo-trazos.jpg" alt="Trazos logo">
-              <h3>Graphic Design and Web Development</h3>
-              <p>Trazos. Digital design, web structure and visual production.</p>
+              <h3>Graphic Design and Motion Graphics</h3>
+              <p>Trazos. Web development, digital design, web structure and visual production.</p>
               <small>Digital skills</small>
             </button>
 
-            <button class="timeline-station reveal" data-panel="busette">
-              <time>2018</time>
-              <img src="assets/icons/logo-centre-social-la-busette.png" alt="Centre Social La Busette logo">
-              <h3>Centre Social La Busette</h3>
-              <p>Project management and community work in Lille.</p>
-              <small>Third sector</small>
-            </button>
-
-            <button class="timeline-station timeline-station--large reveal" data-panel="culturall">
-              <time>2016 - 2018</time>
-              <img src="assets/icons/logo-culturall.jpg" alt="Cultur'All logo">
-              <h3>Cultur'All Studio</h3>
-              <p>Content, publishing and cultural communication in Lille, France.</p>
-              <small>Culture / editorial content</small>
-            </button>
-
-            <button class="timeline-station reveal" data-panel="ministry">
-              <time>2015</time>
-              <img src="assets/icons/logo-ministere-education.png" alt="French Ministry of National Education logo">
-              <h3>BPJEPS / socio-cultural coordination</h3>
-              <p>French Ministry of Education and CEMEA. Training in youth work and cultural projects.</p>
-              <small>Education / France</small>
-            </button>
-
-            <button class="timeline-station reveal" data-panel="brumaria">
-              <time>2014</time>
+            <button class="timeline-station timeline-station--lane-low reveal" data-panel="brumaria" data-date-label="Sep 2018 - Dec 2019">
+              <time>30-09-2018 / 21-12-2019</time>
+              <span class="timeline-duration" style="--duration: 15" aria-hidden="true"><i></i></span>
               <img src="assets/icons/logo-brumaria.jpg" alt="Brumaria logo">
               <h3>Editorial Brumaria</h3>
               <p>Editorial project support in Madrid, bridging art publishing, production and cultural context.</p>
               <small>Publishing industry</small>
             </button>
 
-            <button class="timeline-station reveal" data-panel="screenwriting">
-              <time>2013</time>
+            <button class="timeline-station timeline-station--large timeline-station--lane-high reveal" data-panel="culturall" data-date-label="Sep 2016 - Aug 2018">
+              <time>01-09-2016 / 30-08-2018</time>
+              <span class="timeline-duration" style="--duration: 24" aria-hidden="true"><i></i></span>
+              <img src="assets/icons/logo-culturall.jpg" alt="Cultur'All logo">
+              <h3>Cultur'All Studio</h3>
+              <p>Content, publishing and cultural communication in Lille, France.</p>
+              <small>Culture / editorial content</small>
+            </button>
+
+            <button class="timeline-station timeline-station--lane-mid reveal" data-panel="busette" data-date-label="Sep 2015 - Aug 2016">
+              <time>01-09-2015 / 30-08-2016</time>
+              <span class="timeline-duration" style="--duration: 12" aria-hidden="true"><i></i></span>
+              <img src="assets/icons/logo-centre-social-la-busette.png" alt="Centre Social La Busette logo">
+              <h3>Centre Social La Busette</h3>
+              <p>Project management and community work in Lille.</p>
+              <small>Third sector</small>
+            </button>
+
+            <button class="timeline-station timeline-station--lane-low reveal" data-panel="ministry" data-date-label="Sep 2015 - Jun 2016">
+              <time>01-09-2015 / 30-06-2016</time>
+              <span class="timeline-duration timeline-duration--academic" style="--duration: 10" aria-hidden="true"><i></i></span>
+              <img src="assets/icons/logo-ministere-education.png" alt="French Ministry of National Education logo">
+              <h3>BPJEPS / socio-cultural coordination</h3>
+              <p>French Ministry of Education and CEMEA. Training in youth work and cultural projects.</p>
+              <small>Education / France</small>
+            </button>
+
+            <button class="timeline-station timeline-station--lane-high reveal" data-panel="screenwriting" data-date-label="Sep 2013 - Jun 2014">
+              <time>15-09-2013 / 15-06-2014</time>
+              <span class="timeline-duration timeline-duration--academic" style="--duration: 9" aria-hidden="true"><i></i></span>
               <span class="station-orbit station-orbit--small"></span>
               <h3>Film and TV Screenwriting</h3>
               <p>La Factoria del Guion. Structure, scenes, dialogue and narrative rhythm.</p>
               <small>Creative writing</small>
             </button>
 
-            <button class="timeline-station timeline-station--large reveal" data-panel="urjc">
-              <time>2010 - 2015</time>
+            <button class="timeline-station timeline-station--lane-low reveal" data-panel="openworld" data-date-label="Jul 2011 - Jul 2012">
+              <time>06-07-2011 / 06-07-2012</time>
+              <span class="timeline-duration" style="--duration: 12" aria-hidden="true"><i></i></span>
+              <span class="station-orbit station-orbit--small"></span>
+              <h3>Open World Education</h3>
+              <p>Coordination of language exchanges across Dublin and Madrid.</p>
+              <small>Education / languages</small>
+            </button>
+
+            <button class="timeline-station timeline-station--large timeline-station--lane-mid reveal" data-panel="urjc" data-date-label="Sep 2010 - Jun 2015">
+              <time>01-09-2010 / 30-06-2015</time>
+              <span class="timeline-duration timeline-duration--academic" style="--duration: 58" aria-hidden="true"><i></i></span>
               <span class="station-orbit"></span>
-              <h3>Journalism and Audiovisual Communication</h3>
-              <p>Universidad Rey Juan Carlos. News, image, scripts and public storytelling.</p>
+              <h3>Journalism<br>Communication</h3>
+              <p>Double degree at Universidad Rey Juan Carlos: journalism, audiovisual communication and public opinion.</p>
               <small>Academic foundation</small>
             </button>
           </div>
@@ -450,6 +481,6 @@
 
     <script src="assets/vendor/d3.min.js" defer></script>
     <script src="assets/vendor/topojson-client.min.js" defer></script>
-    <script src="js/main.js?v=20260615-crossroads-parallax-type" defer></script>
+    <script src="js/main.js?v=20260618-mobile-hero" defer></script>
   </body>
 </html>
