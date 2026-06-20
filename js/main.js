@@ -190,9 +190,21 @@ const timelineStations = stations.filter(
 );
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const horizontalMedia = window.matchMedia("(min-width: 761px)");
+const mobileMapMedia = window.matchMedia("(max-width: 760px)");
 
 if (timelineVideoBackground) {
   timelineVideoBackground.play().catch(() => {});
+}
+
+function updateWorldMapViewport() {
+  const svgElement = document.querySelector(".portfolio-world-map");
+
+  if (!svgElement) {
+    return;
+  }
+
+  svgElement.setAttribute("viewBox", mobileMapMedia.matches ? "138 82 410 236" : "0 0 960 520");
+  svgElement.setAttribute("preserveAspectRatio", mobileMapMedia.matches ? "xMidYMid meet" : "xMidYMid meet");
 }
 
 let targetX = 0;
@@ -362,6 +374,8 @@ function renderStaticWorldMap() {
   if (!svgElement || !window.d3 || !window.topojson) {
     return;
   }
+
+  updateWorldMapViewport();
 
   window.d3
     .json("assets/data/countries-110m.json")
@@ -594,6 +608,7 @@ function renderStaticWorldMap() {
 }
 
 renderStaticWorldMap();
+mobileMapMedia.addEventListener("change", updateWorldMapViewport);
 const panelContent = {
   urjc: {
     kicker: "01-09-2010 / 30-06-2015",
@@ -1372,10 +1387,27 @@ const panelContent = {
   },
   lavoz: {
     kicker: "01-06-2026 / present",
-    title: "La Voz del Trubia",
-    body: [
-      "Madrid correspondent for local journalism, interviews and field reporting.",
-      "Future assets: article links, interviews, screenshots, publication pages and notes.",
+    title: "La Voz del Trubia / Madrid-based correspondent for La Voz del Trubia",
+    type: "reader",
+    chapters: [
+      {
+        title: "La Voz del Trubia / Madrid-based correspondent for La Voz del Trubia",
+        items: [
+          {
+            type: "copyBlock",
+            label: "Madrid-based correspondent",
+            title: "La Voz del Trubia",
+            body:
+              "Madrid-based correspondent for La Voz del Trubia, covering institutional affairs, public policy and regional development stories from the capital with a local-journalism lens.",
+          },
+          {
+            label: "01 / Fondos europeos Next Generation",
+            title: "Fondos europeos Next Generation",
+            theme: "La Voz del Trubia / Junio 2026 / PDF",
+            href: "assets/documents/lavoz/junio-trubia-2026.pdf",
+          },
+        ],
+      },
     ],
   },
   "archive-value": {
@@ -1547,6 +1579,16 @@ function getYouTubeVideoId(value) {
 function renderReaderPages(items) {
   return items
     .map((item) => {
+      if (item.type === "copyBlock") {
+        return `
+          <article class="archive-reader-copy-card">
+            <span class="archive-reader-link-card__section">${escapeHtml(item.label)}</span>
+            <h3>${escapeHtml(item.title)}</h3>
+            <p>${escapeHtml(item.body)}</p>
+          </article>
+        `;
+      }
+
       if (item.type === "academicList") {
         return `
           <section class="academic-title-list" aria-label="Academic titles list">

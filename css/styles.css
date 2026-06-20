@@ -3023,6 +3023,38 @@ p {
   box-shadow: 0 26px 90px rgba(0, 0, 0, 0.32);
 }
 
+.archive-reader-copy-card {
+  display: grid;
+  gap: clamp(0.7rem, 1.9vw, 1rem);
+  max-width: 980px;
+  padding: clamp(1rem, 3vw, 1.7rem);
+  border-left: 1px solid rgba(190, 239, 158, 0.55);
+  background:
+    linear-gradient(90deg, rgba(190, 239, 158, 0.11), rgba(190, 239, 158, 0)),
+    rgba(5, 6, 8, 0.54);
+}
+
+.archive-reader-copy-card h3 {
+  margin: 0;
+  color: #fffcf2;
+  font-family: "Newsreader", Georgia, "Times New Roman", serif;
+  font-size: clamp(1.7rem, 4vw, 3.35rem);
+  font-style: italic;
+  font-weight: 700;
+  line-height: 0.98;
+  text-wrap: balance;
+}
+
+.archive-reader-copy-card p {
+  max-width: 64ch;
+  margin: 0;
+  color: rgba(255, 252, 242, 0.72);
+  font-family: "Raleway", ui-sans-serif, system-ui, sans-serif;
+  font-size: clamp(0.88rem, 1.7vw, 1.02rem);
+  font-weight: 300;
+  line-height: 1.55;
+}
+
 .archive-reader-link-card__section {
   width: fit-content;
   color: rgba(190, 239, 158, 0.78);
@@ -3502,7 +3534,7 @@ p {
 
   .timeline-station--map {
     width: 100%;
-    min-height: 76svh;
+    min-height: 84svh;
     padding: 0;
   }
 
@@ -3519,9 +3551,13 @@ p {
     grid-template-rows: repeat(4, minmax(9.5rem, 1fr));
   }
 
-  .archive-tile span {
+  .archive-tile > span:not(.archive-split-logos) {
     color: #beef9e !important;
-    font-size: clamp(2.35rem, 13vw, 4.1rem);
+    font-size: clamp(0.975rem, 2.125vw, 2.075rem);
+  }
+
+  .archive-tile--ambition > span:first-of-type {
+    font-size: clamp(0.59rem, 1.275vw, 1.275rem);
   }
 
   .archive-cross {
@@ -3529,20 +3565,147 @@ p {
   }
 
   .world-map-card {
-    min-height: 76svh;
+    min-height: 84svh;
+    overflow: hidden;
   }
 
   .portfolio-world-map {
-    min-height: 76svh;
+    min-height: 84svh;
+    touch-action: manipulation;
+  }
+
+  .portfolio-world-map > g {
+    transform: translateY(8px);
+  }
+
+  .static-world-country {
+    stroke-width: 0.52;
+  }
+
+  .map-hover-ring,
+  .us-hover-ring {
+    stroke-width: 2.1;
+    transform: scale(2.45);
+  }
+
+  .map-hover-core,
+  .us-hover-core {
+    transform-box: fill-box;
+    transform-origin: center;
+    transform: scale(2.15);
+  }
+
+  .us-hover-label,
+  .map-hover-label {
+    display: none;
+  }
+
+  .us-callout-panel,
+  .map-callout-panel {
+    stroke-width: 0.9;
+  }
+
+  .us-callout-text,
+  .map-callout-text,
+  .map-callout-text--ecuador,
+  .map-callout-text--peru,
+  .map-callout-text--portugal,
+  .map-callout-text--ireland,
+  .map-callout-text--belgium,
+  .map-callout-text--denmark {
+    font-size: 6.4px;
+  }
+
+  .map-callout-text--spain,
+  .map-callout-text--france {
+    font-size: 5.05px;
+  }
+
+  .us-map-callout {
+    transform: translate(74px, 16px) scale(0.76);
+    transform-box: view-box;
+    transform-origin: 0 0;
+  }
+
+  .ecuador-map-callout {
+    transform: translate(-118px, 30px) scale(0.78);
+    transform-box: view-box;
+    transform-origin: 0 0;
+  }
+
+  .peru-map-callout {
+    transform: translate(-158px, -78px) scale(0.82);
+    transform-box: view-box;
+    transform-origin: 0 0;
+  }
+
+  .map-callout-line--ecuador,
+  .map-callout-line--peru {
+    display: none;
+  }
+
+  .portugal-map-callout {
+    transform: translate(-156px, 0) scale(0.76);
+    transform-box: view-box;
+    transform-origin: 0 0;
+  }
+
+  .spain-map-callout {
+    transform: translate(-228px, 8px) scale(0.66);
+    transform-box: view-box;
+    transform-origin: 0 0;
+  }
+
+  .france-map-callout {
+    transform: translate(2px, 0) scale(0.76);
+    transform-box: view-box;
+    transform-origin: 0 0;
+  }
+
+  .ireland-map-callout {
+    transform: translate(10px, 8px) scale(0.86);
+    transform-box: view-box;
+    transform-origin: 0 0;
+  }
+
+  .belgium-map-callout {
+    transform: translate(-176px, 8px) scale(0.78);
+    transform-box: view-box;
+    transform-origin: 0 0;
+  }
+
+  .denmark-map-callout {
+    transform: translate(-196px, 10px) scale(0.78);
+    transform-box: view-box;
+    transform-origin: 0 0;
   }
 
   .map-typewriter-copy {
+    top: clamp(1.15rem, 5svh, 2.4rem);
+    right: auto;
+    bottom: auto;
+    left: clamp(0.85rem, 4vw, 1.25rem);
+    width: min(9.4rem, 41vw);
+    max-width: min(9.4rem, 41vw);
+    padding: 0.35rem 0 0.35rem 0.7rem;
+    border-left: 1px solid rgba(255, 247, 174, 0.5);
+    background: linear-gradient(90deg, rgba(48, 54, 64, 0.72), rgba(48, 54, 64, 0));
+    font-size: clamp(0.68rem, 2.8vw, 0.84rem);
+    letter-spacing: 0;
+    line-height: 1.22;
+    white-space: normal;
+  }
+
+  .map-typewriter-copy::after {
     top: auto;
-    right: 1rem;
-    bottom: clamp(2.2rem, 8svh, 4.5rem);
-    left: auto;
-    max-width: min(21rem, 74vw);
-    font-size: clamp(0.97rem, 4.4vw, 1.28rem);
+    right: 0.18rem;
+    bottom: 0.4rem;
+    height: 0.85em;
+  }
+
+  .map-typewriter-copy span {
+    animation: none;
+    max-width: none;
   }
 
 }
