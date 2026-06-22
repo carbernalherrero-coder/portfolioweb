@@ -112,7 +112,7 @@ const textTranslations = {
       "Ministerio francés de Educación y CEMEA. Formación en intervención juvenil y proyectos culturales.",
     "Education / France": "Educación / Francia",
     "Film and TV Screenwriting": "Guion de cine y televisión",
-    "La Factoria del Guion. Structure, scenes, dialogue and narrative rhythm.":
+    "La Factoría del Guion. Structure, scenes, dialogue and narrative rhythm.":
       "La Factoría del Guion. Estructura, escenas, diálogo y ritmo narrativo.",
     "Creative writing": "Escritura creativa",
     "Coordination of language exchanges across Dublin and Madrid.":
@@ -141,6 +141,8 @@ const textTranslations = {
     "Close": "Cerrar",
     "Portfolio chapter": "Capítulo del portfolio",
     "Archive navigation": "Navegación del archivo",
+    "View previous section": "Ver sección anterior",
+    "View next section": "Ver siguiente sección",
     "Academic titles list": "Lista de títulos académicos",
     "Journalism and Audiovisual Communication": "Periodismo y Comunicación Audiovisual",
     "Academic starting point for the timeline: reporting, audiovisual language, scripts and public storytelling.":
@@ -152,6 +154,7 @@ const textTranslations = {
       "Una futura página de detalle podrá conectar esta formación con estructura narrativa, storytelling audiovisual y trabajo de guion.",
     "Editorial Brumaria visual archive": "Archivo visual de Editorial Brumaria",
     "Publishing / Cultural production": "Edición / producción cultural",
+    "Fieldwork / Human connection": "Trabajo de campo / conexión humana",
     "During 16 months at Editorial Brumaria, I supported the publisher's digital transition, helping launch its website and e-commerce platform while assisting communications, editorial production and cultural programming. I worked across the full publishing cycle: author relations in English and French, copy-editing, layout support, print coordination, magazine content and book launches across several collections.":
       "Durante 16 meses en Editorial Brumaria, apoyé la transición digital de la editorial, ayudando al lanzamiento de su web y plataforma de comercio electrónico, además de colaborar en comunicación, producción editorial y programación cultural. Trabajé en todo el ciclo editorial: relación con autores en inglés y francés, corrección, apoyo a maquetación, coordinación de imprenta, contenidos de revista y lanzamientos de libros en varias colecciones.",
     "Digital Content Producer": "Productor de contenido digital",
@@ -198,6 +201,7 @@ const textTranslations = {
     "Rural depopulation": "Despoblación rural",
     "IU incident": "Incidente IU",
     "El Comercio / Society": "El Comercio / Sociedad",
+    "Society": "Sociedad",
     "Health": "Salud",
     "Digital divide": "Brecha digital",
     "Entrepreneurship": "Emprendimiento",
@@ -240,7 +244,7 @@ const textTranslations = {
     "El Comercio / Portadas": "El Comercio / Portadas",
     "Reportajes multimedia en secciones especiales": "Reportajes multimedia en secciones especiales",
     "El Comercio / Entrevistas": "El Comercio / Entrevistas",
-    "El Comercio / Politica": "El Comercio / Política",
+    "El Comercio / Política": "El Comercio / Política",
     "El Comercio / Sucesos": "El Comercio / Sucesos",
     "Títulos académicos": "Títulos académicos",
     "Universidad Politécnica de Madrid": "Universidad Politécnica de Madrid",
@@ -370,6 +374,7 @@ const dateLabelTranslations = {
 let currentLanguage = localStorage.getItem("portfolio-language") === "es" ? "es" : "en";
 const originalTextNodes = new WeakMap();
 const originalAttributes = new WeakMap();
+let activePanelKey = null;
 
 function preserveSpacingTranslation(original, translated) {
   const leading = original.match(/^\s*/)?.[0] || "";
@@ -412,6 +417,14 @@ function translateTextValue(value, language = currentLanguage) {
   }
 
   return value;
+}
+
+function localizeText(value) {
+  return translateTextValue(String(value ?? ""), currentLanguage);
+}
+
+function escapeLocalized(value) {
+  return escapeHtml(localizeText(value));
 }
 
 function applyLanguage(language = currentLanguage, root = document.body) {
@@ -1036,6 +1049,24 @@ function renderStaticWorldMap() {
       const peruCountry = svg.select(".is-peru-country");
       const portugalCountry = svg.select(".is-portugal-country");
       const spainCountry = svg.select(".is-spain-country");
+      const mapCalloutNames = ["us", "ecuador", "peru", "portugal", "spain", "france", "ireland", "belgium", "denmark"];
+      const getMapCalloutClass = (name) => `is-${name}-callout-open`;
+      const closeMapCallouts = () => {
+        mapCalloutNames.forEach((name) => mapSection?.classList.remove(getMapCalloutClass(name)));
+      };
+      const openMapCallout = (name, { toggle = false } = {}) => {
+        if (!mapSection) {
+          return;
+        }
+
+        const className = getMapCalloutClass(name);
+        const wasOpen = mapSection.classList.contains(className);
+        closeMapCallouts();
+        if (!toggle || !wasOpen) {
+          mapSection.classList.add(className);
+        }
+      };
+
       function bindMapCalloutTargets() {
         if (!mapSection) {
           return;
@@ -1045,7 +1076,7 @@ function renderStaticWorldMap() {
           .attr("tabindex", "0")
           .on("mouseenter focus", (event) => {
             const name = event.currentTarget.dataset.mapCallout;
-            mapSection.classList.add(`is-${name}-callout-open`);
+            openMapCallout(name);
           })
           .on("mouseleave blur", (event) => {
             const name = event.currentTarget.dataset.mapCallout;
@@ -1054,57 +1085,57 @@ function renderStaticWorldMap() {
           .on("click touchstart", (event) => {
             event.preventDefault();
             const name = event.currentTarget.dataset.mapCallout;
-            mapSection.classList.toggle(`is-${name}-callout-open`);
+            openMapCallout(name, { toggle: true });
           });
       }
 
       if (mapSection && !usCountry.empty()) {
         usCountry
-          .on("mouseenter focus", () => mapSection.classList.add("is-us-callout-open"))
+          .on("mouseenter focus", () => openMapCallout("us"))
           .on("mouseleave blur", () => mapSection.classList.remove("is-us-callout-open"))
           .on("click touchstart", (event) => {
             event.preventDefault();
-            mapSection.classList.toggle("is-us-callout-open");
+            openMapCallout("us", { toggle: true });
           });
       }
 
       if (mapSection && !ecuadorCountry.empty()) {
         ecuadorCountry
-          .on("mouseenter focus", () => mapSection.classList.add("is-ecuador-callout-open"))
+          .on("mouseenter focus", () => openMapCallout("ecuador"))
           .on("mouseleave blur", () => mapSection.classList.remove("is-ecuador-callout-open"))
           .on("click touchstart", (event) => {
             event.preventDefault();
-            mapSection.classList.toggle("is-ecuador-callout-open");
+            openMapCallout("ecuador", { toggle: true });
           });
       }
 
       if (mapSection && !peruCountry.empty()) {
         peruCountry
-          .on("mouseenter focus", () => mapSection.classList.add("is-peru-callout-open"))
+          .on("mouseenter focus", () => openMapCallout("peru"))
           .on("mouseleave blur", () => mapSection.classList.remove("is-peru-callout-open"))
           .on("click touchstart", (event) => {
             event.preventDefault();
-            mapSection.classList.toggle("is-peru-callout-open");
+            openMapCallout("peru", { toggle: true });
           });
       }
 
       if (mapSection && !portugalCountry.empty()) {
         portugalCountry
-          .on("mouseenter focus", () => mapSection.classList.add("is-portugal-callout-open"))
+          .on("mouseenter focus", () => openMapCallout("portugal"))
           .on("mouseleave blur", () => mapSection.classList.remove("is-portugal-callout-open"))
           .on("click touchstart", (event) => {
             event.preventDefault();
-            mapSection.classList.toggle("is-portugal-callout-open");
+            openMapCallout("portugal", { toggle: true });
           });
       }
 
       if (mapSection && !spainCountry.empty()) {
         spainCountry
-          .on("mouseenter focus", () => mapSection.classList.add("is-spain-callout-open"))
+          .on("mouseenter focus", () => openMapCallout("spain"))
           .on("mouseleave blur", () => mapSection.classList.remove("is-spain-callout-open"))
           .on("click touchstart", (event) => {
             event.preventDefault();
-            mapSection.classList.toggle("is-spain-callout-open");
+            openMapCallout("spain", { toggle: true });
           });
       }
 
@@ -1122,11 +1153,11 @@ function renderStaticWorldMap() {
 
         if (mapSection) {
           franceCountry
-            .on("mouseenter focus", () => mapSection.classList.add("is-france-callout-open"))
+            .on("mouseenter focus", () => openMapCallout("france"))
             .on("mouseleave blur", () => mapSection.classList.remove("is-france-callout-open"))
             .on("click touchstart", (event) => {
               event.preventDefault();
-              mapSection.classList.toggle("is-france-callout-open");
+              openMapCallout("france", { toggle: true });
             });
         }
       }
@@ -1149,7 +1180,7 @@ const panelContent = {
   },
   screenwriting: {
     kicker: "15-09-2013 / 15-06-2014",
-    title: "La Factoria del Guion",
+    title: "La Factoría del Guion",
     body: [
       "Film and TV screenwriting training.",
       "A future detail page can connect this training to narrative structure, audiovisual storytelling and script work.",
@@ -1175,22 +1206,22 @@ const panelContent = {
       },
       {
         src: "assets/images/brumaria/ficciones-patogenas.png",
-        alt: "Ficciones patogenas book cover by Duen Sacchi",
+        alt: "Ficciones patógenas book cover by Duen Sacchi",
         variant: "tall",
       },
       {
         src: "assets/images/brumaria/otras-protagonistas-poster.png",
-        alt: "Poster for Las otras protagonistas de la transicion",
+        alt: "Poster for Las otras protagonistas de la transición",
         variant: "tall",
       },
       {
         src: "assets/images/brumaria/arte-transicion-open-book.png",
-        alt: "Open book render for Arte y transicion",
+        alt: "Open book render for Arte y transición",
         variant: "wide",
       },
       {
         src: "assets/images/brumaria/poeticas-oposicion.png",
-        alt: "Poeticas de la oposicion event poster",
+        alt: "Poéticas de la oposición event poster",
         variant: "feature",
       },
       {
@@ -1231,12 +1262,12 @@ const panelContent = {
       {
         src: "assets/images/brumaria/facebook-profile.png",
         alt: "Brumaria Facebook profile screenshot",
-        variant: "wide",
+        variant: "wide social",
       },
       {
         src: "assets/images/brumaria/instagram-profile.png",
         alt: "Brumaria Instagram profile screenshot",
-        variant: "wide",
+        variant: "wide social",
       },
     ],
   },
@@ -1288,7 +1319,7 @@ const panelContent = {
           { label: "01 / Metal", title: "Metal Hauts-de-France", videoId: "cm-nNhQwZM4" },
           { label: "02 / Metal", title: "Scene rock locale", videoId: "05i6xgsMzkU" },
           { label: "03 / Metal", title: "Live metal", videoId: "QbFe6fum5Xk" },
-          { label: "04 / Metal", title: "Guitares en scene", videoId: "bygewmemA7A" },
+          { label: "04 / Metal", title: "Guitares en Scène", videoId: "bygewmemA7A" },
           { label: "05 / Metal", title: "Portrait rock", videoId: "nNC5wHX-X5o" },
         ],
       },
@@ -1381,7 +1412,7 @@ const panelContent = {
           },
           {
             label: "Pegados a la Tierra",
-            title: "Por que no juntarnos todos y sacar provecho de nuestra biodiversidad?",
+            title: "¿Por qué no juntarnos todos y sacar provecho de nuestra biodiversidad?",
             theme: "Active tourism and rural hospitality",
             href: "https://pegadosalatierra.elcomercio.es/albergue-gato-gordo-san-pedro-pinera-cudillero/",
           },
@@ -1393,7 +1424,7 @@ const panelContent = {
           },
           {
             label: "Pegados a la Tierra",
-            title: "En mi cocina defiendo la cultura campesina, que esta muy viva",
+            title: "En mi cocina defiendo la cultura campesina, que está muy viva",
             theme: "Mobile gastronomy and local zero-kilometre products",
             href: "https://pegadosalatierra.elcomercio.es/cesar-otero-pizzas-do-pais-manores-tineo/",
           },
@@ -1405,31 +1436,31 @@ const panelContent = {
           },
           {
             label: "Nuestro Campo",
-            title: "La asturiana de los valles es la mas bella y noble",
+            title: "La asturiana de los valles es la más bella y noble",
             theme: "Pedigree livestock, fairs and national auctions",
             href: "https://nuestrocampo.elcomercio.es/la-asturiana-de-los-valles-es-la-mas-bella-y-noble/",
           },
           {
             label: "Nuestro Campo",
-            title: "Si estuvieramos tan unidos como los ganaderos franceses, no estariamos pasandolo tan mal",
+            title: "Si estuviéramos tan unidos como los ganaderos franceses, no estaríamos pasándolo tan mal",
             theme: "Family livestock farming and sector challenges",
             href: "https://nuestrocampo.elcomercio.es/oscar-barrera-lucia-rey-mieldes-explotacion-ganadera/?ref=https%3A%2F%2Fwww.google.com%2F",
           },
           {
             label: "Nuestro Campo",
-            title: "Ocho hectareas de arandanos sin aprovechar",
+            title: "Ocho hectáreas de arándanos sin aprovechar",
             theme: "Agricultural research, cooperativism and rural abandonment",
             href: "https://nuestrocampo.elcomercio.es/ocho-hectareas-de-arandanos-sin-aprovechar/",
           },
           {
             label: "Nuestro Campo",
-            title: "Los rebanos de Asturiana de los Valles",
+            title: "Los rebaños de Asturiana de los Valles",
             theme: "Mountain fair and traditional livestock farming",
             href: "https://nuestrocampo.elcomercio.es/los-rebanos-de-asturiana-de-los-valles-la-imagen-de-asturias/",
           },
           {
             label: "Others",
-            title: "Hay que buscar una solucion para los puestos de trabajo de Danone y para Salas",
+            title: "Hay que buscar una solución para los puestos de trabajo de Danone y para Salas",
             theme: "Economy and protest",
             href: "https://www.elcomercio.es/asturias/danone-salas-trabajos-protesta-oviedo-solucion-20220627203436-nt.html",
           },
@@ -1447,22 +1478,22 @@ const panelContent = {
           {
             label: "01 / Elections",
             src: "assets/images/el-comercio/entrevistas/01-elecciones-belarmino.png",
-            alt: "El Comercio interview with Belarmino Fernandez",
+            alt: "El Comercio interview with Belarmino Fernández",
           },
           {
             label: "02 / Elections",
             src: "assets/images/el-comercio/entrevistas/02-elecciones-fontaniella.png",
-            alt: "El Comercio interview with Jose Luis Fontaniella",
+            alt: "El Comercio interview with José Luis Fontaniella",
           },
           {
             label: "03 / CSIC researcher",
             src: "assets/images/el-comercio/entrevistas/03-investigadora-csic-rosa-narcea.png",
-            alt: "El Comercio interview with Carmen Martinez about the Rosa del Narcea project",
+            alt: "El Comercio interview with Carmen Martínez about the Rosa del Narcea project",
           },
           {
             label: "04 / Elections",
             src: "assets/images/el-comercio/entrevistas/02-elecciones-oscar-ancares.png",
-            alt: "El Comercio interview with Oscar Ancares",
+            alt: "El Comercio interview with Óscar Ancares",
           },
           {
             label: "05 / Elections",
@@ -1472,17 +1503,17 @@ const panelContent = {
           {
             label: "06 / Elections",
             src: "assets/images/el-comercio/entrevistas/04-elecciones-feito.png",
-            alt: "El Comercio interview with Jose Ramon Feito Lorences",
+            alt: "El Comercio interview with José Ramón Feito Lorences",
           },
           {
             label: "07 / Cruz Roja",
             src: "assets/images/el-comercio/entrevistas/05-cruz-roja-andres.png",
-            alt: "El Comercio interview with Andres Rodriguez from Cruz Roja",
+            alt: "El Comercio interview with Andrés Rodríguez from Cruz Roja",
           },
           {
             label: "08 / Elections",
             src: "assets/images/el-comercio/entrevistas/06-elecciones-carmen.png",
-            alt: "El Comercio interview with Carmen Lopez",
+            alt: "El Comercio interview with Carmen López",
           },
         ],
       },
@@ -1492,7 +1523,7 @@ const panelContent = {
           {
             label: "01 / Just transition programme",
             src: "assets/images/el-comercio/politica/01-programa-transicion-justa-barbon.png",
-            alt: "El Comercio article about Adrian Barbon and just transition works in Ibias",
+            alt: "El Comercio article about Adrián Barbón and just transition works in Ibias",
           },
           {
             label: "02 / European Next Generation funds",
@@ -1622,7 +1653,7 @@ const panelContent = {
           {
             label: "02 / Suicide",
             src: "assets/images/el-comercio/sucesos/02-suicidio.png",
-            alt: "El Comercio article about the death of Diego Ruiz in Valdes",
+            alt: "El Comercio article about the death of Diego Ruiz in Valdés",
           },
           {
             label: "03 / Police raid",
@@ -1709,7 +1740,7 @@ const panelContent = {
           {
             label: "2026 / Digital Transformation",
             src: "assets/images/academic/politecnica-transformacion-digital.jpg",
-            alt: "Digital Transformation Change Agents diploma from Universidad Politecnica de Madrid",
+            alt: "Digital Transformation Change Agents diploma from Universidad Politécnica de Madrid",
           },
         ],
       },
@@ -1887,7 +1918,7 @@ const panelContent = {
       {
         src: "assets/images/hilo-rojo/facebook-profile.png",
         alt: "Facebook profile screenshot from ONG Hilo Rojo Trujillo",
-        variant: "wide",
+        variant: "wide social",
         href: "https://www.facebook.com/ONG.HiloRojo.TRUJILLO",
       },
       {
@@ -1898,7 +1929,7 @@ const panelContent = {
       {
         src: "assets/images/hilo-rojo/instagram-management.png",
         alt: "Instagram profile screenshot from ONG Hilo Rojo Peru",
-        variant: "wide",
+        variant: "wide social",
         href: "https://www.instagram.com/onghilorojoperu/",
       },
       {
@@ -2058,6 +2089,7 @@ const panelTitle = document.querySelector("#panel-title");
 const panelBody = document.querySelector("#panel-body");
 const closeButton = document.querySelector(".panel-close");
 let activeReaderCleanup = null;
+let lockedScrollY = 0;
 
 function escapeHtml(value) {
   return String(value)
@@ -2110,9 +2142,9 @@ function renderReaderPages(items) {
       if (item.type === "copyBlock") {
         return `
           <article class="archive-reader-copy-card">
-            <span class="archive-reader-link-card__section">${escapeHtml(item.label)}</span>
-            <h3>${escapeHtml(item.title)}</h3>
-            <p>${escapeHtml(item.body)}</p>
+            <span class="archive-reader-link-card__section">${escapeLocalized(item.label)}</span>
+            <h3>${escapeLocalized(item.title)}</h3>
+            <p>${escapeLocalized(item.body)}</p>
           </article>
         `;
       }
@@ -2125,11 +2157,11 @@ function renderReaderPages(items) {
                 (entry) => `
                   <article class="academic-title-item">
                     <div class="academic-title-item__main">
-                      <strong>${escapeHtml(entry.institution)}</strong>
+                      <strong>${escapeLocalized(entry.institution)}</strong>
                       <span>
                         ${(entry.credentialLines || [entry.credential])
                           .filter(Boolean)
-                          .map((line) => `<em>${escapeHtml(line)}</em>`)
+                          .map((line) => `<em>${escapeLocalized(line)}</em>`)
                           .join("")}
                       </span>
                       ${
@@ -2140,7 +2172,7 @@ function renderReaderPages(items) {
                               href="${escapeHtml(entry.credentialDocument.href)}"
                               target="_blank"
                               rel="noopener noreferrer"
-                            >${escapeHtml(entry.credentialDocument.label)}</a>
+                            >${escapeLocalized(entry.credentialDocument.label)}</a>
                           `
                           : ""
                       }
@@ -2155,17 +2187,17 @@ function renderReaderPages(items) {
                                 href="${escapeHtml(entry.project.links.article)}"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                              >${escapeHtml(entry.project.title)}</a>
+                              >${escapeLocalized(entry.project.title)}</a>
                               <span>
-                                ${escapeHtml(entry.project.publication)}
-                                ${escapeHtml(`(${entry.project.meta})`)}
+                                ${escapeLocalized(entry.project.publication)}
+                                ${escapeLocalized(`(${entry.project.meta})`)}
                               </span>
                               <a
                                 class="academic-title-project__article"
                                 href="${escapeHtml(entry.project.links.article)}"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                              >${escapeHtml(entry.project.description)}</a>
+                              >${escapeLocalized(entry.project.description)}</a>
                             </div>
                           `
                           : `
@@ -2175,8 +2207,8 @@ function renderReaderPages(items) {
                               target="_blank"
                               rel="noopener noreferrer"
                             >
-                              <strong>${escapeHtml(entry.project.title)}</strong>
-                              <span>${escapeHtml(entry.project.description)}</span>
+                              <strong>${escapeLocalized(entry.project.title)}</strong>
+                              <span>${escapeLocalized(entry.project.description)}</span>
                             </a>
                           `
                         : ""
@@ -2192,19 +2224,19 @@ function renderReaderPages(items) {
       if (item.href) {
         return `
           <article class="archive-reader-link-card">
-            <span class="archive-reader-link-card__section">${escapeHtml(item.label)}</span>
+            <span class="archive-reader-link-card__section">${escapeLocalized(item.label)}</span>
             <a href="${escapeHtml(item.href)}" target="_blank" rel="noopener noreferrer">
-              ${escapeHtml(item.title)}
+              ${escapeLocalized(item.title)}
             </a>
-            <p>${escapeHtml(item.theme)}</p>
+            <p>${escapeLocalized(item.theme)}</p>
           </article>
         `;
       }
 
       return `
         <figure class="archive-reader-page">
-          <figcaption>${item.label}</figcaption>
-          <img src="${item.src}" alt="${item.alt}" loading="lazy">
+          <figcaption>${escapeLocalized(item.label)}</figcaption>
+          <img src="${escapeHtml(item.src)}" alt="${escapeLocalized(item.alt)}" loading="lazy">
         </figure>
       `;
     })
@@ -2216,8 +2248,8 @@ function renderVideoCards(videos) {
     .map((video) => {
       const rawVideoId = getYouTubeVideoId(video.videoId || video.url);
       const videoId = escapeHtml(rawVideoId);
-      const title = escapeHtml(video.title);
-      const label = escapeHtml(video.label);
+      const title = escapeLocalized(video.title);
+      const label = escapeLocalized(video.label);
 
       if (!rawVideoId) {
         return "";
@@ -2245,9 +2277,9 @@ function renderVideoProjects(projects) {
       (project) => `
         <section class="video-project" data-video-carousel>
           <div class="video-project__header">
-            <h3>${project.heading}</h3>
+            <h3>${escapeLocalized(project.heading)}</h3>
           </div>
-          <div class="video-carousel__track" data-video-track aria-label="${project.heading}">
+          <div class="video-carousel__track" data-video-track aria-label="${escapeLocalized(project.heading)}">
             ${renderVideoCards(project.videos)}
           </div>
         </section>
@@ -2260,7 +2292,7 @@ function renderStatsPanel(content) {
   const logos = (content.logos || [])
     .map(
       (logo) => `
-        <img src="${escapeHtml(logo.src)}" alt="${escapeHtml(logo.alt)}" loading="lazy">
+        <img src="${escapeHtml(logo.src)}" alt="${escapeLocalized(logo.alt)}" loading="lazy">
       `,
     )
     .join("");
@@ -2270,7 +2302,7 @@ function renderStatsPanel(content) {
       const cardTag = isLinked ? "a" : "article";
       const cardClass = `weber-stat-card${isLinked ? " weber-stat-card--link" : ""}`;
       const linkAttributes = isLinked
-        ? ` href="${escapeHtml(stat.href)}" target="_blank" rel="noopener noreferrer" aria-label="${escapeHtml(`Open ${stat.title} article`)}"`
+        ? ` href="${escapeHtml(stat.href)}" target="_blank" rel="noopener noreferrer" aria-label="${escapeLocalized(`Open ${stat.title} article`)}"`
         : "";
 
       return `
@@ -2281,8 +2313,8 @@ function renderStatsPanel(content) {
             data-counter-prefix="${escapeHtml(stat.prefix || "")}"
             data-counter-suffix="${escapeHtml(stat.suffix || "")}"
           >${escapeHtml(stat.prefix || "")}0${escapeHtml(stat.suffix || "")}</span>
-          <h3>${escapeHtml(stat.title)}</h3>
-          <p>${escapeHtml(stat.subtitle)}</p>
+          <h3>${escapeLocalized(stat.title)}</h3>
+          <p>${escapeLocalized(stat.subtitle)}</p>
         </${cardTag}>
       `;
     })
@@ -2292,14 +2324,53 @@ function renderStatsPanel(content) {
     <div class="weber-logo-cloud" aria-hidden="true">${logos}</div>
     <section class="weber-stats-panel">
       <div class="weber-stats-panel__intro">
-        <p class="weber-stats-panel__subtitle">${escapeHtml(content.subtitle)}</p>
-        <p>${escapeHtml(content.description)}</p>
+        <p class="weber-stats-panel__subtitle">${escapeLocalized(content.subtitle)}</p>
+        <p>${escapeLocalized(content.description)}</p>
       </div>
       <div class="weber-stats-grid">
         ${stats}
       </div>
     </section>
   `;
+}
+
+function lockPageScroll() {
+  if (!mobileMapMedia.matches) {
+    return;
+  }
+
+  if (document.body.classList.contains("panel-scroll-locked")) {
+    return;
+  }
+
+  lockedScrollY = window.scrollY || document.documentElement.scrollTop || 0;
+  document.body.style.setProperty("--locked-scroll-y", `${lockedScrollY}px`);
+  document.body.classList.add("panel-scroll-locked");
+}
+
+function unlockPageScroll() {
+  if (!document.body.classList.contains("panel-scroll-locked")) {
+    return;
+  }
+
+  const originalScrollBehavior = document.documentElement.style.scrollBehavior;
+  document.documentElement.style.scrollBehavior = "auto";
+  document.body.classList.remove("panel-scroll-locked");
+  document.body.style.removeProperty("--locked-scroll-y");
+  window.scrollTo(0, lockedScrollY);
+  requestScrollUpdate();
+  window.setTimeout(() => {
+    document.documentElement.style.scrollBehavior = originalScrollBehavior;
+  }, 0);
+}
+
+function resetPanelScroll() {
+  if (dialog) {
+    dialog.scrollTop = 0;
+  }
+  if (panelBody) {
+    panelBody.scrollTop = 0;
+  }
 }
 
 function renderPhotoMosaic(content) {
@@ -2313,7 +2384,7 @@ function renderPhotoMosaic(content) {
         .filter(Boolean)
         .map((variant) => ` photo-mosaic__tile--${variant}`)
         .join("");
-      const imageMarkup = `<img src="${escapeHtml(image.src)}" alt="${escapeHtml(image.alt)}" loading="lazy" decoding="async">`;
+      const imageMarkup = `<img src="${escapeHtml(image.src)}" alt="${escapeLocalized(image.alt)}" loading="lazy" decoding="async">`;
 
       if (image.href) {
         return `
@@ -2322,7 +2393,7 @@ function renderPhotoMosaic(content) {
             href="${escapeHtml(image.href)}"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="${escapeHtml(`Open ${image.alt}`)}"
+            aria-label="${escapeLocalized(`Open ${image.alt}`)}"
           >
             ${imageMarkup}
           </a>
@@ -2341,15 +2412,15 @@ function renderPhotoMosaic(content) {
     <section class="hilo-mosaic-panel photo-mosaic-panel photo-mosaic-panel--${escapeHtml(mosaicTheme)}">
       <div class="hilo-mosaic-copy">
         <div class="hilo-mosaic-copy__fieldwork">
-          <span>${escapeHtml(mainLabel)}</span>
-          <p class="hilo-mosaic-copy__intro">${escapeHtml(content.intro)}</p>
+          <span>${escapeLocalized(mainLabel)}</span>
+          <p class="hilo-mosaic-copy__intro">${escapeLocalized(content.intro)}</p>
         </div>
         <div class="hilo-social-copy" tabindex="0">
-          <span>${escapeHtml(content.socialTitle)}</span>
-          <p>${escapeHtml(content.socialIntro)}</p>
+          <span>${escapeLocalized(content.socialTitle)}</span>
+          <p>${escapeLocalized(content.socialIntro)}</p>
         </div>
       </div>
-      <div class="hilo-photo-mosaic photo-mosaic-grid photo-mosaic-grid--${escapeHtml(mosaicTheme)}" aria-label="${escapeHtml(mosaicLabel)}">
+      <div class="hilo-photo-mosaic photo-mosaic-grid photo-mosaic-grid--${escapeHtml(mosaicTheme)}" aria-label="${escapeLocalized(mosaicLabel)}">
         ${tiles}
       </div>
     </section>
@@ -2406,7 +2477,7 @@ function initializeReaderChapters(content) {
 
   const updateReader = () => {
     track.style.transform = `translateX(-${activeIndex * 100}%)`;
-    panelTitle.textContent = chapters[activeIndex].title;
+    panelTitle.textContent = localizeText(chapters[activeIndex].title);
     counter.textContent = `${activeIndex + 1} / ${chapters.length}`;
     previousButton.disabled = activeIndex === 0;
     nextButton.disabled = activeIndex === chapters.length - 1;
@@ -2590,16 +2661,18 @@ function initializeVideoCarousel() {
 }
 
 function openPanel(panelKey) {
-  const content = panelContent[panelKey];
+  const contentKey = panelKey === "urjc" ? "navarra" : panelKey;
+  const content = panelContent[contentKey];
 
   if (!content || !dialog || !panelKicker || !panelTitle || !panelBody) {
     return;
   }
 
+  activePanelKey = panelKey;
   activeReaderCleanup?.();
   activeReaderCleanup = null;
-  panelKicker.textContent = content.kicker;
-  panelTitle.textContent = content.title;
+  panelKicker.textContent = localizeText(content.kicker);
+  panelTitle.textContent = localizeText(content.title);
 
   if (content.type === "reader") {
     const chapters = content.chapters || [{ title: content.title, items: content.items || [] }];
@@ -2608,10 +2681,10 @@ function openPanel(panelKey) {
         ${
           chapters.length > 1
             ? `
-              <div class="archive-reader-nav" aria-label="Archive navigation">
-                <button class="archive-reader-arrow" type="button" data-reader-previous aria-label="Ver sección anterior">←</button>
+              <div class="archive-reader-nav" aria-label="${escapeLocalized("Archive navigation")}">
+                <button class="archive-reader-arrow" type="button" data-reader-previous aria-label="${escapeLocalized("View previous section")}">←</button>
                 <span class="archive-reader-counter" data-reader-counter>1 / ${chapters.length}</span>
-                <button class="archive-reader-arrow" type="button" data-reader-next aria-label="Ver siguiente sección">→</button>
+                <button class="archive-reader-arrow" type="button" data-reader-next aria-label="${escapeLocalized("View next section")}">→</button>
               </div>
             `
             : ""
@@ -2621,7 +2694,7 @@ function openPanel(panelKey) {
             ${chapters
               .map(
                 (chapter) => `
-                  <section class="archive-reader-chapter" aria-label="${chapter.title}">
+                  <section class="archive-reader-chapter" aria-label="${escapeLocalized(chapter.title)}">
                     <div class="archive-reader">
                       ${renderReaderPages(chapter.items)}
                     </div>
@@ -2637,7 +2710,7 @@ function openPanel(panelKey) {
   } else if (content.type === "videoCarousel") {
     panelBody.innerHTML = `
       <div class="video-carousel">
-        <p class="video-carousel__intro">${content.intro}</p>
+        <p class="video-carousel__intro">${escapeLocalized(content.intro)}</p>
         ${renderVideoProjects(content.projects || [])}
       </div>
     `;
@@ -2650,12 +2723,17 @@ function openPanel(panelKey) {
   } else {
     panelBody.innerHTML = `
       <ul>
-        ${content.body.map((item) => `<li>${item}</li>`).join("")}
+        ${content.body.map((item) => `<li>${escapeLocalized(item)}</li>`).join("")}
       </ul>
     `;
   }
 
-  dialog.showModal();
+  if (!dialog.open) {
+    lockPageScroll();
+    dialog.showModal();
+  } else {
+    resetPanelScroll();
+  }
   applyLanguage(currentLanguage, dialog);
 }
 
@@ -2674,6 +2752,8 @@ closeButton?.addEventListener("click", () => {
 dialog?.addEventListener("close", () => {
   activeReaderCleanup?.();
   activeReaderCleanup = null;
+  activePanelKey = null;
+  unlockPageScroll();
 });
 
 dialog?.addEventListener("cancel", (event) => {
@@ -2683,6 +2763,9 @@ dialog?.addEventListener("cancel", (event) => {
 languageButtons.forEach((button) => {
   button.addEventListener("click", () => {
     applyLanguage(button.dataset.lang);
+    if (dialog?.open && activePanelKey) {
+      openPanel(activePanelKey);
+    }
   });
 });
 
