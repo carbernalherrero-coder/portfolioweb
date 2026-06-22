@@ -1,4 +1,480 @@
 const yearElement = document.querySelector("#current-year");
+const languageButtons = Array.from(document.querySelectorAll("[data-lang]"));
+
+const textTranslations = {
+  es: {
+    "Back to the beginning": "Volver al inicio",
+    "Carlos Bernal | Career Universe": "Carlos Bernal | Universo profesional",
+    "Horizontal scrollytelling portfolio for Carlos Bernal, journalist and strategic communication specialist.":
+      "Portfolio horizontal de scrollytelling de Carlos Bernal, periodista y especialista en comunicación estratégica.",
+    "Main navigation": "Navegación principal",
+    "Language selector": "Selector de idioma",
+    "View English version": "Ver versión en inglés",
+    "World map": "Mapamundi",
+    "Timeline": "Trayectoria",
+    "Archive": "Archivo",
+    "Contact": "Contacto",
+    "Journalist": "Periodista",
+    "working at the crossroads where": "trabajando en el cruce donde",
+    "field reporting, strategic communication, and public-impact work meet.":
+      "convergen el reporterismo de campo, la comunicación estratégica y el trabajo de impacto público.",
+    "working": "trabajando",
+    "at": "en",
+    "the crossroads": "el cruce",
+    "where": "donde",
+    "field reporting,": "el reporterismo de campo,",
+    "strategic communication": "la comunicación estratégica",
+    "and public impact": "y el impacto público",
+    "work meet.": "se encuentran.",
+    "+5 years in field reporting": "+5 años en reporterismo de campo",
+    "+2 years in the third sector": "+2 años en el tercer sector",
+    "+2 years in strategic communication": "+2 años en comunicación estratégica",
+    "+1 year in the publishing industry": "+1 año en el sector editorial",
+    "Trilingual in Spanish, English and French": "Trilingüe en español, inglés y francés",
+    "Graphic design and web development": "Diseño gráfico y desarrollo web",
+    "Master in corporate communication and public affairs": "Máster en comunicación corporativa y asuntos públicos",
+    "Master in political management": "Máster en gestión política",
+    "Portfolio archive categories": "Categorías del archivo del portfolio",
+    "French Ministry": "Ministerio francés",
+    "of Education": "de Educación",
+    "NGO": "ONG",
+    "Static world map": "Mapa mundial estático",
+    "A clean grey world map with selected countries highlighted as an editorial transition section.":
+      "Un mapa mundial gris y limpio con países destacados como sección editorial de transición.",
+    "TAP USA": "TOCA EE. UU.",
+    "TAP PORTUGAL": "TOCA PORTUGAL",
+    "TAP SPAIN": "TOCA ESPAÑA",
+    "TAP FRANCE": "TOCA FRANCIA",
+    "TAP IRELAND": "TOCA IRLANDA",
+    "TAP BELGIUM": "TOCA BÉLGICA",
+    "TAP DENMARK": "TOCA DINAMARCA",
+    "TAP ECUADOR": "TOCA ECUADOR",
+    "TAP PERU": "TOCA PERÚ",
+    "Date:": "Fecha:",
+    "Role:": "Rol:",
+    "Organization:": "Organización:",
+    "Master's Programme Student": "Estudiante de máster",
+    "International Academic Year": "Curso académico internacional",
+    "Sociocultural Project Coordinator": "Coordinador de proyectos socioculturales",
+    "2026 (in progress)": "2026 (en curso)",
+    "Journalist": "Periodista",
+    "Corporate Communication Consultant": "Consultor de comunicación corporativa",
+    "Corporate Comm & Public Affairs - Master": "Máster en comunicación corporativa y asuntos públicos",
+    "Graphic Design & Web Development": "Diseño gráfico y desarrollo web",
+    "Editorial Assistant": "Asistente editorial",
+    "Film and TV Screenwriting Programme": "Programa de guion de cine y televisión",
+    "Assistant Content Manager": "Asistente de gestión de contenidos",
+    "Production, Lille": "Producción, Lille",
+    "Project Manager": "Gestor de proyectos",
+    "BPJEPS Loisirs Tous Publics": "BPJEPS Loisirs Tous Publics",
+    "Scholarship": "Beca",
+    "Linguistic Exchange Coordinator": "Coordinador de intercambios lingüísticos",
+    "Engaging Europe Programme Participant": "Participante en el programa Engaging Europe",
+    "Erasmus Exchange Student": "Estudiante Erasmus",
+    "Digital Content Specialist / Volunteer": "Especialista en contenido digital / voluntario",
+    "Achuar community-based project": "Proyecto comunitario achuar",
+    "An international path shaped across": "Una trayectoria internacional construida en",
+    "Spanish, French, and English-speaking environments.": "entornos de habla española, francesa e inglesa.",
+    "Madrid correspondent: local journalism, interviews and field reporting.":
+      "Corresponsal en Madrid: periodismo local, entrevistas y reporterismo de campo.",
+    "01-06-2026 / present": "01-06-2026 / actualidad",
+    "Journalism archive": "Archivo periodístico",
+    "Education volunteer and digital content assistant in Trujillo, Peru.":
+      "Voluntario educativo y asistente de contenido digital en Trujillo, Perú.",
+    "Third sector / Peru": "Tercer sector / Perú",
+    "School of Political Management": "School of Political Management",
+    "The George Washington University. Political management and public affairs learning.":
+      "The George Washington University. Formación en gestión política y asuntos públicos.",
+    "International training": "Formación internacional",
+    "Corporate communication consulting in Madrid: monitoring, plans, content and public affairs support.":
+      "Consultoría de comunicación corporativa en Madrid: monitorización, planes, contenidos y apoyo en asuntos públicos.",
+    "Agency / corporate PR": "Agencia / comunicación corporativa",
+    "Corporate Communication": "Comunicación corporativa",
+    "Universidad de Navarra master: political communication, public affairs, institutional and crisis communication.":
+      "Máster de la Universidad de Navarra: comunicación política, asuntos públicos, comunicación institucional y de crisis.",
+    "Master": "Máster",
+    "Reporter and editor in Asturias across field reporting, interviews, local beats and video.":
+      "Redactor y editor en Asturias, con reporterismo de campo, entrevistas, información local y vídeo.",
+    "Graphic Design and Motion Graphics": "Diseño gráfico y Motion Graphics",
+    "Trazos. Web development, digital design, web structure and visual production.":
+      "Trazos. Desarrollo web, diseño digital, estructura web y producción visual.",
+    "Digital skills": "Competencias digitales",
+    "Editorial project support in Madrid, bridging art publishing, production and cultural context.":
+      "Apoyo a proyectos editoriales en Madrid, conectando edición artística, producción y contexto cultural.",
+    "Publishing industry": "Sector editorial",
+    "Content, publishing and cultural communication in Lille, France.":
+      "Contenido, edición y comunicación cultural en Lille, Francia.",
+    "Culture / editorial content": "Cultura / contenido editorial",
+    "Project management and community work in Lille.": "Gestión de proyectos y trabajo comunitario en Lille.",
+    "Third sector": "Tercer sector",
+    "BPJEPS / socio-cultural coordination": "BPJEPS / coordinación sociocultural",
+    "French Ministry of Education and CEMEA. Training in youth work and cultural projects.":
+      "Ministerio francés de Educación y CEMEA. Formación en intervención juvenil y proyectos culturales.",
+    "Education / France": "Educación / Francia",
+    "Film and TV Screenwriting": "Guion de cine y televisión",
+    "La Factoria del Guion. Structure, scenes, dialogue and narrative rhythm.":
+      "La Factoría del Guion. Estructura, escenas, diálogo y ritmo narrativo.",
+    "Creative writing": "Escritura creativa",
+    "Coordination of language exchanges across Dublin and Madrid.":
+      "Coordinación de intercambios lingüísticos entre Dublín y Madrid.",
+    "Education / languages": "Educación / idiomas",
+    "Journalism and": "Periodismo y",
+    "Communication": "Comunicación",
+    "Double degree at Universidad Rey Juan Carlos: journalism, audiovisual communication and public opinion.":
+      "Doble grado en la Universidad Rey Juan Carlos: periodismo, comunicación audiovisual y opinión pública.",
+    "Academic foundation": "Base académica",
+    "Horizontal scrollytelling portfolio.": "Portfolio horizontal de scrollytelling.",
+    "Interested in working together?": "¿Te interesa que trabajemos juntos?",
+    "Let’s tell purposeful stories that build trust.":
+      "Contemos historias con propósito que construyan confianza.",
+    "Contact details": "Datos de contacto",
+    "LinkedIn — Carlos Bernal": "LinkedIn — Carlos Bernal",
+    "Name": "Nombre",
+    "Email": "Email",
+    "Phone": "Teléfono",
+    "Message": "Mensaje",
+    "Send message": "Enviar mensaje",
+    "Secure Formspree delivery with email fallback.":
+      "Envío seguro con Formspree y respaldo por email.",
+    "Carlos Bernal portrait": "Retrato de Carlos Bernal",
+    "Close detail panel": "Cerrar panel de detalle",
+    "Close": "Cerrar",
+    "Portfolio chapter": "Capítulo del portfolio",
+    "Archive navigation": "Navegación del archivo",
+    "Academic titles list": "Lista de títulos académicos",
+    "Journalism and Audiovisual Communication": "Periodismo y Comunicación Audiovisual",
+    "Academic starting point for the timeline: reporting, audiovisual language, scripts and public storytelling.":
+      "Punto de partida académico de la trayectoria: reporterismo, lenguaje audiovisual, guion y narración pública.",
+    "This station can later open degree projects, certificates, selected papers and university work.":
+      "Esta estación podrá abrir proyectos de grado, certificados, trabajos seleccionados y producción universitaria.",
+    "Film and TV screenwriting training.": "Formación en guion de cine y televisión.",
+    "A future detail page can connect this training to narrative structure, audiovisual storytelling and script work.":
+      "Una futura página de detalle podrá conectar esta formación con estructura narrativa, storytelling audiovisual y trabajo de guion.",
+    "Editorial Brumaria visual archive": "Archivo visual de Editorial Brumaria",
+    "Publishing / Cultural production": "Edición / producción cultural",
+    "During 16 months at Editorial Brumaria, I supported the publisher's digital transition, helping launch its website and e-commerce platform while assisting communications, editorial production and cultural programming. I worked across the full publishing cycle: author relations in English and French, copy-editing, layout support, print coordination, magazine content and book launches across several collections.":
+      "Durante 16 meses en Editorial Brumaria, apoyé la transición digital de la editorial, ayudando al lanzamiento de su web y plataforma de comercio electrónico, además de colaborar en comunicación, producción editorial y programación cultural. Trabajé en todo el ciclo editorial: relación con autores en inglés y francés, corrección, apoyo a maquetación, coordinación de imprenta, contenidos de revista y lanzamientos de libros en varias colecciones.",
+    "Digital Content Producer": "Productor de contenido digital",
+    "I also contributed to digital content creation, combining graphic design skills, editorial editing and sharp social media copywriting to strengthen Brumaria's online voice, visual identity and audience engagement.":
+      "También contribuí a la creación de contenido digital, combinando diseño gráfico, edición editorial y copywriting preciso para redes sociales con el fin de reforzar la voz online, la identidad visual y la conexión con la audiencia de Brumaria.",
+    "French Ministry of Education / CEMEA": "Ministerio francés de Educación / CEMEA",
+    "BPJEPS / socio-cultural project coordination training in France.":
+      "Formación BPJEPS en coordinación de proyectos socioculturales en Francia.",
+    "Future assets: certificates, program documents, workshop material and education-related evidence.":
+      "Materiales futuros: certificados, documentos del programa, materiales de talleres y evidencias vinculadas a educación.",
+    "A curated selection of audiovisual work produced during my time with Cultur'all Studio in Lille, spanning festivals, music videos, and campaign spots for cultural and institutional clients across Northern France.":
+      "Una selección curada de trabajos audiovisuales producidos durante mi etapa en Cultur'all Studio en Lille, con festivales, videoclips y piezas de campaña para clientes culturales e institucionales del norte de Francia.",
+    "Future assets: workshop documentation, project notes, photographs and impact summaries.":
+      "Materiales futuros: documentación de talleres, notas de proyecto, fotografías y resúmenes de impacto.",
+    "Graphic Design and Web Development": "Diseño gráfico y desarrollo web",
+    "Digital design and web-development training at Trazos.":
+      "Formación en diseño digital y desarrollo web en Trazos.",
+    "This station can later hold design exercises, web prototypes and visual production work.":
+      "Esta estación podrá albergar ejercicios de diseño, prototipos web y trabajos de producción visual.",
+    "El Comercio / Front pages": "El Comercio / Portadas",
+    "Wildfires": "Incendios",
+    "Politics": "Política",
+    "Culture": "Cultura",
+    "Crime and incidents": "Sucesos",
+    "Multimedia features in special sections": "Reportajes multimedia en secciones especiales",
+    "Craftsmanship, wood and rural tourism": "Artesanía, madera y turismo rural",
+    "Active tourism and rural hospitality": "Turismo activo y hostelería rural",
+    "Agri-food industry and craft beer": "Industria agroalimentaria y cerveza artesanal",
+    "Mobile gastronomy and local zero-kilometre products": "Gastronomía ambulante y productos locales de kilómetro cero",
+    "Agricultural innovation, biotechnology and luxury cosmetics": "Innovación agrícola, biotecnología y cosmética de lujo",
+    "Pedigree livestock, fairs and national auctions": "Ganadería de pureza, ferias y subastas nacionales",
+    "Family livestock farming and sector challenges": "Explotación ganadera familiar y desafíos sectoriales",
+    "Agricultural research, cooperativism and rural abandonment": "Investigación agrícola, cooperativismo y abandono rural",
+    "Mountain fair and traditional livestock farming": "Feria de montaña y ganadería tradicional",
+    "Others": "Otros",
+    "Economy and protest": "Economía y manifestación",
+    "El Comercio / Interviews": "El Comercio / Entrevistas",
+    "Elections": "Elecciones",
+    "CSIC researcher": "Investigadora del CSIC",
+    "El Comercio / Politics": "El Comercio / Política",
+    "Just transition programme": "Programa de transición justa",
+    "European Next Generation funds": "Fondos europeos Next Generation",
+    "Municipal elections": "Elecciones municipales",
+    "Rural depopulation": "Despoblación rural",
+    "IU incident": "Incidente IU",
+    "El Comercio / Society": "El Comercio / Sociedad",
+    "Health": "Salud",
+    "Digital divide": "Brecha digital",
+    "Entrepreneurship": "Emprendimiento",
+    "El Comercio / Economy": "El Comercio / Economía",
+    "Rural tourism": "Turismo rural",
+    "Mining": "Minería",
+    "Job insecurity": "Precariedad",
+    "Livestock farming": "Ganadería",
+    "El Comercio / Culture": "El Comercio / Cultura",
+    "Heritage": "Patrimonio",
+    "Rural popular culture": "Cultura popular rural",
+    "Black ceramics": "Cerámica",
+    "Literature": "Literatura",
+    "El Comercio / Crime and incidents": "El Comercio / Sucesos",
+    "Suicide": "Suicidio",
+    "Police raid": "Redada",
+    "Academic work": "Títulos, trabajos y",
+    "and collaborations": "colaboraciones académicas",
+    "Academic degrees": "Títulos académicos",
+    "Digital Transformation - Change Agent - 2026": "Transformación Digital - Agente del Cambio - 2026",
+    "Digital Transformation": "Transformación Digital",
+    "Master in Political, Corporate and Public Affairs Communication": "Máster en Comunicación Política, Corporativa y Asuntos Públicos",
+    "TFM - Communication strategy and analysis Auditorio Sony - 8.87": "TFM - Estrategia y análisis de comunicación Auditorio Sony - 8,87",
+    "Master's newsletter collaboration": "Colaboración en la newsletter del máster",
+    "Listen, reframe, lead: Nike's formula for dominating the agenda":
+      "Escuchar, reencuadrar, liderar: la fórmula Nike para dominar la agenda",
+    "Universidad Rey Juan Carlos - Audiovisual Communication": "Universidad Rey Juan Carlos - Comunicación Audiovisual",
+    "Audiovisual Communication": "Comunicación Audiovisual",
+    "Universidad Rey Juan Carlos - Journalism": "Universidad Rey Juan Carlos - Periodismo",
+    "Journalism": "Periodismo",
+    "subscribers": "suscriptores",
+    "1.587 subscribers": "1.587 suscriptores",
+    "Master in Web Development and Motion Graphics": "Máster en Desarrollo Web y Motion Graphics",
+    "Degree in Audiovisual Communication - 2015": "Grado en Comunicación Audiovisual - 2015",
+    "Final degree project: distinction (9.3/10)": "Trabajo TFG: Sobresaliente (9.3/10)",
+    "Comparative analysis between a comic and its film adaptation. Case study: Persepolis.":
+      "Análisis comparativo entre un cómic y su adaptación cinematográfica. Estudio de caso: Persepolis.",
+    "Degree in Journalism - 2015": "Grado en Periodismo - 2015",
+    "Film and TV Screenwriting course - 2013": "Curso en guion de Cine y TV - 2013",
+    "El Comercio / Portadas": "El Comercio / Portadas",
+    "Reportajes multimedia en secciones especiales": "Reportajes multimedia en secciones especiales",
+    "El Comercio / Entrevistas": "El Comercio / Entrevistas",
+    "El Comercio / Politica": "El Comercio / Política",
+    "El Comercio / Sucesos": "El Comercio / Sucesos",
+    "Títulos académicos": "Títulos académicos",
+    "Universidad Politécnica de Madrid": "Universidad Politécnica de Madrid",
+    "The Graduate School of Political Management": "The Graduate School of Political Management",
+    "Cambridge C1 Advanced": "Cambridge C1 Advanced",
+    "Coordination of language exchanges between Dublin and Madrid.":
+      "Coordinación de intercambios lingüísticos entre Dublín y Madrid.",
+    "Early international education work connected to languages, mobility and cross-cultural communication.":
+      "Primer trabajo internacional en educación, vinculado a idiomas, movilidad y comunicación intercultural.",
+    "Corporate Communications Team Member — 2025": "Miembro del equipo de Corporate Communications — 2025",
+    "Part of the Corporate Communications team during 2025, contributing to the planning, development, and execution of strategic communication plans. Supported corporate positioning, content coordination, stakeholder messaging, and campaign delivery.":
+      "Parte del equipo de Corporate Communications durante 2025, contribuyendo a la planificación, desarrollo y ejecución de planes estratégicos de comunicación. Apoyo en posicionamiento corporativo, coordinación de contenidos, mensajes para stakeholders y ejecución de campañas.",
+    "Weber Shandwick clients": "Clientes de Weber Shandwick",
+    "Nespresso, Turkish Airlines, Synergym and Universidad Europea.":
+      "Nespresso, Turkish Airlines, Synergym y Universidad Europea.",
+    "Press Releases": "Notas de prensa",
+    "Tier-1 content (CincoDías, La Vanguardia, La Razón, Europa Press).":
+      "Contenido en medios tier-1 (CincoDías, La Vanguardia, La Razón, Europa Press).",
+    "Op-eds": "Tribunas",
+    "Opinion piece for El Economista on behalf of Nespresso's CEO.":
+      "Tribuna para El Economista en nombre de la CEO de Nespresso.",
+    "Co-organizations of events": "Coorganización de eventos",
+    "for Turkish Airlines and Synergym.": "para Turkish Airlines y Synergym.",
+    "School of Political Management experience.": "Experiencia en la School of Political Management.",
+    "Future assets: academic work, presentations, certificates and public affairs materials.":
+      "Materiales futuros: trabajos académicos, presentaciones, certificados y materiales de asuntos públicos.",
+    "ONG Hilo Rojo | Trujillo, Peru": "ONG Hilo Rojo | Trujillo, Perú",
+    "At HiloRojo, I shared my passion for communication as a bridge between people, cultures, and stories. Working in a diverse environment taught me to listen with care and communicate with purpose. It was a lesson in empathy, creativity, and human connection.":
+      "En HiloRojo compartí mi pasión por la comunicación como puente entre personas, culturas e historias. Trabajar en un entorno diverso me enseñó a escuchar con cuidado y comunicar con propósito. Fue una lección de empatía, creatividad y conexión humana.",
+    "For four months, I managed HiloRojo Perú’s Instagram and Facebook presence, engaging communities of 3,625 and 6.5K followers through original video content that I planned, filmed, edited, and post-produced.":
+      "Durante cuatro meses gestioné la presencia de HiloRojo Perú en Instagram y Facebook, conectando con comunidades de 3.625 y 6,5K seguidores mediante contenido de vídeo original que planifiqué, grabé, edité y postproduje.",
+    "La Voz del Trubia / Madrid-based correspondent for La Voz del Trubia":
+      "La Voz del Trubia / Corresponsal en Madrid para La Voz del Trubia",
+    "Madrid-based correspondent": "Corresponsal en Madrid",
+    "Madrid-based correspondent for La Voz del Trubia, covering institutional affairs, public policy and regional development stories from the capital with a local-journalism lens.":
+      "Corresponsal en Madrid para La Voz del Trubia, cubriendo asuntos institucionales, políticas públicas e historias de desarrollo regional desde la capital con mirada de periodismo local.",
+    "Value": "Valor",
+    "Selected field reporting, social-impact projects and pieces that explain the professional value behind the portfolio.":
+      "Selección de reporterismo de campo, proyectos de impacto social y piezas que explican el valor profesional detrás del portfolio.",
+    "Future assets: articles, case studies, visual notes and editorial outcomes.":
+      "Materiales futuros: artículos, casos de estudio, notas visuales y resultados editoriales.",
+    "Growth": "Crecimiento",
+    "Academic progression, master's degrees, international programmes and design/web development training.":
+      "Progresión académica, másteres, programas internacionales y formación en diseño/desarrollo web.",
+    "Future assets: certificates, coursework, presentations and learning evidence.":
+      "Materiales futuros: certificados, trabajos de curso, presentaciones y evidencias de aprendizaje.",
+    "Reputation": "Reputación",
+    "Corporate communication, public affairs, media relations and strategic content work.":
+      "Comunicación corporativa, asuntos públicos, relaciones con medios y contenido estratégico.",
+    "Future assets: non-confidential briefs, monitoring samples, planning notes and reputation frameworks.":
+      "Materiales futuros: briefs no confidenciales, muestras de monitorización, notas de planificación y marcos de reputación.",
+    "Diversity": "Diversidad",
+    "International experience across Spanish, French and English-speaking environments.":
+      "Experiencia internacional en entornos de habla española, francesa e inglesa.",
+    "Future assets: maps, project diaries, language evidence and cross-cultural work.":
+      "Materiales futuros: mapas, diarios de proyecto, evidencias lingüísticas y trabajo intercultural.",
+    "Share": "Compartir",
+    "Published journalism, audiovisual pieces, interviews and public-facing storytelling.":
+      "Periodismo publicado, piezas audiovisuales, entrevistas y narrativas orientadas al público.",
+    "Future assets: links, clips, screenshots, embeds and publication pages.":
+      "Materiales futuros: enlaces, clips, capturas, embeds y páginas de publicación.",
+    "Ambition": "Ambición",
+    "Projects that connect journalism, strategic communication, public affairs and visual storytelling.":
+      "Proyectos que conectan periodismo, comunicación estratégica, asuntos públicos y storytelling visual.",
+    "Future assets: portfolio experiments, prototypes, design systems and narrative formats.":
+      "Materiales futuros: experimentos de portfolio, prototipos, sistemas de diseño y formatos narrativos.",
+    "Dispute": "Debate",
+    "Work around public debate, political communication, institutional environments and social listening.":
+      "Trabajo en torno al debate público, la comunicación política, entornos institucionales y escucha social.",
+    "Future assets: analysis, issue maps, stakeholder contexts and communication strategy notes.":
+      "Materiales futuros: análisis, mapas de asuntos, contextos de stakeholders y notas de estrategia de comunicación.",
+    "Critical": "Crítico",
+    "Research, essays, screenwriting, editorial thinking and reflective academic work.":
+      "Investigación, ensayos, guion, pensamiento editorial y trabajo académico reflexivo.",
+    "Future assets: papers, scripts, reading notes, research projects and visual essays.":
+      "Materiales futuros: papers, guiones, notas de lectura, proyectos de investigación y ensayos visuales.",
+    "Journalism work": "Trabajo periodístico",
+    "El Comercio, La Voz del Trubia and cultural media work.":
+      "El Comercio, La Voz del Trubia y trabajo en medios culturales.",
+    "Future filters: interviews, field reporting, video, opinion, culture, local politics and features.":
+      "Filtros futuros: entrevistas, reporterismo de campo, vídeo, opinión, cultura, política local y reportajes.",
+    "Third sector and education": "Tercer sector y educación",
+    "Hilo Rojo, Cultur'All Studio, Centre Social La Busette, UFCV and education projects.":
+      "Hilo Rojo, Cultur'All Studio, Centre Social La Busette, UFCV y proyectos educativos.",
+    "Future assets: workshops, camps, videos, project documents and photo stories.":
+      "Materiales futuros: talleres, campamentos, vídeos, documentos de proyecto y foto-historias.",
+    "Corporate communication and public affairs": "Comunicación corporativa y asuntos públicos",
+    "Weber Shandwick, Universidad de Navarra and George Washington University.":
+      "Weber Shandwick, Universidad de Navarra y George Washington University.",
+    "Future assets: non-confidential strategy work, media angles, presentations and research.":
+      "Materiales futuros: trabajo estratégico no confidencial, enfoques para medios, presentaciones e investigación.",
+    "Academic titles": "Títulos académicos",
+    "Journalism and Audiovisual Communication, screenwriting, BPJEPS, design/web development and two master's tracks.":
+      "Periodismo y Comunicación Audiovisual, guion, BPJEPS, diseño/desarrollo web y dos itinerarios de máster.",
+    "This archive will gather certificates, coursework and formal academic material.":
+      "Este archivo reunirá certificados, trabajos de curso y material académico formal.",
+    "Academic works": "Trabajos académicos",
+    "Future library for research, papers, presentations, essays and selected projects.":
+      "Biblioteca futura para investigación, papers, presentaciones, ensayos y proyectos seleccionados.",
+    "Recommended filters: Public Affairs, Journalism, Strategy, Design, Screenwriting and AI tools.":
+      "Filtros recomendados: asuntos públicos, periodismo, estrategia, diseño, guion y herramientas de IA.",
+    "Skills and tools": "Competencias y herramientas",
+    "Digital, analytics, content, design, video and AI tools can be linked to real evidence inside the portfolio.":
+      "Herramientas digitales, analíticas, de contenido, diseño, vídeo e IA pueden vincularse a evidencias reales dentro del portfolio.",
+  },
+};
+
+const dateLabelTranslations = {
+  es: {
+    "Jun 2026 / present": "Jun 2026 / actualidad",
+    "Jan - May 2026": "Ene - May 2026",
+    "Jan - Mar 2025": "Ene - Mar 2025",
+    "Apr - Nov 2025": "Abr - Nov 2025",
+    "Sep 2024 - Jun 2025": "Sep 2024 - Jun 2025",
+    "Sep 2021 - Dec 2023": "Sep 2021 - Dic 2023",
+    "Sep 2020 - Jun 2021": "Sep 2020 - Jun 2021",
+    "Sep 2018 - Dec 2019": "Sep 2018 - Dic 2019",
+    "Sep 2016 - Aug 2018": "Sep 2016 - Ago 2018",
+    "Sep 2015 - Aug 2016": "Sep 2015 - Ago 2016",
+    "Sep 2015 - Jun 2016": "Sep 2015 - Jun 2016",
+    "Sep 2013 - Jun 2014": "Sep 2013 - Jun 2014",
+    "Jul 2011 - Jul 2012": "Jul 2011 - Jul 2012",
+    "Sep 2010 - Jun 2015": "Sep 2010 - Jun 2015",
+  },
+};
+
+let currentLanguage = localStorage.getItem("portfolio-language") === "es" ? "es" : "en";
+const originalTextNodes = new WeakMap();
+const originalAttributes = new WeakMap();
+
+function preserveSpacingTranslation(original, translated) {
+  const leading = original.match(/^\s*/)?.[0] || "";
+  const trailing = original.match(/\s*$/)?.[0] || "";
+  return `${leading}${translated}${trailing}`;
+}
+
+function getOriginalAttribute(element, attribute) {
+  let attributes = originalAttributes.get(element);
+  if (!attributes) {
+    attributes = {};
+    originalAttributes.set(element, attributes);
+  }
+
+  if (!(attribute in attributes)) {
+    attributes[attribute] = element.getAttribute(attribute);
+  }
+
+  return attributes[attribute];
+}
+
+function translateTextValue(value, language = currentLanguage) {
+  if (language === "en") {
+    return value;
+  }
+
+  const translations = textTranslations[language] || {};
+  if (translations[value]) {
+    return translations[value];
+  }
+
+  const numberedLabel = value.match(/^(\d+\s*\/\s*)(.+)$/);
+  if (numberedLabel && translations[numberedLabel[2]]) {
+    return `${numberedLabel[1]}${translations[numberedLabel[2]]}`;
+  }
+
+  const datedLabel = value.match(/^(\d{4}\s*\/\s*)(.+)$/);
+  if (datedLabel && translations[datedLabel[2]]) {
+    return `${datedLabel[1]}${translations[datedLabel[2]]}`;
+  }
+
+  return value;
+}
+
+function applyLanguage(language = currentLanguage, root = document.body) {
+  currentLanguage = language === "es" ? "es" : "en";
+  document.documentElement.lang = currentLanguage;
+  localStorage.setItem("portfolio-language", currentLanguage);
+
+  languageButtons.forEach((button) => {
+    const isActive = button.dataset.lang === currentLanguage;
+    button.classList.toggle("is-active", isActive);
+    button.setAttribute("aria-pressed", String(isActive));
+  });
+
+  if (root) {
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+      acceptNode(node) {
+        return node.nodeValue.trim() ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+      },
+    });
+
+    while (walker.nextNode()) {
+      const node = walker.currentNode;
+      if (!originalTextNodes.has(node)) {
+        originalTextNodes.set(node, node.nodeValue);
+      }
+      const original = originalTextNodes.get(node);
+      const translated = translateTextValue(original.trim(), currentLanguage);
+      node.nodeValue = preserveSpacingTranslation(original, translated);
+    }
+
+    root.querySelectorAll?.("[aria-label]").forEach((element) => {
+      if (element.hasAttribute("aria-label")) {
+        const original = getOriginalAttribute(element, "aria-label");
+        element.setAttribute("aria-label", translateTextValue(original, currentLanguage));
+      }
+    });
+  }
+
+  const pageTitle = document.querySelector("title");
+  if (pageTitle) {
+    const original = pageTitle.dataset.originalTitle || pageTitle.textContent;
+    pageTitle.dataset.originalTitle = original;
+    pageTitle.textContent = translateTextValue(original, currentLanguage);
+  }
+
+  const metaDescription = document.querySelector("meta[name='description']");
+  if (metaDescription) {
+    const original = getOriginalAttribute(metaDescription, "content");
+    metaDescription.setAttribute("content", translateTextValue(original, currentLanguage));
+  }
+
+  document.querySelectorAll("[data-date-label]").forEach((station) => {
+    if (!station.dataset.originalDateLabel) {
+      station.dataset.originalDateLabel = station.dataset.dateLabel;
+    }
+    const original = station.dataset.originalDateLabel;
+    station.dataset.dateLabel = currentLanguage === "es" ? dateLabelTranslations.es[original] || original : original;
+  });
+
+  if (typeof updateActiveStation === "function") {
+    updateActiveStation();
+  }
+}
 
 if (yearElement) {
   yearElement.textContent = new Date().getFullYear().toString();
@@ -196,6 +672,20 @@ if (timelineVideoBackground) {
   timelineVideoBackground.play().catch(() => {});
 }
 
+document.querySelectorAll('.site-nav a[href^="#"]').forEach((link) => {
+  link.addEventListener("click", (event) => {
+    const hash = link.getAttribute("href");
+
+    if (!hash || hash === "#") {
+      return;
+    }
+
+    event.preventDefault();
+    history.pushState(null, "", hash);
+    scrollToPortfolioSection(hash);
+  });
+});
+
 function updateWorldMapViewport() {
   const svgElement = document.querySelector(".portfolio-world-map");
 
@@ -262,6 +752,39 @@ function setUniverseHeight() {
   const firstYearBlock = calendarRuler?.querySelector(".year-block");
   maxRulerTranslate = firstYearBlock ? firstYearBlock.offsetWidth * 16 : 0;
   universe.style.height = `${maxTranslate + window.innerHeight}px`;
+}
+
+function getHorizontalTargetScroll(element) {
+  if (!element || !universe || !track) {
+    return window.scrollY;
+  }
+
+  if (element.id === "work-timeline") {
+    return universe.offsetTop + timelineStartX;
+  }
+
+  const targetOffset = Math.min(
+    maxTranslate,
+    Math.max(0, element.offsetLeft - window.innerWidth * 0.08),
+  );
+  return universe.offsetTop + targetOffset;
+}
+
+function scrollToPortfolioSection(hash) {
+  const target = document.querySelector(hash);
+
+  if (!target) {
+    return;
+  }
+
+  if (!isHorizontalEnabled() || !target.closest(".career-universe")) {
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+    return;
+  }
+
+  setUniverseHeight();
+  const top = getHorizontalTargetScroll(target);
+  window.scrollTo({ top, behavior: "smooth" });
 }
 
 function updateActiveStation() {
@@ -348,6 +871,12 @@ function requestScrollUpdate() {
 
 setUniverseHeight();
 requestScrollUpdate();
+
+if (window.location.hash && document.querySelector(window.location.hash)) {
+  window.requestAnimationFrame(() => {
+    scrollToPortfolioSection(window.location.hash);
+  });
+}
 
 window.addEventListener("scroll", requestScrollUpdate, { passive: true });
 window.addEventListener("resize", () => {
@@ -793,155 +1322,155 @@ const panelContent = {
   },
   comercio: {
     kicker: "01-09-2021 / 15-12-2023",
-    title: "El Comercio / Portadas",
+    title: "El Comercio / Front pages",
     type: "reader",
     chapters: [
       {
-        title: "El Comercio / Portadas",
+        title: "El Comercio / Front pages",
         items: [
           {
-            label: "01 / Incendios",
+            label: "01 / Wildfires",
             src: "assets/images/el-comercio/portadas/01-portada-incendios.jpg",
             alt: "El Comercio front page about wildfires in Asturias",
           },
           {
-            label: "01 / Incendios",
+            label: "01 / Wildfires",
             src: "assets/images/el-comercio/portadas/02-articulo-incendios.jpg",
             alt: "El Comercio article about beekeepers affected by wildfires",
           },
           {
-            label: "02 / Politica",
+            label: "02 / Politics",
             src: "assets/images/el-comercio/portadas/03-portada-autovia.png",
             alt: "El Comercio front page about the southwestern highway extension",
           },
           {
-            label: "02 / Politica",
+            label: "02 / Politics",
             src: "assets/images/el-comercio/portadas/04-articulo-autovia.png",
             alt: "El Comercio article about the southwestern highway toward Ponferrada",
           },
           {
-            label: "03 / Cultura",
+            label: "03 / Culture",
             src: "assets/images/el-comercio/portadas/05-portada-cangas.png",
             alt: "El Comercio front page about Cangas celebration",
           },
           {
-            label: "03 / Cultura",
+            label: "03 / Culture",
             src: "assets/images/el-comercio/portadas/06-articulo-descarga.png",
             alt: "El Comercio feature about La Descarga celebration",
           },
           {
-            label: "04 / Sucesos",
+            label: "04 / Crime and incidents",
             src: "assets/images/el-comercio/portadas/07-portada-sucesos-incendio.png",
             alt: "El Comercio front page about a fatal house fire in Cangas del Narcea",
           },
           {
-            label: "04 / Sucesos",
+            label: "04 / Crime and incidents",
             src: "assets/images/el-comercio/portadas/08-articulo-sucesos-incendio-cangas.png",
             alt: "El Comercio article about a fatal house fire in Cangas del Narcea",
           },
         ],
       },
       {
-        title: "Reportajes multimedia en secciones especiales",
+        title: "Multimedia features in special sections",
         items: [
           {
             label: "Pegados a la Tierra",
             title: "Si no te adaptas a los tiempos, trabajar en un oficio ancestral es imposible",
-            theme: "Artesania, madera y turismo rural",
+            theme: "Craftsmanship, wood and rural tourism",
             href: "https://pegadosalatierra.elcomercio.es/victor-garcia-la-guarida-del-cunqueiro-degana-asturias/",
           },
           {
             label: "Pegados a la Tierra",
             title: "Por que no juntarnos todos y sacar provecho de nuestra biodiversidad?",
-            theme: "Turismo activo y hosteleria rural",
+            theme: "Active tourism and rural hospitality",
             href: "https://pegadosalatierra.elcomercio.es/albergue-gato-gordo-san-pedro-pinera-cudillero/",
           },
           {
             label: "Pegados a la Tierra",
             title: "Lo artesano demanda naturaleza, por eso apostamos por Somiedo",
-            theme: "Industria agroalimentaria y cerveza artesanal",
+            theme: "Agri-food industry and craft beer",
             href: "https://pegadosalatierra.elcomercio.es/lo-artesano-demanda-naturaleza-por-eso-apostamos-por-somiedo/",
           },
           {
             label: "Pegados a la Tierra",
             title: "En mi cocina defiendo la cultura campesina, que esta muy viva",
-            theme: "Gastronomia ambulante y productos locales de km 0",
+            theme: "Mobile gastronomy and local zero-kilometre products",
             href: "https://pegadosalatierra.elcomercio.es/cesar-otero-pizzas-do-pais-manores-tineo/",
           },
           {
             label: "Nuestro Campo",
             title: "La rosa del Narcea se abre paso",
-            theme: "Innovacion agricola, biotecnologia y cosmetica de lujo",
+            theme: "Agricultural innovation, biotechnology and luxury cosmetics",
             href: "https://nuestrocampo.elcomercio.es/la-rosa-del-narcea-se-abre-paso/",
           },
           {
             label: "Nuestro Campo",
             title: "La asturiana de los valles es la mas bella y noble",
-            theme: "Ganaderia de pureza, ferias y subastas nacionales",
+            theme: "Pedigree livestock, fairs and national auctions",
             href: "https://nuestrocampo.elcomercio.es/la-asturiana-de-los-valles-es-la-mas-bella-y-noble/",
           },
           {
             label: "Nuestro Campo",
             title: "Si estuvieramos tan unidos como los ganaderos franceses, no estariamos pasandolo tan mal",
-            theme: "Explotacion ganadera familiar y desafios sectoriales",
+            theme: "Family livestock farming and sector challenges",
             href: "https://nuestrocampo.elcomercio.es/oscar-barrera-lucia-rey-mieldes-explotacion-ganadera/?ref=https%3A%2F%2Fwww.google.com%2F",
           },
           {
             label: "Nuestro Campo",
             title: "Ocho hectareas de arandanos sin aprovechar",
-            theme: "Investigacion agricola, cooperativismo y abandono rural",
+            theme: "Agricultural research, cooperativism and rural abandonment",
             href: "https://nuestrocampo.elcomercio.es/ocho-hectareas-de-arandanos-sin-aprovechar/",
           },
           {
             label: "Nuestro Campo",
             title: "Los rebanos de Asturiana de los Valles",
-            theme: "Feria de montana y ganaderia tradicional",
+            theme: "Mountain fair and traditional livestock farming",
             href: "https://nuestrocampo.elcomercio.es/los-rebanos-de-asturiana-de-los-valles-la-imagen-de-asturias/",
           },
           {
-            label: "Otros",
+            label: "Others",
             title: "Hay que buscar una solucion para los puestos de trabajo de Danone y para Salas",
-            theme: "Economia y manifestacion",
+            theme: "Economy and protest",
             href: "https://www.elcomercio.es/asturias/danone-salas-trabajos-protesta-oviedo-solucion-20220627203436-nt.html",
           },
           {
-            label: "Otros",
+            label: "Others",
             title: "Aparece un desconocido soneto de Miguel Eugenio del Riego en memoria de su hermano",
-            theme: "Cultura",
+            theme: "Culture",
             href: "https://www.elcomercio.es/culturas/aparece-desconocido-soneto-miguel-eugenio-riego-memoria-20231025223424-nt.html",
           },
         ],
       },
       {
-        title: "El Comercio / Entrevistas",
+        title: "El Comercio / Interviews",
         items: [
           {
-            label: "01 / Elecciones",
+            label: "01 / Elections",
             src: "assets/images/el-comercio/entrevistas/01-elecciones-belarmino.png",
             alt: "El Comercio interview with Belarmino Fernandez",
           },
           {
-            label: "02 / Elecciones",
+            label: "02 / Elections",
             src: "assets/images/el-comercio/entrevistas/02-elecciones-fontaniella.png",
             alt: "El Comercio interview with Jose Luis Fontaniella",
           },
           {
-            label: "03 / Investigadora CSIC",
+            label: "03 / CSIC researcher",
             src: "assets/images/el-comercio/entrevistas/03-investigadora-csic-rosa-narcea.png",
             alt: "El Comercio interview with Carmen Martinez about the Rosa del Narcea project",
           },
           {
-            label: "04 / Elecciones",
+            label: "04 / Elections",
             src: "assets/images/el-comercio/entrevistas/02-elecciones-oscar-ancares.png",
             alt: "El Comercio interview with Oscar Ancares",
           },
           {
-            label: "05 / Elecciones",
+            label: "05 / Elections",
             src: "assets/images/el-comercio/entrevistas/03-elecciones-hidalgo.png",
             alt: "El Comercio interview with Sergio Hidalgo",
           },
           {
-            label: "06 / Elecciones",
+            label: "06 / Elections",
             src: "assets/images/el-comercio/entrevistas/04-elecciones-feito.png",
             alt: "El Comercio interview with Jose Ramon Feito Lorences",
           },
@@ -951,62 +1480,62 @@ const panelContent = {
             alt: "El Comercio interview with Andres Rodriguez from Cruz Roja",
           },
           {
-            label: "08 / Elecciones",
+            label: "08 / Elections",
             src: "assets/images/el-comercio/entrevistas/06-elecciones-carmen.png",
             alt: "El Comercio interview with Carmen Lopez",
           },
         ],
       },
       {
-        title: "El Comercio / Politica",
+        title: "El Comercio / Politics",
         items: [
           {
-            label: "01 / Programa transicion justa",
+            label: "01 / Just transition programme",
             src: "assets/images/el-comercio/politica/01-programa-transicion-justa-barbon.png",
             alt: "El Comercio article about Adrian Barbon and just transition works in Ibias",
           },
           {
-            label: "02 / fondos europeos Next Generation",
+            label: "02 / European Next Generation funds",
             src: "assets/images/el-comercio/politica/02-fondos-europeos-next-generation.png",
             alt: "El Comercio article about European Next Generation funds and economic reactivation",
           },
           {
-            label: "03 / Programa transicion justa",
+            label: "03 / Just transition programme",
             src: "assets/images/el-comercio/politica/02-programa-transicion-justa-mina-miura.png",
             alt: "El Comercio article about Mina Miura and the coal market in southwestern Asturias",
           },
           {
-            label: "04 / elecciones municipales",
+            label: "04 / Municipal elections",
             src: "assets/images/el-comercio/politica/04-elecciones-municipales.png",
             alt: "El Comercio article about municipal election proposals for rural economy",
           },
           {
-            label: "05 / Programa transicion justa",
+            label: "05 / Just transition programme",
             src: "assets/images/el-comercio/politica/03-programa-transicion-justa-restauracion-minas.png",
             alt: "El Comercio article about environmental restoration of mines and employment",
           },
           {
-            label: "06 / Despoblacion rural",
+            label: "06 / Rural depopulation",
             src: "assets/images/el-comercio/politica/04-despoblacion-rural.png",
             alt: "El Comercio article about rural depopulation and Caja Rural in Somiedo",
           },
           {
-            label: "07 / Incidente IU",
+            label: "07 / IU incident",
             src: "assets/images/el-comercio/politica/05-incidente-iu.png",
             alt: "El Comercio article about a political incident involving IU in Cangas del Narcea",
           },
         ],
       },
       {
-        title: "El Comercio / Sociedad",
+        title: "El Comercio / Society",
         items: [
           {
-            label: "01 / Salud",
+            label: "01 / Health",
             src: "assets/images/el-comercio/sociedad/03-salud.png",
             alt: "El Comercio article about access to healthcare on the Asturias and Galicia border",
           },
           {
-            label: "02 / Brecha digital",
+            label: "02 / Digital divide",
             src: "assets/images/el-comercio/sociedad/02-brecha-digital-valle-cibea.png",
             alt: "El Comercio article about the Valle del Cibea and the lack of mobile and internet coverage",
           },
@@ -1016,74 +1545,74 @@ const panelContent = {
             alt: "El Comercio article about Cruz Roja volunteers and immigration support",
           },
           {
-            label: "04 / Despoblacion rural",
+            label: "04 / Rural depopulation",
             src: "assets/images/el-comercio/sociedad/02-historia.png",
             alt: "El Comercio article about El Fuejo and rural depopulation",
           },
           {
-            label: "05 / Emprendimiento",
+            label: "05 / Entrepreneurship",
             src: "assets/images/el-comercio/sociedad/04-emprendimiento.png",
             alt: "El Comercio article about rural entrepreneurship in southwestern Asturias",
           },
         ],
       },
       {
-        title: "El Comercio / Economia",
+        title: "El Comercio / Economy",
         items: [
           {
-            label: "01 / Turismo rural",
+            label: "01 / Rural tourism",
             src: "assets/images/el-comercio/economia/01-turismo-rural.png",
             alt: "El Comercio article about rural tourism and a new generation of entrepreneurs",
           },
           {
-            label: "02 / Mineria",
+            label: "02 / Mining",
             src: "assets/images/el-comercio/economia/02-mineria.png",
             alt: "El Comercio article about Orovalle Minerals workers and mining rights",
           },
           {
-            label: "03 / Precariedad",
+            label: "03 / Job insecurity",
             src: "assets/images/el-comercio/economia/03-precariedad.png",
             alt: "El Comercio article about precarious job offers and young workers",
           },
           {
-            label: "04 / ganaderia",
+            label: "04 / Livestock farming",
             src: "assets/images/el-comercio/economia/04-ganaderia.png",
             alt: "El Comercio article about livestock prices and cattle farming",
           },
         ],
       },
       {
-        title: "El Comercio / Cultura",
+        title: "El Comercio / Culture",
         items: [
           {
-            label: "01 / Patrimonio",
+            label: "01 / Heritage",
             src: "assets/images/el-comercio/cultura/01-patrimonio-basilica-cangas.png",
             alt: "El Comercio article about the basilica of Cangas del Narcea and its heritage",
           },
           {
-            label: "02 / Cultura popular rural",
+            label: "02 / Rural popular culture",
             src: "assets/images/el-comercio/cultura/02-cultura-popular-rural.png",
             alt: "El Comercio article about Os Reises and rural popular culture",
           },
           {
-            label: "03 / Ceramica",
+            label: "03 / Black ceramics",
             src: "assets/images/el-comercio/cultura/02-ceramica-negra.png",
             alt: "El Comercio article about black ceramics from Cangas del Narcea",
           },
           {
-            label: "04 / Patrimonio",
+            label: "04 / Heritage",
             src: "assets/images/el-comercio/cultura/02-patrimonio-cornellana.png",
             alt: "El Comercio article about the monastery of Cornellana and heritage restoration",
           },
           {
-            label: "05 / Literatura",
+            label: "05 / Literature",
             src: "assets/images/el-comercio/cultura/03-literatura-casona.png",
             alt: "El Comercio article about Cangas writers and Alejandro Casona",
           },
         ],
       },
       {
-        title: "El Comercio / Sucesos",
+        title: "El Comercio / Crime and incidents",
         items: [
           {
             label: "01 / Rally Tineo",
@@ -1091,12 +1620,12 @@ const panelContent = {
             alt: "El Comercio article about a fatal accident in the Rally Tineo",
           },
           {
-            label: "02 / Suicidio",
+            label: "02 / Suicide",
             src: "assets/images/el-comercio/sucesos/02-suicidio.png",
             alt: "El Comercio article about the death of Diego Ruiz in Valdes",
           },
           {
-            label: "03 / Redada",
+            label: "03 / Police raid",
             src: "assets/images/el-comercio/sucesos/03-redada.png",
             alt: "El Comercio article about a cocaine raid in Cangas del Narcea",
           },
@@ -1106,18 +1635,18 @@ const panelContent = {
   },
   navarra: {
     kicker: "Archive",
-    title: "Títulos académicos",
+    title: "Academic degrees",
     type: "reader",
     chapters: [
       {
-        title: "Títulos académicos",
+        title: "Academic degrees",
         items: [
           {
             type: "academicList",
             entries: [
               {
                 institution: "Universidad Politécnica de Madrid",
-                credential: "Transformación Digital - Agente del Cambio - 2026",
+                credential: "Digital Transformation - Change Agent - 2026",
               },
               {
                 institution: "The Graduate School of Political Management",
@@ -1126,27 +1655,26 @@ const panelContent = {
               {
                 institution: "Universidad de Navarra",
                 credentialLines: [
-                  "Máster en Comunicación Política, Corporativa y Asuntos Públicos",
+                  "Master in Political, Corporate and Public Affairs Communication",
                   "2024/25",
                 ],
                 credentialDocument: {
-                  label: "TFM - Estrategia y análisis de comunicación Auditorio Sony - 8,87",
+                  label: "TFM - Communication strategy and analysis Auditorio Sony - 8.87",
                   href: "assets/documents/academic/tfm-mcpc-auditorio-sony-2025.pdf",
                 },
                 project: {
-                  title: "Colaboración en la newsletter del máster",
+                  title: "Master's newsletter collaboration",
                   publication: "PRECISA/MENTE",
-                  meta: "1.587 suscriptores",
-                  description: "Escuchar, reencuadrar, liderar: la fórmula Nike para dominar la agenda",
+                  meta: "1.587 subscribers",
+                  description: "Listen, reframe, lead: Nike's formula for dominating the agenda",
                   links: {
-                    publication: "https://www.linkedin.com/newsletters/precisa-mente-7031193333930561536/",
                     article:
                       "https://www.linkedin.com/pulse/escuchar-reencuadrar-liderar-la-formula-nike-para-dominar-agenda-r0mwf/",
                   },
                 },
               },
               {
-                institution: "Master en Desarrollo Web y Motion Graphics",
+                institution: "Master in Web Development and Motion Graphics",
                 credential: "Escuela Trazos - 2021",
               },
               {
@@ -1155,21 +1683,21 @@ const panelContent = {
               },
               {
                 institution: "Universidad Rey Juan Carlos",
-                credential: "Grado en Comunicación Audiovisual - 2015",
+                credential: "Degree in Audiovisual Communication - 2015",
                 project: {
-                  title: "Trabajo TFG: Sobresaliente (9.3/10)",
+                  title: "Final degree project: distinction (9.3/10)",
                   description:
-                    "Análisis comparativo entre un cómic y su adaptación cinematográfica. Estudio de caso: Persepolis.",
+                    "Comparative analysis between a comic and its film adaptation. Case study: Persepolis.",
                   href: "assets/documents/academic/tfg-audiovisual-persepolis.pdf",
                 },
               },
               {
                 institution: "Universidad Rey Juan Carlos",
-                credential: "Grado en Periodismo - 2015",
+                credential: "Degree in Journalism - 2015",
               },
               {
                 institution: "La Factoría del Guión",
-                credential: "Curso en guion de Cine y TV - 2013",
+                credential: "Film and TV Screenwriting course - 2013",
               },
             ],
           },
@@ -1179,9 +1707,9 @@ const panelContent = {
         title: "Universidad Politécnica de Madrid",
         items: [
           {
-            label: "2026 / Transformación Digital",
+            label: "2026 / Digital Transformation",
             src: "assets/images/academic/politecnica-transformacion-digital.jpg",
-            alt: "Diploma de Transformacion Digital Agentes del Cambio de la Universidad Politecnica de Madrid",
+            alt: "Digital Transformation Change Agents diploma from Universidad Politecnica de Madrid",
           },
         ],
       },
@@ -1201,7 +1729,7 @@ const panelContent = {
           {
             label: "2024-25 / MCPC",
             src: "assets/images/academic/mcpc-universidad-navarra.jpg",
-            alt: "Diploma del Master en Comunicacion Politica y Corporativa de la Universidad de Navarra",
+            alt: "Master in Political and Corporate Communication diploma from Universidad de Navarra",
           },
         ],
       },
@@ -1216,22 +1744,22 @@ const panelContent = {
         ],
       },
       {
-        title: "Universidad Rey Juan Carlos - Comunicación Audiovisual",
+        title: "Universidad Rey Juan Carlos - Audiovisual Communication",
         items: [
           {
-            label: "2015 / Comunicación Audiovisual",
+            label: "2015 / Audiovisual Communication",
             src: "assets/images/academic/urjc-comunicacion-audiovisual.jpg",
-            alt: "Titulo de Graduado en Comunicacion Audiovisual por la Universidad Rey Juan Carlos",
+            alt: "Audiovisual Communication degree diploma from Universidad Rey Juan Carlos",
           },
         ],
       },
       {
-        title: "Universidad Rey Juan Carlos - Periodismo",
+        title: "Universidad Rey Juan Carlos - Journalism",
         items: [
           {
-            label: "2015 / Periodismo",
+            label: "2015 / Journalism",
             src: "assets/images/academic/urjc-periodismo.jpg",
-            alt: "Titulo de Graduado en Periodismo por la Universidad Rey Juan Carlos",
+            alt: "Journalism degree diploma from Universidad Rey Juan Carlos",
           },
         ],
       },
@@ -1624,14 +2152,12 @@ function renderReaderPages(items) {
                             <div class="academic-title-project">
                               <a
                                 class="academic-title-project__heading"
-                                href="${escapeHtml(entry.project.links.publication)}"
+                                href="${escapeHtml(entry.project.links.article)}"
                                 target="_blank"
                                 rel="noopener noreferrer"
                               >${escapeHtml(entry.project.title)}</a>
                               <span>
-                                <a href="${escapeHtml(entry.project.links.publication)}" target="_blank" rel="noopener noreferrer">
-                                  ${escapeHtml(entry.project.publication)}
-                                </a>
+                                ${escapeHtml(entry.project.publication)}
                                 ${escapeHtml(`(${entry.project.meta})`)}
                               </span>
                               <a
@@ -2130,6 +2656,7 @@ function openPanel(panelKey) {
   }
 
   dialog.showModal();
+  applyLanguage(currentLanguage, dialog);
 }
 
 document.querySelectorAll("[data-panel]").forEach((trigger) => {
@@ -2152,3 +2679,73 @@ dialog?.addEventListener("close", () => {
 dialog?.addEventListener("cancel", (event) => {
   event.preventDefault();
 });
+
+languageButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    applyLanguage(button.dataset.lang);
+  });
+});
+
+document.querySelectorAll("[data-contact-form]").forEach((form) => {
+  form.addEventListener("submit", async (event) => {
+    const action = form.getAttribute("action") || "";
+
+    if (action.startsWith("http")) {
+      event.preventDefault();
+      const submitButton = form.querySelector('button[type="submit"]');
+      const originalButtonText = submitButton?.textContent;
+      submitButton?.setAttribute("disabled", "true");
+      if (submitButton) {
+        submitButton.textContent = currentLanguage === "es" ? "Enviando..." : "Sending...";
+      }
+
+      try {
+        const response = await fetch(action, {
+          method: form.method || "POST",
+          body: new FormData(form),
+          headers: { Accept: "application/json" },
+        });
+
+        if (!response.ok) {
+          throw new Error("Form submission failed");
+        }
+
+        form.reset();
+        if (submitButton) {
+          submitButton.textContent = currentLanguage === "es" ? "Mensaje enviado" : "Message sent";
+        }
+      } catch {
+        if (submitButton) {
+          submitButton.textContent = currentLanguage === "es" ? "Error al enviar" : "Send failed";
+        }
+      } finally {
+        window.setTimeout(() => {
+          submitButton?.removeAttribute("disabled");
+          if (submitButton && originalButtonText) {
+            submitButton.textContent = translateTextValue(originalButtonText, currentLanguage);
+          }
+        }, 2400);
+      }
+
+      return;
+    }
+
+    event.preventDefault();
+    const formData = new FormData(form);
+    const recipient = form.dataset.contactEmail || "cbernalhcom@gmail.com";
+    const subject = encodeURIComponent(`Portfolio contact - ${formData.get("name") || "New message"}`);
+    const body = encodeURIComponent(
+      [
+        `Name: ${formData.get("name") || ""}`,
+        `Email: ${formData.get("email") || ""}`,
+        `Phone: ${formData.get("phone") || ""}`,
+        "",
+        "Message:",
+        formData.get("message") || "",
+      ].join("\n"),
+    );
+    window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
+  });
+});
+
+applyLanguage(currentLanguage);

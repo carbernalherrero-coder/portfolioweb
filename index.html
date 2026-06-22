@@ -20,9 +20,14 @@
     <header class="site-header">
       <a class="brand" href="#top" aria-label="Back to the beginning">CB</a>
       <nav class="site-nav" aria-label="Main navigation">
-        <a href="#timeline">Timeline</a>
+        <a href="#world-map">World map</a>
+        <a href="#work-timeline">Timeline</a>
         <a href="#archive">Archive</a>
         <a href="#contact">Contact</a>
+        <span class="language-switcher" role="group" aria-label="Language selector">
+          <button class="language-toggle" type="button" data-lang="es" aria-label="Ver versión en español">ES</button>
+          <button class="language-toggle is-active" type="button" data-lang="en" aria-label="View English version">EN</button>
+        </span>
       </nav>
     </header>
 
@@ -129,7 +134,7 @@
                   <span>La Voz<br>del Trubia</span>
                 </button>
                 <button class="archive-tile archive-tile--ambition" data-panel="navarra" type="button">
-                  <span>Títulos, trabajos<br>colaboraciones<br>académicas</span>
+                  <span>Academic work<br>and collaborations</span>
                   <span class="archive-split-logos" aria-hidden="true">
                     <span class="archive-split-logo archive-split-logo--navarra"></span>
                     <span class="archive-split-logo archive-split-logo--george"></span>
@@ -147,7 +152,7 @@
               </div>
             </article>
 
-            <article class="timeline-station timeline-station--map" aria-labelledby="world-map-title">
+            <article class="timeline-station timeline-station--map" id="world-map" aria-labelledby="world-map-title">
               <div class="world-map-card">
                 <svg class="portfolio-world-map" viewBox="0 0 960 520" role="img" aria-labelledby="world-map-title world-map-desc">
                   <title id="world-map-title">Static world map</title>
@@ -338,7 +343,7 @@
               </div>
             </article>
 
-            <button class="timeline-station timeline-station--lane-high reveal" data-panel="lavoz" data-date-label="Jun 2026 / present">
+            <button class="timeline-station timeline-station--lane-high reveal" id="work-timeline" data-panel="lavoz" data-date-label="Jun 2026 / present">
               <time>01-06-2026 / present</time>
               <span class="timeline-duration" style="--duration: 1.1" aria-hidden="true"><i></i></span>
               <img src="assets/icons/logo-la-voz-del-trubia.jpg" alt="La Voz del Trubia logo">
@@ -440,7 +445,7 @@
             <button class="timeline-station timeline-station--lane-high reveal" data-panel="screenwriting" data-date-label="Sep 2013 - Jun 2014">
               <time>15-09-2013 / 15-06-2014</time>
               <span class="timeline-duration timeline-duration--academic" style="--duration: 9" aria-hidden="true"><i></i></span>
-              <span class="station-orbit station-orbit--small"></span>
+              <img src="assets/icons/logo-factoria-del-guion.jpg" alt="La Factoria del Guion logo">
               <h3>Film and TV Screenwriting</h3>
               <p>La Factoria del Guion. Structure, scenes, dialogue and narrative rhythm.</p>
               <small>Creative writing</small>
@@ -449,7 +454,7 @@
             <button class="timeline-station timeline-station--lane-low reveal" data-panel="openworld" data-date-label="Jul 2011 - Jul 2012">
               <time>06-07-2011 / 06-07-2012</time>
               <span class="timeline-duration" style="--duration: 12" aria-hidden="true"><i></i></span>
-              <span class="station-orbit station-orbit--small"></span>
+              <img src="assets/icons/logo-open-world-education.png" alt="Open World Education logo">
               <h3>Open World Education</h3>
               <p>Coordination of language exchanges across Dublin and Madrid.</p>
               <small>Education / languages</small>
@@ -458,8 +463,8 @@
             <button class="timeline-station timeline-station--large timeline-station--lane-mid reveal" data-panel="urjc" data-date-label="Sep 2010 - Jun 2015">
               <time>01-09-2010 / 30-06-2015</time>
               <span class="timeline-duration timeline-duration--academic" style="--duration: 58" aria-hidden="true"><i></i></span>
-              <span class="station-orbit"></span>
-              <h3>Journalism<br>Communication</h3>
+              <img src="assets/icons/logo-urjc.png" alt="Universidad Rey Juan Carlos logo">
+              <h3>Journalism and<br>Communication</h3>
               <p>Double degree at Universidad Rey Juan Carlos: journalism, audiovisual communication and public opinion.</p>
               <small>Academic foundation</small>
             </button>
@@ -468,8 +473,55 @@
       </section>
     </main>
 
-    <footer class="site-footer" id="contact">
-      <p>&copy; <span id="current-year"></span> Carlos Bernal. Horizontal scrollytelling portfolio.</p>
+    <footer class="site-footer contact-section" id="contact">
+      <div class="contact-geometry" aria-hidden="true">
+        <span class="contact-line contact-line--one"></span>
+        <span class="contact-line contact-line--two"></span>
+        <span class="contact-node contact-node--one"></span>
+        <span class="contact-node contact-node--two"></span>
+      </div>
+      <div class="contact-inner">
+        <div class="contact-portrait">
+          <img src="assets/images/carlos-bernal-contact.png" alt="Carlos Bernal portrait" loading="lazy">
+        </div>
+        <div class="contact-copy">
+          <p class="contact-kicker">Interested in working together?</p>
+          <h2>Let’s tell purposeful stories that build trust.</h2>
+          <div class="contact-links" aria-label="Contact details">
+            <a href="mailto:cbernalhcom@gmail.com">cbernalhcom@gmail.com</a>
+            <a href="tel:+34669732900">+34 669 73 29 00</a>
+            <a href="https://www.linkedin.com/in/carlos-bernal-periodistaseo/" target="_blank" rel="noopener noreferrer">LinkedIn — Carlos Bernal</a>
+          </div>
+        </div>
+        <form
+          class="contact-form"
+          data-contact-form
+          data-contact-email="cbernalhcom@gmail.com"
+          data-mailto-fallback="true"
+          action="https://formspree.io/f/mvzjoajo"
+          method="post"
+        >
+          <label>
+            <span>Name</span>
+            <input type="text" name="name" autocomplete="name" required>
+          </label>
+          <label>
+            <span>Email</span>
+            <input type="email" name="email" autocomplete="email" required>
+          </label>
+          <label>
+            <span>Phone</span>
+            <input type="tel" name="phone" autocomplete="tel">
+          </label>
+          <label>
+            <span>Message</span>
+            <textarea name="message" rows="5" required></textarea>
+          </label>
+          <button type="submit">Send message</button>
+          <p class="contact-form-note">Secure Formspree delivery with email fallback.</p>
+        </form>
+      </div>
+      <p class="site-footer__legal">&copy; <span id="current-year"></span> Carlos Bernal. Horizontal scrollytelling portfolio.</p>
     </footer>
 
     <dialog class="detail-panel" id="detail-panel" aria-labelledby="panel-title">
