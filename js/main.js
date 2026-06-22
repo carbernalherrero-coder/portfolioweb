@@ -106,6 +106,10 @@ const textTranslations = {
       "Contenido, edición y comunicación cultural en Lille, Francia.",
     "Culture / editorial content": "Cultura / contenido editorial",
     "Project management and community work in Lille.": "Gestión de proyectos y trabajo comunitario en Lille.",
+    "Operational base for a gender-equality and inclusion project in Lille.":
+      "Base operativa de un proyecto de inclusión e igualdad de género en Lille.",
+    "French Ministry scholarship and BPJEPS socio-cultural coordination at CEMEA.":
+      "Beca del Ministerio francés y coordinación sociocultural BPJEPS en CEMEA.",
     "Third sector": "Tercer sector",
     "BPJEPS / socio-cultural coordination": "BPJEPS / coordinación sociocultural",
     "French Ministry of Education and CEMEA. Training in youth work and cultural projects.":
@@ -134,6 +138,7 @@ const textTranslations = {
     "Phone": "Teléfono",
     "Message": "Mensaje",
     "Send message": "Enviar mensaje",
+    "Message sent. Thank you.": "El mensaje ha sido enviado. Muchas gracias.",
     "Secure Formspree delivery with email fallback.":
       "Envío seguro con Formspree y respaldo por email.",
     "Carlos Bernal portrait": "Retrato de Carlos Bernal",
@@ -147,11 +152,11 @@ const textTranslations = {
     "Journalism and Audiovisual Communication": "Periodismo y Comunicación Audiovisual",
     "Academic starting point for the timeline: reporting, audiovisual language, scripts and public storytelling.":
       "Punto de partida académico de la trayectoria: reporterismo, lenguaje audiovisual, guion y narración pública.",
-    "This station can later open degree projects, certificates, selected papers and university work.":
-      "Esta estación podrá abrir proyectos de grado, certificados, trabajos seleccionados y producción universitaria.",
+    "This academic stage built the reporting discipline, audiovisual language and critical framework behind my subsequent work in journalism, communication and public storytelling.":
+      "Esta etapa académica construyó la disciplina reporteril, el lenguaje audiovisual y el marco crítico que sostiene mi trabajo posterior en periodismo, comunicación y narración pública.",
     "Film and TV screenwriting training.": "Formación en guion de cine y televisión.",
-    "A future detail page can connect this training to narrative structure, audiovisual storytelling and script work.":
-      "Una futura página de detalle podrá conectar esta formación con estructura narrativa, storytelling audiovisual y trabajo de guion.",
+    "The programme strengthened my command of dramatic structure, character development, dialogue and audiovisual storytelling for fiction and factual narratives.":
+      "El programa reforzó mi dominio de la estructura dramática, la construcción de personajes, el diálogo y la narración audiovisual para relatos de ficción y no ficción.",
     "Editorial Brumaria visual archive": "Archivo visual de Editorial Brumaria",
     "Publishing / Cultural production": "Edición / producción cultural",
     "Fieldwork / Human connection": "Trabajo de campo / conexión humana",
@@ -163,17 +168,47 @@ const textTranslations = {
     "French Ministry of Education / CEMEA": "Ministerio francés de Educación / CEMEA",
     "BPJEPS / socio-cultural project coordination training in France.":
       "Formación BPJEPS en coordinación de proyectos socioculturales en Francia.",
-    "Future assets: certificates, program documents, workshop material and education-related evidence.":
-      "Materiales futuros: certificados, documentos del programa, materiales de talleres y evidencias vinculadas a educación.",
     "A curated selection of audiovisual work produced during my time with Cultur'all Studio in Lille, spanning festivals, music videos, and campaign spots for cultural and institutional clients across Northern France.":
       "Una selección curada de trabajos audiovisuales producidos durante mi etapa en Cultur'all Studio en Lille, con festivales, videoclips y piezas de campaña para clientes culturales e institucionales del norte de Francia.",
-    "Future assets: workshop documentation, project notes, photographs and impact summaries.":
-      "Materiales futuros: documentación de talleres, notas de proyecto, fotografías y resúmenes de impacto.",
     "Graphic Design and Web Development": "Diseño gráfico y desarrollo web",
     "Digital design and web-development training at Trazos.":
       "Formación en diseño digital y desarrollo web en Trazos.",
-    "This station can later hold design exercises, web prototypes and visual production work.":
-      "Esta estación podrá albergar ejercicios de diseño, prototipos web y trabajos de producción visual.",
+    "This training gave me a practical visual toolkit for building digital narratives: interface structure, graphic composition, motion graphics and web-oriented production.":
+      "Esta formación me dio una caja de herramientas visual para construir narrativas digitales: estructura de interfaz, composición gráfica, motion graphics y producción orientada a web.",
+    "I received a French Ministry of Education scholarship to complete a 12-month BPJEPS programme at CEMEA. The training combined full-time theoretical classes with the design and implementation of a socio-cultural project across Lille's municipal social-centre network: an inclusion and gender-equality programme built around 14 workshops and public events, subsequently documented in a formal report for the Ministry.":
+      "Recibí una beca del Ministerio francés de Educación para realizar una formación BPJEPS de 12 meses en CEMEA. El programa combinó clases teóricas a jornada completa con el diseño e implantación de un proyecto sociocultural en la red municipal de centros sociales de Lille: una iniciativa de inclusión e igualdad de género articulada en 14 talleres y eventos públicos, documentada posteriormente en una memoria formal para el Ministerio.",
+    "Designed the inclusion and gender-equality project from concept to implementation.":
+      "Diseñé el proyecto de inclusión e igualdad de género desde la idea inicial hasta su implantación.",
+    "Coordinated institutional communication with the French Ministry of Education and Lille City Council.":
+      "Coordiné la comunicación institucional con el Ministerio francés de Educación y el Ayuntamiento de Lille.",
+    "Planned and managed 14 workshops and public events across Lille's social-centre network.":
+      "Planifiqué y gestioné 14 talleres y eventos públicos en la red de centros sociales de Lille.",
+    "Worked with centre directors, local teams and municipal stakeholders to deliver the programme.":
+      "Trabajé con direcciones de centros, equipos locales y actores municipales para ejecutar el programa.",
+    "Presented the project and final report, successfully completing the BPJEPS assessment.":
+      "Presenté el proyecto y la memoria final, completando con éxito la evaluación del BPJEPS.",
+    "Centre Social La Busette was the operational base for my BPJEPS project in Lille. From there, and with the support of its management team, I designed, tested and coordinated the first workshops of an inclusion and gender-equality programme before expanding it to other municipal social centres. The centre director acted as my project tutor throughout the process.":
+      "Centre Social La Busette fue la base operativa de mi proyecto BPJEPS en Lille. Desde allí, y con el apoyo de su equipo directivo, diseñé, probé y coordiné los primeros talleres de un programa de inclusión e igualdad de género antes de extenderlo a otros centros sociales municipales. La directora del centro fue mi tutora de proyecto durante todo el proceso.",
+    "Used La Busette as the headquarters for project planning, coordination and follow-up.":
+      "Utilicé La Busette como sede de planificación, coordinación y seguimiento del proyecto.",
+    "Designed the first workshop formats with the centre's management and community teams.":
+      "Diseñé los primeros formatos de taller con el equipo directivo y comunitario del centro.",
+    "Coordinated schedules, spaces, participants and support teams for local activities.":
+      "Coordiné calendarios, espacios, participantes y equipos de apoyo para las actividades locales.",
+    "Adapted the project model before transferring workshops to other social centres in Lille.":
+      "Adapté el modelo del proyecto antes de trasladar los talleres a otros centros sociales de Lille.",
+    "Worked under the supervision of the centre director, who served as project tutor.":
+      "Trabajé bajo la supervisión de la directora del centro, que ejerció como tutora del proyecto.",
+    "After two years producing audiovisual content in Lille for cultural centres, Lille City Council and music festivals, plus one year at Editorial Brumaria supporting editorial projects in Madrid, I joined Trazos to professionalise that practical background. The programme strengthened my command of graphic design, motion graphics and digital production through Adobe workflows, visual identity, editorial design, advertising, animation and front-end foundations.":
+      "Después de dos años produciendo contenido audiovisual en Lille para centros culturales, el Ayuntamiento y festivales de música, además de un año en Editorial Brumaria apoyando proyectos editoriales en Madrid, cursé Trazos para profesionalizar esa experiencia práctica. El programa reforzó mi dominio del diseño gráfico, el motion graphics y la producción digital mediante Adobe, identidad visual, diseño editorial, publicidad, animación y bases de front-end.",
+    "Professionalised my audiovisual background through graphic design, branding, editorial design and advertising practice.":
+      "Profesionalicé mi experiencia audiovisual previa mediante diseño gráfico, branding, diseño editorial y práctica publicitaria.",
+    "Worked with Adobe Illustrator, Photoshop, InDesign, After Effects and Premiere for visual and motion production.":
+      "Trabajé con Adobe Illustrator, Photoshop, InDesign, After Effects y Premiere para producción visual y motion.",
+    "Built motion-graphics skills around rhythm, composition, keyframes, effects, video editing and animated storytelling.":
+      "Desarrollé competencias de motion graphics en ritmo, composición, keyframes, efectos, edición de vídeo y narrativa animada.",
+    "Connected design training with web-oriented production, strengthening HTML, CSS, JavaScript and digital storytelling foundations.":
+      "Conecté la formación en diseño con producción orientada a web, reforzando bases de HTML, CSS, JavaScript y narrativa digital.",
     "El Comercio / Front pages": "El Comercio / Portadas",
     "Wildfires": "Incendios",
     "Politics": "Política",
@@ -269,8 +304,8 @@ const textTranslations = {
     "Co-organizations of events": "Coorganización de eventos",
     "for Turkish Airlines and Synergym.": "para Turkish Airlines y Synergym.",
     "School of Political Management experience.": "Experiencia en la School of Political Management.",
-    "Future assets: academic work, presentations, certificates and public affairs materials.":
-      "Materiales futuros: trabajos académicos, presentaciones, certificados y materiales de asuntos públicos.",
+    "A specialised political-management programme that connected campaign strategy, public leadership, institutional communication and the practical logic of decision-making in Washington, D.C.":
+      "Un programa especializado en gestión política que conectó estrategia de campaña, liderazgo público, comunicación institucional y la lógica práctica de la toma de decisiones en Washington, D.C.",
     "ONG Hilo Rojo | Trujillo, Peru": "ONG Hilo Rojo | Trujillo, Perú",
     "At HiloRojo, I shared my passion for communication as a bridge between people, cultures, and stories. Working in a diverse environment taught me to listen with care and communicate with purpose. It was a lesson in empathy, creativity, and human connection.":
       "En HiloRojo compartí mi pasión por la comunicación como puente entre personas, culturas e historias. Trabajar en un entorno diverso me enseñó a escuchar con cuidado y comunicar con propósito. Fue una lección de empatía, creatividad y conexión humana.",
@@ -284,66 +319,66 @@ const textTranslations = {
     "Value": "Valor",
     "Selected field reporting, social-impact projects and pieces that explain the professional value behind the portfolio.":
       "Selección de reporterismo de campo, proyectos de impacto social y piezas que explican el valor profesional detrás del portfolio.",
-    "Future assets: articles, case studies, visual notes and editorial outcomes.":
-      "Materiales futuros: artículos, casos de estudio, notas visuales y resultados editoriales.",
+    "A selection of field reporting, social-impact projects and editorial work where listening, context and human detail create professional value.":
+      "Una selección de reporterismo de campo, proyectos de impacto social y trabajo editorial donde la escucha, el contexto y el detalle humano generan valor profesional.",
     "Growth": "Crecimiento",
     "Academic progression, master's degrees, international programmes and design/web development training.":
       "Progresión académica, másteres, programas internacionales y formación en diseño/desarrollo web.",
-    "Future assets: certificates, coursework, presentations and learning evidence.":
-      "Materiales futuros: certificados, trabajos de curso, presentaciones y evidencias de aprendizaje.",
+    "A learning path shaped by journalism, audiovisual storytelling, public affairs, design, web development and international training.":
+      "Una trayectoria de aprendizaje marcada por el periodismo, la narración audiovisual, los asuntos públicos, el diseño, el desarrollo web y la formación internacional.",
     "Reputation": "Reputación",
     "Corporate communication, public affairs, media relations and strategic content work.":
       "Comunicación corporativa, asuntos públicos, relaciones con medios y contenido estratégico.",
-    "Future assets: non-confidential briefs, monitoring samples, planning notes and reputation frameworks.":
-      "Materiales futuros: briefs no confidenciales, muestras de monitorización, notas de planificación y marcos de reputación.",
+    "Work focused on reputation, media relations, message discipline and strategic content for brands, institutions and public-facing organisations.":
+      "Trabajo centrado en reputación, relación con medios, disciplina de mensaje y contenido estratégico para marcas, instituciones y organizaciones con exposición pública.",
     "Diversity": "Diversidad",
     "International experience across Spanish, French and English-speaking environments.":
       "Experiencia internacional en entornos de habla española, francesa e inglesa.",
-    "Future assets: maps, project diaries, language evidence and cross-cultural work.":
-      "Materiales futuros: mapas, diarios de proyecto, evidencias lingüísticas y trabajo intercultural.",
+    "Experience built across Spain, France, Ireland, Peru, Ecuador, Portugal and the United States, moving between languages, cultures and professional contexts.":
+      "Experiencia construida en España, Francia, Irlanda, Perú, Ecuador, Portugal y Estados Unidos, moviéndome entre idiomas, culturas y contextos profesionales.",
     "Share": "Compartir",
     "Published journalism, audiovisual pieces, interviews and public-facing storytelling.":
       "Periodismo publicado, piezas audiovisuales, entrevistas y narrativas orientadas al público.",
-    "Future assets: links, clips, screenshots, embeds and publication pages.":
-      "Materiales futuros: enlaces, clips, capturas, embeds y páginas de publicación.",
+    "Public-facing work across local journalism, multimedia reporting, interviews, audiovisual pieces and editorial projects designed to reach real audiences.":
+      "Trabajo orientado al público en periodismo local, reportajes multimedia, entrevistas, piezas audiovisuales y proyectos editoriales pensados para llegar a audiencias reales.",
     "Ambition": "Ambición",
     "Projects that connect journalism, strategic communication, public affairs and visual storytelling.":
       "Proyectos que conectan periodismo, comunicación estratégica, asuntos públicos y storytelling visual.",
-    "Future assets: portfolio experiments, prototypes, design systems and narrative formats.":
-      "Materiales futuros: experimentos de portfolio, prototipos, sistemas de diseño y formatos narrativos.",
+    "Projects where journalism, strategic communication, public affairs, design and visual storytelling meet in a single professional profile.":
+      "Proyectos donde periodismo, comunicación estratégica, asuntos públicos, diseño y storytelling visual se encuentran en un mismo perfil profesional.",
     "Dispute": "Debate",
     "Work around public debate, political communication, institutional environments and social listening.":
       "Trabajo en torno al debate público, la comunicación política, entornos institucionales y escucha social.",
-    "Future assets: analysis, issue maps, stakeholder contexts and communication strategy notes.":
-      "Materiales futuros: análisis, mapas de asuntos, contextos de stakeholders y notas de estrategia de comunicación.",
+    "Experience reading public debate, mapping stakeholders, following political contexts and translating complex issues into clear communication.":
+      "Experiencia leyendo el debate público, mapeando stakeholders, siguiendo contextos políticos y traduciendo asuntos complejos en comunicación clara.",
     "Critical": "Crítico",
     "Research, essays, screenwriting, editorial thinking and reflective academic work.":
       "Investigación, ensayos, guion, pensamiento editorial y trabajo académico reflexivo.",
-    "Future assets: papers, scripts, reading notes, research projects and visual essays.":
-      "Materiales futuros: papers, guiones, notas de lectura, proyectos de investigación y ensayos visuales.",
+    "Research, essays, scripts and editorial thinking that connect analytical rigour with narrative craft and cultural interpretation.":
+      "Investigación, ensayos, guiones y pensamiento editorial que conectan rigor analítico, oficio narrativo e interpretación cultural.",
     "Journalism work": "Trabajo periodístico",
     "El Comercio, La Voz del Trubia and cultural media work.":
       "El Comercio, La Voz del Trubia y trabajo en medios culturales.",
-    "Future filters: interviews, field reporting, video, opinion, culture, local politics and features.":
-      "Filtros futuros: entrevistas, reporterismo de campo, vídeo, opinión, cultura, política local y reportajes.",
+    "Interviews, field reporting, video, opinion, culture, local politics and feature writing across regional and cultural media.":
+      "Entrevistas, reporterismo de campo, vídeo, opinión, cultura, política local y reportajes en medios regionales y culturales.",
     "Third sector and education": "Tercer sector y educación",
     "Hilo Rojo, Cultur'All Studio, Centre Social La Busette, UFCV and education projects.":
       "Hilo Rojo, Cultur'All Studio, Centre Social La Busette, UFCV y proyectos educativos.",
-    "Future assets: workshops, camps, videos, project documents and photo stories.":
-      "Materiales futuros: talleres, campamentos, vídeos, documentos de proyecto y foto-historias.",
+    "Community work, youth projects, educational coordination and audiovisual storytelling developed in France and Latin America.":
+      "Trabajo comunitario, proyectos juveniles, coordinación educativa y storytelling audiovisual desarrollados en Francia y América Latina.",
     "Corporate communication and public affairs": "Comunicación corporativa y asuntos públicos",
     "Weber Shandwick, Universidad de Navarra and George Washington University.":
       "Weber Shandwick, Universidad de Navarra y George Washington University.",
-    "Future assets: non-confidential strategy work, media angles, presentations and research.":
-      "Materiales futuros: trabajo estratégico no confidencial, enfoques para medios, presentaciones e investigación.",
+    "Strategic communication experience spanning media angles, reputation work, research, institutional narratives and public-affairs thinking.":
+      "Experiencia en comunicación estratégica: enfoques para medios, reputación, investigación, narrativas institucionales y pensamiento de asuntos públicos.",
     "Academic titles": "Títulos académicos",
     "Journalism and Audiovisual Communication, screenwriting, BPJEPS, design/web development and two master's tracks.":
       "Periodismo y Comunicación Audiovisual, guion, BPJEPS, diseño/desarrollo web y dos itinerarios de máster.",
-    "This archive will gather certificates, coursework and formal academic material.":
-      "Este archivo reunirá certificados, trabajos de curso y material académico formal.",
+    "A structured view of my formal academic path, from journalism and audiovisual communication to screenwriting, BPJEPS, design, web development and public affairs.":
+      "Una vista estructurada de mi recorrido académico formal, desde periodismo y comunicación audiovisual hasta guion, BPJEPS, diseño, desarrollo web y asuntos públicos.",
     "Academic works": "Trabajos académicos",
-    "Future library for research, papers, presentations, essays and selected projects.":
-      "Biblioteca futura para investigación, papers, presentaciones, ensayos y proyectos seleccionados.",
+    "A curated library of research, papers, presentations, essays and selected projects connected to journalism, strategy, design and public affairs.":
+      "Una biblioteca curada de investigación, trabajos, presentaciones, ensayos y proyectos seleccionados vinculados con periodismo, estrategia, diseño y asuntos públicos.",
     "Recommended filters: Public Affairs, Journalism, Strategy, Design, Screenwriting and AI tools.":
       "Filtros recomendados: asuntos públicos, periodismo, estrategia, diseño, guion y herramientas de IA.",
     "Skills and tools": "Competencias y herramientas",
@@ -1175,7 +1210,7 @@ const panelContent = {
     title: "Journalism and Audiovisual Communication",
     body: [
       "Academic starting point for the timeline: reporting, audiovisual language, scripts and public storytelling.",
-      "This station can later open degree projects, certificates, selected papers and university work.",
+      "This academic stage built the reporting discipline, audiovisual language and critical framework behind my subsequent work in journalism, communication and public storytelling.",
     ],
   },
   screenwriting: {
@@ -1183,7 +1218,7 @@ const panelContent = {
     title: "La Factoría del Guion",
     body: [
       "Film and TV screenwriting training.",
-      "A future detail page can connect this training to narrative structure, audiovisual storytelling and script work.",
+      "The programme strengthened my command of dramatic structure, character development, dialogue and audiovisual storytelling for fiction and factual narratives.",
     ],
   },
   brumaria: {
@@ -1274,9 +1309,14 @@ const panelContent = {
   ministry: {
     kicker: "01-09-2015 / 30-06-2016",
     title: "French Ministry of Education / CEMEA",
-    body: [
-      "BPJEPS / socio-cultural project coordination training in France.",
-      "Future assets: certificates, program documents, workshop material and education-related evidence.",
+    intro:
+      "I received a French Ministry of Education scholarship to complete a 12-month BPJEPS programme at CEMEA. The training combined full-time theoretical classes with the design and implementation of a socio-cultural project across Lille's municipal social-centre network: an inclusion and gender-equality programme built around 14 workshops and public events, subsequently documented in a formal report for the Ministry.",
+    bullets: [
+      "Designed the inclusion and gender-equality project from concept to implementation.",
+      "Coordinated institutional communication with the French Ministry of Education and Lille City Council.",
+      "Planned and managed 14 workshops and public events across Lille's social-centre network.",
+      "Worked with centre directors, local teams and municipal stakeholders to deliver the programme.",
+      "Presented the project and final report, successfully completing the BPJEPS assessment.",
     ],
   },
   culturall: {
@@ -1338,17 +1378,26 @@ const panelContent = {
   busette: {
     kicker: "01-09-2015 / 30-08-2016",
     title: "Centre Social La Busette",
-    body: [
-      "Project management and community work in Lille.",
-      "Future assets: workshop documentation, project notes, photographs and impact summaries.",
+    intro:
+      "Centre Social La Busette was the operational base for my BPJEPS project in Lille. From there, and with the support of its management team, I designed, tested and coordinated the first workshops of an inclusion and gender-equality programme before expanding it to other municipal social centres. The centre director acted as my project tutor throughout the process.",
+    bullets: [
+      "Used La Busette as the headquarters for project planning, coordination and follow-up.",
+      "Designed the first workshop formats with the centre's management and community teams.",
+      "Coordinated schedules, spaces, participants and support teams for local activities.",
+      "Adapted the project model before transferring workshops to other social centres in Lille.",
+      "Worked under the supervision of the centre director, who served as project tutor.",
     ],
   },
   trazos: {
     kicker: "01-09-2020 / 30-06-2021",
     title: "Graphic Design and Web Development",
-    body: [
-      "Digital design and web-development training at Trazos.",
-      "This station can later hold design exercises, web prototypes and visual production work.",
+    intro:
+      "After two years producing audiovisual content in Lille for cultural centres, Lille City Council and music festivals, plus one year at Editorial Brumaria supporting editorial projects in Madrid, I joined Trazos to professionalise that practical background. The programme strengthened my command of graphic design, motion graphics and digital production through Adobe workflows, visual identity, editorial design, advertising, animation and front-end foundations.",
+    bullets: [
+      "Professionalised my audiovisual background through graphic design, branding, editorial design and advertising practice.",
+      "Worked with Adobe Illustrator, Photoshop, InDesign, After Effects and Premiere for visual and motion production.",
+      "Built motion-graphics skills around rhythm, composition, keyframes, effects, video editing and animated storytelling.",
+      "Connected design training with web-oriented production, strengthening HTML, CSS, JavaScript and digital storytelling foundations.",
     ],
   },
   comercio: {
@@ -1862,7 +1911,7 @@ const panelContent = {
     title: "The George Washington University",
     body: [
       "School of Political Management experience.",
-      "Future assets: academic work, presentations, certificates and public affairs materials.",
+      "A specialised political-management programme that connected campaign strategy, public leadership, institutional communication and the practical logic of decision-making in Washington, D.C.",
     ],
   },
   hilo: {
@@ -1974,7 +2023,7 @@ const panelContent = {
     title: "Value",
     body: [
       "Selected field reporting, social-impact projects and pieces that explain the professional value behind the portfolio.",
-      "Future assets: articles, case studies, visual notes and editorial outcomes.",
+      "A selection of field reporting, social-impact projects and editorial work where listening, context and human detail create professional value.",
     ],
   },
   "archive-growth": {
@@ -1982,7 +2031,7 @@ const panelContent = {
     title: "Growth",
     body: [
       "Academic progression, master's degrees, international programmes and design/web development training.",
-      "Future assets: certificates, coursework, presentations and learning evidence.",
+      "A learning path shaped by journalism, audiovisual storytelling, public affairs, design, web development and international training.",
     ],
   },
   "archive-reputation": {
@@ -1990,7 +2039,7 @@ const panelContent = {
     title: "Reputation",
     body: [
       "Corporate communication, public affairs, media relations and strategic content work.",
-      "Future assets: non-confidential briefs, monitoring samples, planning notes and reputation frameworks.",
+      "Work focused on reputation, media relations, message discipline and strategic content for brands, institutions and public-facing organisations.",
     ],
   },
   "archive-diversity": {
@@ -1998,7 +2047,7 @@ const panelContent = {
     title: "Diversity",
     body: [
       "International experience across Spanish, French and English-speaking environments.",
-      "Future assets: maps, project diaries, language evidence and cross-cultural work.",
+      "Experience built across Spain, France, Ireland, Peru, Ecuador, Portugal and the United States, moving between languages, cultures and professional contexts.",
     ],
   },
   "archive-share": {
@@ -2006,7 +2055,7 @@ const panelContent = {
     title: "Share",
     body: [
       "Published journalism, audiovisual pieces, interviews and public-facing storytelling.",
-      "Future assets: links, clips, screenshots, embeds and publication pages.",
+      "Public-facing work across local journalism, multimedia reporting, interviews, audiovisual pieces and editorial projects designed to reach real audiences.",
     ],
   },
   "archive-ambition": {
@@ -2014,7 +2063,7 @@ const panelContent = {
     title: "Ambition",
     body: [
       "Projects that connect journalism, strategic communication, public affairs and visual storytelling.",
-      "Future assets: portfolio experiments, prototypes, design systems and narrative formats.",
+      "Projects where journalism, strategic communication, public affairs, design and visual storytelling meet in a single professional profile.",
     ],
   },
   "archive-dispute": {
@@ -2022,7 +2071,7 @@ const panelContent = {
     title: "Dispute",
     body: [
       "Work around public debate, political communication, institutional environments and social listening.",
-      "Future assets: analysis, issue maps, stakeholder contexts and communication strategy notes.",
+      "Experience reading public debate, mapping stakeholders, following political contexts and translating complex issues into clear communication.",
     ],
   },
   "archive-critical": {
@@ -2030,7 +2079,7 @@ const panelContent = {
     title: "Critical",
     body: [
       "Research, essays, screenwriting, editorial thinking and reflective academic work.",
-      "Future assets: papers, scripts, reading notes, research projects and visual essays.",
+      "Research, essays, scripts and editorial thinking that connect analytical rigour with narrative craft and cultural interpretation.",
     ],
   },
   journalism: {
@@ -2038,7 +2087,7 @@ const panelContent = {
     title: "Journalism work",
     body: [
       "El Comercio, La Voz del Trubia and cultural media work.",
-      "Future filters: interviews, field reporting, video, opinion, culture, local politics and features.",
+      "Interviews, field reporting, video, opinion, culture, local politics and feature writing across regional and cultural media.",
     ],
   },
   social: {
@@ -2046,7 +2095,7 @@ const panelContent = {
     title: "Third sector and education",
     body: [
       "Hilo Rojo, Cultur'All Studio, Centre Social La Busette, UFCV and education projects.",
-      "Future assets: workshops, camps, videos, project documents and photo stories.",
+      "Community work, youth projects, educational coordination and audiovisual storytelling developed in France and Latin America.",
     ],
   },
   corporate: {
@@ -2054,7 +2103,7 @@ const panelContent = {
     title: "Corporate communication and public affairs",
     body: [
       "Weber Shandwick, Universidad de Navarra and George Washington University.",
-      "Future assets: non-confidential strategy work, media angles, presentations and research.",
+      "Strategic communication experience spanning media angles, reputation work, research, institutional narratives and public-affairs thinking.",
     ],
   },
   academic: {
@@ -2062,14 +2111,14 @@ const panelContent = {
     title: "Academic titles",
     body: [
       "Journalism and Audiovisual Communication, screenwriting, BPJEPS, design/web development and two master's tracks.",
-      "This archive will gather certificates, coursework and formal academic material.",
+      "A structured view of my formal academic path, from journalism and audiovisual communication to screenwriting, BPJEPS, design, web development and public affairs.",
     ],
   },
   works: {
     kicker: "Archive",
     title: "Academic works",
     body: [
-      "Future library for research, papers, presentations, essays and selected projects.",
+      "A curated library of research, papers, presentations, essays and selected projects connected to journalism, strategy, design and public affairs.",
       "Recommended filters: Public Affairs, Journalism, Strategy, Design, Screenwriting and AI tools.",
     ],
   },
@@ -2720,6 +2769,13 @@ function openPanel(panelKey) {
     activeReaderCleanup = initializeStatCounters();
   } else if (content.type === "photoMosaic") {
     panelBody.innerHTML = renderPhotoMosaic(content);
+  } else if (content.intro && content.bullets) {
+    panelBody.innerHTML = `
+      <p>${escapeLocalized(content.intro)}</p>
+      <ul>
+        ${content.bullets.map((item) => `<li>${escapeLocalized(item)}</li>`).join("")}
+      </ul>
+    `;
   } else {
     panelBody.innerHTML = `
       <ul>
@@ -2776,8 +2832,13 @@ document.querySelectorAll("[data-contact-form]").forEach((form) => {
     if (action.startsWith("http")) {
       event.preventDefault();
       const submitButton = form.querySelector('button[type="submit"]');
+      const statusMessage = form.querySelector("[data-contact-status]");
       const originalButtonText = submitButton?.textContent;
       submitButton?.setAttribute("disabled", "true");
+      if (statusMessage) {
+        statusMessage.hidden = true;
+        statusMessage.textContent = "";
+      }
       if (submitButton) {
         submitButton.textContent = currentLanguage === "es" ? "Enviando..." : "Sending...";
       }
@@ -2794,10 +2855,18 @@ document.querySelectorAll("[data-contact-form]").forEach((form) => {
         }
 
         form.reset();
+        if (statusMessage) {
+          statusMessage.textContent = localizeText("Message sent. Thank you.");
+          statusMessage.hidden = false;
+        }
         if (submitButton) {
           submitButton.textContent = currentLanguage === "es" ? "Mensaje enviado" : "Message sent";
         }
       } catch {
+        if (statusMessage) {
+          statusMessage.textContent = currentLanguage === "es" ? "No se ha podido enviar. Inténtalo de nuevo o escríbeme por WhatsApp." : "The message could not be sent. Please try again or contact me on WhatsApp.";
+          statusMessage.hidden = false;
+        }
         if (submitButton) {
           submitButton.textContent = currentLanguage === "es" ? "Error al enviar" : "Send failed";
         }

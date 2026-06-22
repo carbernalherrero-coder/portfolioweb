@@ -2220,6 +2220,22 @@ p {
   color: var(--ink);
 }
 
+.contact-link--whatsapp {
+  justify-content: flex-start;
+}
+
+.contact-link--whatsapp img {
+  width: 1.94rem;
+  height: 1.94rem;
+  flex: 0 0 auto;
+  border-radius: 0.42rem;
+  object-fit: cover;
+}
+
+.contact-link--whatsapp span {
+  white-space: nowrap;
+}
+
 .contact-form {
   display: grid;
   gap: 0.85rem;
@@ -2298,6 +2314,20 @@ p {
   margin: 0;
   letter-spacing: 0.04em;
   text-transform: none;
+}
+
+.contact-form-status {
+  margin: 0;
+  border: 1px solid rgba(126, 214, 255, 0.45);
+  background: rgba(126, 214, 255, 0.1);
+  color: #7ed6ff;
+  padding: 0.8rem 0.95rem;
+  font-size: 0.9rem;
+  line-height: 1.35;
+}
+
+.contact-form-status[hidden] {
+  display: none;
 }
 
 .site-footer__legal {
