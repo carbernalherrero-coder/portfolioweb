@@ -75,57 +75,60 @@ const textTranslations = {
     "Achuar community-based project": "Proyecto comunitario achuar",
     "An international path shaped across": "Una trayectoria internacional construida en",
     "Spanish, French, and English-speaking environments.": "entornos de habla española, francesa e inglesa.",
-    "Madrid correspondent: local journalism, interviews and field reporting.":
-      "Corresponsal en Madrid: periodismo local, entrevistas y reporterismo de campo.",
+    "Madrid correspondent. I document Asturias' sociocultural and political activity in the capital and cover the political work of its deputies and senators.":
+      "Corresponsal en Madrid. Documento la actividad sociocultural y política de Asturias en la capital. Cubro la actividad política de sus diputados y senadores.",
     "01-06-2026 / present": "01-06-2026 / actualidad",
     "Journalism archive": "Archivo periodístico",
-    "Education volunteer and digital content assistant in Trujillo, Peru.":
-      "Voluntario educativo y asistente de contenido digital en Trujillo, Perú.",
+    "I supported educational projects, told stories of childhood, community and cultural diversity, produced content for its social media channels and learned to communicate through listening and territory.":
+      "Acompañé proyectos educativos. Conté historias de infancia, comunidad y diversidad cultural. Produje contenido para sus RRSS. Aprendí a comunicar desde la escucha y el territorio.",
     "Third sector / Peru": "Tercer sector / Perú",
     "School of Political Management": "School of Political Management",
-    "The George Washington University. Political management and public affairs learning.":
-      "The George Washington University. Formación en gestión política y asuntos públicos.",
+    "I completed the GSPM at George Washington University, studying applied politics, advocacy and strategic communication through real cases in campaigns, institutions and public affairs.":
+      "Cursé el GSPM en George Washington University. Estudié política aplicada, advocacy y comunicación estratégica. Trabajé casos reales de campañas, instituciones y asuntos públicos.",
     "International training": "Formación internacional",
-    "Corporate communication consulting in Madrid: monitoring, plans, content and public affairs support.":
-      "Consultoría de comunicación corporativa en Madrid: monitorización, planes, contenidos y apoyo en asuntos públicos.",
+    "I supported the strategic communication team, developing content, press releases and corporate materials. I prepared reports and media monitoring, managed events and media and influencer relations, and learned reputation, creativity and consulting in a global environment.":
+      "Apoyé al equipo en comunicación estratégica. Desarrollé contenidos, notas de prensa y materiales corporativos. Elaboré informes y seguimiento mediático. Gestioné eventos y relaciones con medios e influencers. Aprendí reputación, creatividad y consultoría en un entorno global.",
     "Agency / corporate PR": "Agencia / comunicación corporativa",
     "Corporate Communication": "Comunicación corporativa",
+    "Corporate Communication and Public Affairs": "Comunicación Corporativa y Asuntos Públicos",
     "Universidad de Navarra master: political communication, public affairs, institutional and crisis communication.":
       "Máster de la Universidad de Navarra: comunicación política, asuntos públicos, comunicación institucional y de crisis.",
     "Master": "Máster",
-    "Reporter and editor in Asturias across field reporting, interviews, local beats and video.":
-      "Redactor y editor en Asturias, con reporterismo de campo, entrevistas, información local y vídeo.",
-    "Graphic Design and Motion Graphics": "Diseño gráfico y Motion Graphics",
+    "Specialised in field reporting, multimedia coverage and SEO analytics. I developed strong source management and the ability to translate complex realities into rigorous stories.":
+      "Especializado en periodismo de campo, cobertura multimedia y analítica SEO. Desarrollé una sólida gestión de fuentes y la capacidad de traducir realidades complejas en crónicas rigurosas.",
+    "Graphic Design": "Diseño gráfico",
+    "Training in 2D and 3D animation with After Effects and Cinema 4D for advertising and TV, combined with UX/UI design and web layout (HTML5, CSS3 and WordPress).":
+      "Formación en animación 2D y 3D con After Effects y Cinema 4D para publicidad y TV, combinado con diseño UX/UI y maquetación web (HTML5, CSS3 y WordPress).",
     "Trazos. Web development, digital design, web structure and visual production.":
       "Trazos. Desarrollo web, diseño digital, estructura web y producción visual.",
     "Digital skills": "Competencias digitales",
-    "Editorial project support in Madrid, bridging art publishing, production and cultural context.":
-      "Apoyo a proyectos editoriales en Madrid, conectando edición artística, producción y contexto cultural.",
+    "I participated in every stage of the editorial cycle. I supported author relations, coordinated book presentations and contributed to layout, communication and digital strategy.":
+      "Participé en todas las fases del ciclo editorial. Apoyé relación con autores internacionales. Coordiné presentaciones de libros y contribuí a maquetación, comunicación y estrategia digital.",
     "Publishing industry": "Sector editorial",
-    "Content, publishing and cultural communication in Lille, France.":
-      "Contenido, edición y comunicación cultural en Lille, Francia.",
+    "I participated in audiovisual campaigns for political candidates, artistic projects, festivals and events. I developed pieces from scriptwriting, production, shooting and post-production.":
+      "Participé en campañas audiovisuales para candidatos políticos, proyectos artísticos, festivales y eventos. Desarrollé piezas desde el guion, la producción, la realización y postproducción.",
     "Culture / editorial content": "Cultura / contenido editorial",
     "Project management and community work in Lille.": "Gestión de proyectos y trabajo comunitario en Lille.",
-    "Operational base for a gender-equality and inclusion project in Lille.":
-      "Base operativa de un proyecto de inclusión e igualdad de género en Lille.",
-    "French Ministry scholarship and BPJEPS socio-cultural coordination at CEMEA.":
-      "Beca del Ministerio francés y coordinación sociocultural BPJEPS en CEMEA.",
+    "Designed an inclusion and gender-equality project, defined goals, indicators, dynamics and institutional communication, and expanded the project across Lille's centre network.":
+      "Diseño de proyecto sobre inclusión e igualdad de género. Definí objetivos, indicadores, dinámicas y comunicación institucional. Expandí el proyecto a la red de centros de Lille.",
+    "I completed the BPJEPS at CEMEA thanks to a scholarship from the French Ministry of National Education. I gained tools in socio-educational facilitation, event protocol and institutional communication.":
+      "Cursé el BPJEPS en CEMEA gracias a una beca del Ministerio de Educación Nacional francés. Adquirí herramientas de animación socioeducativa, protocolo de eventos y comunicación institucional.",
     "Third sector": "Tercer sector",
-    "BPJEPS / socio-cultural coordination": "BPJEPS / coordinación sociocultural",
+    "BPJEPS / Coordinator": "BPJEPS / Coordinador",
     "French Ministry of Education and CEMEA. Training in youth work and cultural projects.":
       "Ministerio francés de Educación y CEMEA. Formación en intervención juvenil y proyectos culturales.",
     "Education / France": "Educación / Francia",
-    "Film and TV Screenwriting": "Guion de cine y televisión",
-    "La Factoría del Guion. Structure, scenes, dialogue and narrative rhythm.":
-      "La Factoría del Guion. Estructura, escenas, diálogo y ritmo narrativo.",
+    "Film and TV Screenwriting": "Guión de cine y TV",
+    "I studied the narrative structure of audiovisual works, analysed the internal rhythm of series and films, and applied those tools to writing, communication and storytelling.":
+      "Estudié la estructura narrativa de obras audiovisuales. Analicé el ritmo interno de series y películas. Apliqué esas herramientas a la escritura, la comunicación y el storytelling.",
     "Creative writing": "Escritura creativa",
-    "Coordination of language exchanges across Dublin and Madrid.":
-      "Coordinación de intercambios lingüísticos entre Dublín y Madrid.",
+    "I coordinated linguistic exchanges between Dublin and Madrid, managed internal communication with families and schools, and ensured the support and wellbeing of around thirty teenagers.":
+      "Coordiné intercambios lingüísticos entre Dublín y Madrid. Gestioné la comunicación interna con familias y colegios. Garanticé el acompañamiento y bienestar de una treintena de adolescentes.",
     "Education / languages": "Educación / idiomas",
     "Journalism and": "Periodismo y",
     "Communication": "Comunicación",
-    "Double degree at Universidad Rey Juan Carlos: journalism, audiovisual communication and public opinion.":
-      "Doble grado en la Universidad Rey Juan Carlos: periodismo, comunicación audiovisual y opinión pública.",
+    "I trained in writing, production, scriptwriting and visual narrative. I learned field research, source verification and SEO analytics. Production for TV, radio, film and digital platforms.":
+      "Me formé en redacción, producción, guion y narrativa visual. Aprendí investigación de campo, verificación de fuentes y analítica SEO. Producción para TV, radio, cine y plataformas digitales.",
     "Academic foundation": "Base académica",
     "Horizontal scrollytelling portfolio.": "Portfolio horizontal de scrollytelling.",
     "Interested in working together?": "¿Te interesa que trabajemos juntos?",
@@ -166,8 +169,30 @@ const textTranslations = {
     "I also contributed to digital content creation, combining graphic design skills, editorial editing and sharp social media copywriting to strengthen Brumaria's online voice, visual identity and audience engagement.":
       "También contribuí a la creación de contenido digital, combinando diseño gráfico, edición editorial y copywriting preciso para redes sociales con el fin de reforzar la voz online, la identidad visual y la conexión con la audiencia de Brumaria.",
     "French Ministry of Education / CEMEA": "Ministerio francés de Educación / CEMEA",
+    "Coordinator of a sociocultural project with support from the French Ministry of National Education, Lille City Council and CEMEA":
+      "Coordinador de un proyecto sociocultural con la ayuda del Ministerio de Educación Nacional francés, el Ayuntamiento de Lille y CEMEA",
     "BPJEPS / socio-cultural project coordination training in France.":
       "Formación BPJEPS en coordinación de proyectos socioculturales en Francia.",
+    "French Ministry of Education scholarship, CEMEA training and a socio-educational project in Lille.":
+      "Beca del Ministerio de Educación francés, formación en CEMEA y proyecto socioeducativo en Lille.",
+    "Measurable project architecture": "Arquitectura medible del proyecto",
+    "SMART project": "Proyecto SMART",
+    "A socio-educational inclusion and gender-equality project designed through BPJEPS training at CEMEA, supported by the French Ministry of Education and deployed from Centre Social La Boussole into Lille's municipal network.":
+      "Proyecto socioeducativo de inclusión e igualdad de género diseñado dentro de la formación BPJEPS en CEMEA, apoyado por el Ministerio de Educación francés y desplegado desde el Centre Social La Boussole hacia la red municipal de Lille.",
+    "Report pages": "Páginas de memoria",
+    "Full project memory with context, objectives, methodology and evaluation materials.":
+      "Memoria completa con contexto, objetivos, metodología y materiales de evaluación.",
+    "Workshops": "Talleres",
+    "Sessions for teenagers around inclusion, gender equality and social participation.":
+      "Sesiones para adolescentes sobre inclusión, igualdad de género y participación social.",
+    "Public events": "Eventos públicos",
+    "Activities organised with Lille City Council and social centres in public spaces.":
+      "Actividades organizadas con el Ayuntamiento de Lille y centros sociales en espacios públicos.",
+    "Stakeholder groups": "Grupos de interés",
+    "Ministry, CEMEA, City Council, social centres, teenagers and families.":
+      "Ministerio, CEMEA, Ayuntamiento, centros sociales, adolescentes y familias.",
+    "With a scholarship from the French Ministry of National Education, I completed BPJEPS professional training at CEMEA and designed, coordinated and implemented a socio-educational project on social inclusion and gender equality for teenagers in Lille. The project was developed from the Centre Social La Boussole and expanded through the municipal network of social centres, combining institutional communication, event organisation, message adaptation and SMART project methodology.":
+      "Gracias a una beca del Ministerio de Educación Nacional francés, cursé la formación profesional BPJEPS en CEMEA y diseñé, coordiné e implementé un proyecto socioeducativo sobre inclusión social e igualdad de género para adolescentes de Lille. El proyecto se desarrolló desde el Centre Social La Boussole y se expandió por la red municipal de centros sociales, combinando comunicación institucional, organización de eventos, adaptación de mensajes y metodología SMART.",
     "A curated selection of audiovisual work produced during my time with Cultur'all Studio in Lille, spanning festivals, music videos, and campaign spots for cultural and institutional clients across Northern France.":
       "Una selección curada de trabajos audiovisuales producidos durante mi etapa en Cultur'all Studio en Lille, con festivales, videoclips y piezas de campaña para clientes culturales e institucionales del norte de Francia.",
     "Graphic Design and Web Development": "Diseño gráfico y desarrollo web",
@@ -183,10 +208,36 @@ const textTranslations = {
       "Coordiné la comunicación institucional con el Ministerio francés de Educación y el Ayuntamiento de Lille.",
     "Planned and managed 14 workshops and public events across Lille's social-centre network.":
       "Planifiqué y gestioné 14 talleres y eventos públicos en la red de centros sociales de Lille.",
+    "Defined measurable objectives, KPIs and a SMART methodology for the project report.":
+      "Definí objetivos medibles, KPIs y metodología SMART para la memoria del proyecto.",
+    "Adapted messages for institutional stakeholders, teenagers and multicultural audiences.":
+      "Adapté mensajes para interlocutores institucionales, adolescentes y públicos multiculturales.",
     "Worked with centre directors, local teams and municipal stakeholders to deliver the programme.":
       "Trabajé con direcciones de centros, equipos locales y actores municipales para ejecutar el programa.",
-    "Presented the project and final report, successfully completing the BPJEPS assessment.":
-      "Presenté el proyecto y la memoria final, completando con éxito la evaluación del BPJEPS.",
+    "The process strengthened my written and spoken French to C1 level and opened my path into the third sector.":
+      "El proceso reforzó mi francés escrito y oral hasta nivel C1 y abrió mi trayectoria dentro del tercer sector.",
+    "Full project report": "Memoria completa del proyecto",
+    "Project overview": "Resumen del proyecto",
+    "Reader note": "Nota de lectura",
+    "Institutional communication and third-sector learning": "Comunicación institucional y aprendizaje en tercer sector",
+    "Design and coordination of a sociocultural project in collaboration with the French Ministry of Education, Lille City Council and the educational institution CEMEA.":
+      "Diseño y coordinación de un proyecto sociocultural en colaboración con el Ministerio de Educación francés, el Ayuntamiento de Lille y la institución educativa CEMEA.",
+    "Project synthesis": "Síntesis del proyecto",
+    "With a scholarship from the French Ministry of National Education, I completed BPJEPS professional training at CEMEA and designed, coordinated and implemented a socio-educational project on social inclusion and gender equality for teenagers in Lille. The work combined institutional communication with Lille City Council, message adaptation for young and multicultural audiences, SMART methodology, measurable objectives and coordination with centre directors, families and local teams.":
+      "Gracias a una beca del Ministerio de Educación Nacional francés, cursé la formación profesional BPJEPS en CEMEA y diseñé, coordiné e implementé un proyecto socioeducativo sobre inclusión social e igualdad de género para adolescentes de Lille. El trabajo combinó comunicación institucional con el Ayuntamiento de Lille, adaptación de mensajes para públicos jóvenes y multiculturales, metodología SMART, objetivos medibles y coordinación con direcciones de centros, familias y equipos locales.",
+    "Professional growth": "Crecimiento profesional",
+    "French C1, public communication and project management": "Francés C1, comunicación pública y gestión de proyectos",
+    "The project strengthened my written and spoken French to C1 level and opened my path into the third sector. It also connected project management, public-facing events, internal communication with families and practical experience adapting messages for institutions, adolescents and community contexts.":
+      "El proyecto reforzó mi francés escrito y oral hasta nivel C1 y abrió mi trayectoria dentro del tercer sector. También conectó gestión de proyectos, eventos públicos, comunicación interna con familias y experiencia práctica adaptando mensajes para instituciones, adolescentes y contextos comunitarios.",
+    "The next carousel section contains the full 94-page report submitted for the BPJEPS assessment, including context, measurable objectives, methodology, activities, institutional coordination and evaluation materials.":
+      "La siguiente sección del carrusel contiene la memoria íntegra de 94 páginas presentada para la evaluación BPJEPS, con contexto, objetivos medibles, metodología, actividades, coordinación institucional y materiales de evaluación.",
+    "01 / Project design": "01 / Diseño del proyecto",
+    "02 / Institutional communication": "02 / Comunicación institucional",
+    "03 / Third sector": "03 / Tercer sector",
+    "Project report / PDF": "Memoria del proyecto / PDF",
+    "Open the complete socio-educational project report": "Abrir la memoria completa del proyecto socioeducativo",
+    "94-page report documenting the inclusion and gender-equality project developed in Lille with support from the French Ministry of Education and CEMEA.":
+      "Memoria de 94 páginas que documenta el proyecto de inclusión e igualdad de género desarrollado en Lille con apoyo del Ministerio de Educación francés y CEMEA.",
     "Centre Social La Busette was the operational base for my BPJEPS project in Lille. From there, and with the support of its management team, I designed, tested and coordinated the first workshops of an inclusion and gender-equality programme before expanding it to other municipal social centres. The centre director acted as my project tutor throughout the process.":
       "Centre Social La Busette fue la base operativa de mi proyecto BPJEPS en Lille. Desde allí, y con el apoyo de su equipo directivo, diseñé, probé y coordiné los primeros talleres de un programa de inclusión e igualdad de género antes de extenderlo a otros centros sociales municipales. La directora del centro fue mi tutora de proyecto durante todo el proceso.",
     "Used La Busette as the headquarters for project planning, coordination and follow-up.":
@@ -303,6 +354,15 @@ const textTranslations = {
       "Tribuna para El Economista en nombre de la CEO de Nespresso.",
     "Co-organizations of events": "Coorganización de eventos",
     "for Turkish Airlines and Synergym.": "para Turkish Airlines y Synergym.",
+    "Recommendation letter": "Carta de recomendación",
+    "One of the aspects that most impressed us about Carlos during his time at Weber Shandwick was his collaborative attitude and openness to learning. His willingness to listen, adapt and evolve in a dynamic environment reflects his commitment to professional growth.":
+      "Uno de los aspectos que más impresionaron de Carlos durante su estancia en Weber Shandwick fue su actitud colaborativa y su apertura al aprendizaje. Su disposición para escuchar, adaptarse y evolucionar en un entorno dinámico refleja su compromiso con el crecimiento profesional.",
+    "VP, Corporate and Reputation, Weber Shandwick.":
+      "VP, Corporativo y Reputación Weber Shandwick.",
+    "Full recommendation letter": "Carta íntegra",
+    "Open full recommendation letter": "Abrir carta de recomendación completa",
+    "Recommendation letter from José Antonio Ortega Romero, VP Corporate and Reputation at Weber Shandwick.":
+      "Carta de recomendación de José Antonio Ortega Romero, VP Corporativo y Reputación en Weber Shandwick.",
     "School of Political Management experience.": "Experiencia en la School of Political Management.",
     "A specialised political-management programme that connected campaign strategy, public leadership, institutional communication and the practical logic of decision-making in Washington, D.C.":
       "Un programa especializado en gestión política que conectó estrategia de campaña, liderazgo público, comunicación institucional y la lógica práctica de la toma de decisiones en Washington, D.C.",
@@ -1308,15 +1368,69 @@ const panelContent = {
   },
   ministry: {
     kicker: "01-09-2015 / 30-06-2016",
-    title: "French Ministry of Education / CEMEA",
-    intro:
-      "I received a French Ministry of Education scholarship to complete a 12-month BPJEPS programme at CEMEA. The training combined full-time theoretical classes with the design and implementation of a socio-cultural project across Lille's municipal social-centre network: an inclusion and gender-equality programme built around 14 workshops and public events, subsequently documented in a formal report for the Ministry.",
-    bullets: [
-      "Designed the inclusion and gender-equality project from concept to implementation.",
-      "Coordinated institutional communication with the French Ministry of Education and Lille City Council.",
-      "Planned and managed 14 workshops and public events across Lille's social-centre network.",
-      "Worked with centre directors, local teams and municipal stakeholders to deliver the programme.",
-      "Presented the project and final report, successfully completing the BPJEPS assessment.",
+    title: "Coordinator of a sociocultural project with support from the French Ministry of National Education, Lille City Council and CEMEA",
+    type: "reader",
+    chapters: [
+      {
+        title: "Design and coordination of a sociocultural project in collaboration with the French Ministry of Education, Lille City Council and the educational institution CEMEA.",
+        items: [
+          {
+            type: "copyBlock",
+            label: "Project synthesis",
+            title: "Institutional communication and third-sector learning",
+            body:
+              "With a scholarship from the French Ministry of National Education, I completed BPJEPS professional training at CEMEA and designed, coordinated and implemented a socio-educational project on social inclusion and gender equality for teenagers in Lille. The work combined institutional communication with Lille City Council, message adaptation for young and multicultural audiences, SMART methodology, measurable objectives and coordination with centre directors, families and local teams.",
+          },
+          {
+            type: "copyBlock",
+            label: "Professional growth",
+            title: "French C1, public communication and project management",
+            body:
+              "The project strengthened my written and spoken French to C1 level and opened my path into the third sector. It also connected project management, public-facing events, internal communication with families and practical experience adapting messages for institutions, adolescents and community contexts.",
+          },
+          {
+            type: "metricGrid",
+            label: "SMART project",
+            title: "Measurable project architecture",
+            body:
+              "A socio-educational inclusion and gender-equality project designed through BPJEPS training at CEMEA, supported by the French Ministry of Education and deployed from Centre Social La Boussole into Lille's municipal network.",
+            stats: [
+              {
+                value: "94",
+                title: "Report pages",
+                subtitle: "Full project memory with context, objectives, methodology and evaluation materials.",
+              },
+              {
+                value: "14",
+                title: "Workshops",
+                subtitle: "Sessions for teenagers around inclusion, gender equality and social participation.",
+              },
+              {
+                value: "4",
+                title: "Public events",
+                subtitle: "Activities organised with Lille City Council and social centres in public spaces.",
+              },
+              {
+                value: "5",
+                title: "Stakeholder groups",
+                subtitle: "Ministry, CEMEA, City Council, social centres, teenagers and families.",
+              },
+            ],
+          },
+        ],
+      },
+      {
+        title: "Full project report",
+        items: [
+          {
+            label: "Project report / PDF",
+            title: "Open the complete socio-educational project report",
+            theme:
+              "94-page report documenting the inclusion and gender-equality project developed in Lille with support from the French Ministry of Education and CEMEA.",
+            href: "assets/documents/ministry/memoria-proyecto-socioeducativo-lille.pdf",
+          },
+        ],
+      },
     ],
   },
   culturall: {
@@ -1856,7 +1970,13 @@ const panelContent = {
   weber: {
     kicker: "01-04-2025 / 30-11-2025",
     title: "Weber Shandwick",
-    type: "stats",
+    type: "reader",
+    chapters: [
+      {
+        title: "Weber Shandwick",
+        items: [
+          {
+            type: "statsPanel",
     subtitle: "Corporate Communications Team Member — 2025",
     description:
       "Part of the Corporate Communications team during 2025, contributing to the planning, development, and execution of strategic communication plans. Supported corporate positioning, content coordination, stakeholder messaging, and campaign delivery.",
@@ -1903,6 +2023,28 @@ const panelContent = {
         value: 2,
         title: "Co-organizations of events",
         subtitle: "for Turkish Airlines and Synergym.",
+      },
+    ],
+          },
+        ],
+      },
+      {
+        title: "Recommendation letter",
+        items: [
+          {
+            type: "recommendationLetter",
+            quote:
+              "One of the aspects that most impressed us about Carlos during his time at Weber Shandwick was his collaborative attitude and openness to learning. His willingness to listen, adapt and evolve in a dynamic environment reflects his commitment to professional growth.",
+            author: "José Antonio Ortega Romero",
+            authorHref: "https://www.linkedin.com/in/joseaortega/?skipRedirect=true",
+            role: "VP, Corporate and Reputation, Weber Shandwick.",
+            label: "Full recommendation letter",
+            href: "assets/documents/weber/carta-recomendacion-jose-antonio-ortega-weber-shandwick.pdf",
+            linkLabel: "Open full recommendation letter",
+            src: "assets/images/weber/carta-recomendacion-jose-antonio-ortega.png",
+            alt: "Recommendation letter from José Antonio Ortega Romero, VP Corporate and Reputation at Weber Shandwick.",
+          },
+        ],
       },
     ],
   },
@@ -2188,6 +2330,70 @@ function getYouTubeVideoId(value) {
 function renderReaderPages(items) {
   return items
     .map((item) => {
+      if (item.type === "statsPanel") {
+        return renderStatsPanel(item);
+      }
+
+      if (item.type === "recommendationLetter") {
+        return `
+          <section class="recommendation-letter-panel">
+            <article class="recommendation-letter-quote-card">
+              <span class="archive-reader-link-card__section">${escapeLocalized(item.label)}</span>
+              <blockquote>“${escapeLocalized(item.quote)}”</blockquote>
+              <footer>
+                <a href="${escapeHtml(item.authorHref)}" target="_blank" rel="noopener noreferrer">
+                  ${escapeLocalized(item.author)}
+                </a>
+                <span>${escapeLocalized(item.role)}</span>
+              </footer>
+            </article>
+            <figure class="recommendation-letter-preview">
+              <figcaption>
+                <span>${escapeLocalized(item.label)}</span>
+                <a href="${escapeHtml(item.href)}" target="_blank" rel="noopener noreferrer">
+                  ${escapeLocalized(item.linkLabel)}
+                </a>
+              </figcaption>
+              <a href="${escapeHtml(item.href)}" target="_blank" rel="noopener noreferrer">
+                <img src="${escapeHtml(item.src)}" alt="${escapeLocalized(item.alt)}" loading="lazy">
+              </a>
+            </figure>
+          </section>
+        `;
+      }
+
+      if (item.type === "metricGrid") {
+        const stats = (item.stats || [])
+          .map(
+            (stat) => `
+              <article class="weber-stat-card ministry-stat-card">
+                <span
+                  class="weber-stat-card__number ministry-stat-card__number"
+                  data-counter-value="${Number(stat.value) || 0}"
+                  data-counter-prefix="${escapeHtml(stat.prefix || "")}"
+                  data-counter-suffix="${escapeHtml(stat.suffix || "")}"
+                >${escapeHtml(stat.prefix || "")}0${escapeHtml(stat.suffix || "")}</span>
+                <h3>${escapeLocalized(stat.title)}</h3>
+                <p>${escapeLocalized(stat.subtitle)}</p>
+              </article>
+            `,
+          )
+          .join("");
+
+        return `
+          <section class="weber-stats-panel ministry-stats-panel">
+            <div class="weber-stats-panel__intro ministry-stats-panel__intro">
+              <p class="weber-stats-panel__subtitle">${escapeLocalized(item.label)}</p>
+              <h3>${escapeLocalized(item.title)}</h3>
+              <p>${escapeLocalized(item.body)}</p>
+            </div>
+            <div class="weber-stats-grid ministry-stats-grid">
+              ${stats}
+            </div>
+          </section>
+        `;
+      }
+
       if (item.type === "copyBlock") {
         return `
           <article class="archive-reader-copy-card">
@@ -2519,9 +2725,10 @@ function initializeReaderChapters(content) {
   const counter = readerShell?.querySelector("[data-reader-counter]");
   const chapters = content.chapters || [];
   let activeIndex = 0;
+  const cleanupCounters = initializeStatCounters();
 
   if (!readerShell || !track || chapters.length < 2) {
-    return () => {};
+    return cleanupCounters;
   }
 
   const updateReader = () => {
@@ -2548,6 +2755,7 @@ function initializeReaderChapters(content) {
   updateReader();
 
   return () => {
+    cleanupCounters();
     previousButton.removeEventListener("click", showPrevious);
     nextButton.removeEventListener("click", showNext);
   };
